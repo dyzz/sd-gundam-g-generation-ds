@@ -130,8 +130,8 @@
   },
   {
    "offset": "0x248B",
-   "text": "使用条件、战斗中对象、仅自身（效果）大幅强化攻击能力、必定回避敌方攻击、无效化对方的特殊防御与装甲",
-   "payload_hex": "e83fd8e9d4e99102ef28e7ffc00101e7beebf202eb7aabe88d000aea8fe8710bbee665e8ade9a59ee7cce7c6da02e860e8678ccae7e3d09ee7cc0200e7dcea8fe9a5e7bed0e7b4e7cfed7be968ec68e832e98febdb0000"
+   "text": "使用条件、战斗中{01}{01}对象、仅自身{00}（效果）大幅强化攻击、必定回避敌方攻击{00}无效化对方的特殊防御与装甲",
+   "payload_hex": "e83fd8e9d4e99102ef28e7ffc00101e7beebf202eb7aabe88d000aea8fe8710bbee665e8ade9a59ee7cc02e860e8678ccae7e3d09ee7cc00e7dcea8fe9a5e7bed0e7b4e7cfed7be968ec68e832e98febdb0000"
   },
   {
    "offset": "0x24E3",
@@ -140,8 +140,8 @@
   },
   {
    "offset": "0x259F",
-   "text": "使用条件、战斗中对象、仅自身（效果）大幅强化攻击能力。命中时封印对方ID。发动先制攻击、必定回避敌方攻击",
-   "payload_hex": "e83fd8e9d4e99102ef28e7ffc00101e7beebf202eb7aabe88d000aea8fe8710bbee665e8ade9a59ee7cce7c6da03e853c0ef2deb83ec4fe7bed012001103e870ef30b8e8de9ee7cc02e860e8678ccae7e3d09ee7cc0000"
+   "text": "使用条件、战斗中{01}{01}对象、仅自身{00}（效果）大幅强化攻击能力、发动先制攻击{00}命中时封印对方ID、必定回避敌方攻击",
+   "payload_hex": "e83fd8e9d4e99102ef28e7ffc00101e7beebf202eb7aabe88d000aea8fe8710bbee665e8ade9a59ee7cce7c6da02e870ef30b8e8de9ee7cc00e853c0ef2deb83ec4fe7bed0121102e860e8678ccae7e3d09ee7cc0000"
   },
   {
    "offset": "0x25F7",
@@ -330,8 +330,8 @@
   },
   {
    "offset": "0x2FAF",
-   "text": "使用条件、战斗中对象、仅自身（效果）强化攻击能力。命中时封印对方ID1回合。必定回避敌方攻击、发动先制攻击",
-   "payload_hex": "e83fd8e9d4e99102ef28e7ffc00101e7beebf202eb7aabe88d000aea8fe8710be8ade9a59ee7cce7c6da03e853c0ef2deb83ec4fe7bed012110e008ca003e860e8678ccae7e3d09ee7cc02e870ef30b8e8de9ee7cc0000"
+   "text": "使用条件、战斗中{01}{01}对象、仅自身{00}（效果）强化攻击能力、必定回避敌方攻击{00}命中时封印对方ID1回合、发动先制攻击",
+   "payload_hex": "e83fd8e9d4e99102ef28e7ffc00101e7beebf202eb7aabe88d000aea8fe8710be8ade9a59ee7cce7c6da02e860e8678ccae7e3d09ee7cc00e853c0ef2deb83ec4fe7bed012110e8ca002e870ef30b8e8de9ee7cc0000"
   },
   {
    "offset": "0x3007",
@@ -2530,8 +2530,8 @@
   },
   {
    "offset": "0x5343",
-   "text": "使用条件、战斗中对象、仅自身（效果）卡缪在队伍中时、攻击能力大幅强化、无效化对方的特殊防御",
-   "payload_hex": "e83fd8e9d4e99102ef28e7ffc00101e7beebf202eb7aabe88d000aea8fe8710be801e917ef29e7c9ec07c0ef2d029ee7cce7c6dabee665e8ade9a50200e7dcea8fe9a5e7bed0e7b4e7cfed7be968ec680000"
+   "text": "使用条件、战斗中{01}{01}对象、仅自身{00}（效果）卡缪在队伍中时、攻击能力大幅强化{00}无效化对方的特殊防御",
+   "payload_hex": "e83fd8e9d4e99102ef28e7ffc00101e7beebf202eb7aabe88d000aea8fe8710be801e917ef29e7c9ec07c0ef2d029ee7cce7c6dabee665e8ade9a500e7dcea8fe9a5e7bed0e7b4e7cfed7be968ec680000"
   },
   {
    "offset": "0x5396",
@@ -6300,8 +6300,8 @@
   },
   {
    "offset": "0x95A2",
-   "text": "使用条件、地图对象、指挥范围（效果）1回合内除自身外的我方反应+20、命中率和攻击力+20%",
-   "payload_hex": "e83fd8e9d4e99102bfeb2d0101e7beebf202e8c0e949ec8ee9de000aea8fe8710b0e8ca0e99ae974abe88de8f7e7b48bd0e87ce873ef5e0fe9980200e853c0e9e1e7d39ee7ccdaef5e0fe998ead90000"
+   "text": "使用条件、地图{01}{01}对象、指挥范围{00}（效果）1回合内除自身外的我方反应+20{00}命中率和攻击力+20%",
+   "payload_hex": "e83fd8e9d4e99102bfeb2d0101e7beebf202e8c0e949ec8ee9de000aea8fe8710b0e8ca0e99ae974abe88de8f7e7b48bd0e87ce873ef5e0fe99800e853c0e9e1e7d39ee7ccdaef5e0fe998ead90000"
   },
   {
    "offset": "0x95F3",

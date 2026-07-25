@@ -670,6 +670,8 @@ FREF_MAX_DEPTH = 8
 # On-screen field pixel budgets (measured against the real engine):
 ID_TITLE_BUDGET_PX = 64          # ID-command box title row (engine truncates + '~' past this)
 ID_EFFECT_BUDGET_PX = 76         # ID-command effect summary line in the box body
+ID_DETAIL_LINE_CELLS = 20        # full-width renderA cells in the in-battle detail panel
+ID_DETAIL_MAX_LINES = 3          # condition/target + two effect rows
 ABILITY_NAME_BUDGET_PX = 76      # ID-ability name cell
 UNIT_NAME_BUDGET_PX = 144        # widest unit-name context (status/database field)
 ASSIGN_UNIT_NAME_BUDGET_PX = 120  # 配属 exact 15-tile row reservation
@@ -3024,13 +3026,14 @@ def gate_cutin_offset_table(rep, ctx):
 
 
 def gate_idcmd_detail_integrity(rep, ctx):
-    """The （效果）-line gate: for EVERY entry of the ID-command detail offset
-    table, walk the record exactly like the in-battle renderer (stop at the
-    first standalone 00 00) and require that the VISIBLE part contains the
-    effect line whenever the JP original's visible part does.  Catches the
-    forged-interior-terminator class (in-place zero padding hid the effect
-    line on 159/256 detail views) — table pointers and strings can all be
-    individually intact while the panel still renders nothing."""
+    """The in-battle ID-detail gate: for EVERY entry of the detail offset
+    table, walk the record exactly like the renderer (stop at the first
+    standalone 00 00), require the JP （效果） line to remain visible, and
+    enforce the panel's three-line / 20-renderA-cell geometry.
+
+    This catches both the forged-interior-terminator class (in-place zero
+    padding hid the effect line on 159/256 detail views) and the right-edge
+    clipping class where intact text silently extends past the 256px screen."""
     az, aj = ctx["a9"], ctx["jp_a9"]
 
     def visible(a9, foff, limit=0x400):
@@ -3072,7 +3075,65 @@ def gate_idcmd_detail_integrity(rep, ctx):
                 i += 1
         return found
 
-    n = missing = interior = 0
+    def primary_macro(idx):
+        """Token-aware renderA dictionary entry lookup."""
+        count = struct.unpack_from("<H", az, PRIMARY_DICT_OFF)[0] // 2
+        if not 0 <= idx < count:
+            return None
+        off = struct.unpack_from("<H", az, PRIMARY_DICT_OFF + idx * 2)[0]
+        start = PRIMARY_DICT_OFF + off
+        p = start
+        while p < len(az):
+            if az[p] >= 0xE0 and p + 1 < len(az):
+                p += 2
+                continue
+            if az[p] == 0x00:
+                return az[start:p]
+            p += 1
+        return az[start:]
+
+    def glyph_cells(payload, depth=0):
+        """Visible renderA cells in one line; 00/01 are layout controls."""
+        cells = 0
+        p = 0
+        while p < len(payload):
+            b = payload[p]
+            if b in (0x00, 0x01):
+                p += 1
+                continue
+            if b < 0xE0:
+                cells += 1
+                p += 1
+                continue
+            if p + 1 >= len(payload):
+                cells += 1
+                break
+            token = (b << 8) | payload[p + 1]
+            p += 2
+            if token >= 0xF000 and depth < FREF_MAX_DEPTH:
+                sub = primary_macro(token - 0xF000)
+                cells += glyph_cells(sub, depth + 1) if sub is not None else 1
+            else:
+                cells += 1
+        return cells
+
+    def line_widths(vis):
+        lines = []
+        start = 0
+        p = 0
+        while p < len(vis):
+            if vis[p] >= 0xE0 and p + 1 < len(vis):
+                p += 2
+                continue
+            if vis[p] == 0x00:
+                lines.append(glyph_cells(vis[start:p]))
+                start = p + 1
+            p += 1
+        lines.append(glyph_cells(vis[start:]))
+        return lines
+
+    n = missing = 0
+    geometry = []
     for k in range(256):
         oz = struct.unpack_from("<I", az, ID_CMD_DETAIL_OFFTAB + k * 4)[0]
         ojp = struct.unpack_from("<I", aj, ID_CMD_DETAIL_OFFTAB + k * 4)[0]
@@ -3084,13 +3145,24 @@ def gate_idcmd_detail_integrity(rep, ctx):
         vj, vz = visible(aj, fj), visible(az, fz)
         if has_effect(vj, aj) and not has_effect(vz, az):
             missing += 1
-    if missing:
+        widths = line_widths(vz)
+        if len(widths) > ID_DETAIL_MAX_LINES or max(widths, default=0) > ID_DETAIL_LINE_CELLS:
+            geometry.append((k, widths))
+    if missing or geometry:
+        problems = []
+        if missing:
+            problems.append(f"{missing}/{n} views lost their （效果） line")
+        if geometry:
+            sample = ", ".join(f"didx {k}={widths}" for k, widths in geometry[:8])
+            problems.append(
+                f"{len(geometry)}/{n} views exceed {ID_DETAIL_MAX_LINES} lines or "
+                f"{ID_DETAIL_LINE_CELLS} cells ({sample})")
         rep.add("idcmd_detail_integrity", False,
-                f"{missing}/{n} detail views lost their （效果） line "
-                "(forged interior 00 00 truncates the record)")
+                "; ".join(problems))
     else:
         rep.add("idcmd_detail_integrity", True,
-                f"{n} detail views: every JP effect line has a rendered ZH counterpart")
+                f"{n} detail views: effect headers preserved; "
+                f"all lines <= {ID_DETAIL_LINE_CELLS} cells / {ID_DETAIL_MAX_LINES} rows")
 
 
 def gate_offline_coverage(rep, ctx):
