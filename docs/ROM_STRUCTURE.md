@@ -40,7 +40,7 @@ overlays and is not compressed).
 
 ### Text-bearing NitroFS files (the complete changed set)
 
-101 `_STG*.bin` stage scripts (grown; see `STAGE_FORMAT.md`) plus 20 misc files:
+101 `_STG*.bin` stage scripts (grown; see `STAGE_FORMAT.md`) plus 27 misc files:
 
 | file | JP size | role |
 |---|---|---|
@@ -59,13 +59,15 @@ overlays and is not compressed).
 | `c4b.bin` | 42,252 | encyclopedia (図鑑) text sibling of `324.bin` (dict-compressed JP → all-atlas ZH re-encode) |
 | `388.bin` | 832 | captain-badge BG tiles (format id 0x000A, 4bpp raw tiles — graphics, not text) |
 | `42d.bin` | 20,332 | Title and bonus-menu OBJ tiles (按START键！/开始/继续/附加; 普通模式/特殊模式/返回; 资料/角色/机体; EV回顾; 声音/BGM/SE) — original `START`/`EV`/`SE` rasters retained; Chinese labels use outlined, softened paint |
-| `3d3.bin`–`3d7.bin` | 3,068 / 2,088 / 1,588 / 1,244 / 1,556 | BackStage root + all submenus (作战/编成/MS开发/系统; 作战内容/地图/索敌/进击; 配属/列表/别动队; 格纳库/系统图; 保存/读取/设置) — BG tiles regenerated and fixed-capacity repacked from committed 12x12 atlas cells |
+| `3d3.bin`–`3d7.bin` | 3,068 / 2,088 / 1,588 / 1,244 / 1,556 | BackStage root + all submenus (作战/编成/MS开发/系统; 作战内容/地图/索敌/进击; 配属/列表/别动队; 格纳库/系统图; 保存/读取/设置) — BG tiles regenerated and fixed-capacity repacked from committed 12x12 atlas cells; `MS` gets one pixel of added tracking |
+| `3e3.bin` / `3e4.bin` | 9,744 / 5,616 | settings descriptions and normal/focused values (including the New Game+ animation row); both BG canvases are regenerated and repacked within their original tile capacities |
 | `478.bin` | 3,312 | in-combat force-HUD faction table (战舰/自军/友军/敌军) — raw 4bpp BG tiles (file id 949; tile block @ 0x610) |
 | `48a.bin` | 3,312 | terrain/movement badge OBJ tiles (回避/通/宇/飞/地/水) — raw tiles, `offset = tile*32 + 784` |
+| `c31.bin` | 2,744 | compressed dialogue-frame graphics; the extended nameplate edge is recolored to match the main green plate |
 | `b6e.bin` | 416 | parts **names** (40 entries: 30 real + 10 予備 spares; arm9 offset table, see map) |
 | `b6f.bin` | 1,936 | parts **captions/descriptions** (own arm9 offset table) |
 
-Everything not listed above (3,133 files incl. `sound_data.sdat`) is byte-identical to JP.
+Everything not listed above (3,126 files incl. `sound_data.sdat`) is byte-identical to JP.
 
 ---
 
@@ -190,6 +192,8 @@ RAM = `0x02000000 + file` unless stated. JP→ZH columns show patched literals.
 | dictionary selector | `0x16B868` | `[0x0216B868]=0x021444B4` (primary), `[+4]=0x0212D770` (alt) |
 | renderB label arena | `0x14AC34..0x14BD84` | stat/UI label strings; bounded immediately before the unit-icon bank |
 | unit-icon graphics bank | `0x14BD84..0x15D6C4` | 250 × 24×24 4bpp thumbnails; immutable vs JP (`unit_icon_bank_frozen`) |
+| battle START-menu graphics | `0x168598..0x168F52` | existing LZSS block: descriptor `0x800009B6` reserves 2,486 compressed bytes and expands to 5,824 B / 182 tiles. The Chinese rebuild uses 2,211 B and 141 tiles; the remaining bytes/tiles stay capacity slack, not appended data |
+| battle START-menu layouts | `0x168FB8..0x169338` | layouts 2–22 are atomically rebuilt in the existing 804-byte arena (792 B used); pointer entries 2–22 at `0x1692E4..0x169338` are repointed inside that arena. Proven translated surfaces are `回合结束/保存/读取/设置`, `结束回合？`, and `是/否`; unobserved layout labels remain JP |
 | OBJ-text path (engine A) | — | `0x0202BC74 → 0x02013C00 → 0x02013220 → 0x02013704` → OBJ VRAM `0x06400000` |
 | dialogue nameplate setup | cursor literals `0x2BA38`/`0x2BB00`, geometry `0x2BB58..0x2C42E`, IF mirrors `0x652E4`/`0x65308`, helper `0x12D680` | The three portrait slots occupy OBJ tiles `300..459`, `460..619` and `620..779`. The 14×2-tile (112 px) name surface stays at `780..807`, and the 27×4 body stays at `808..915`. Both cursor paths move from their overlapping stock base `912` to `916`, reusing the left-choice resource `916..919`; the right-choice bracket remains `920..923`. Text origin, 12 px glyph advance and portrait allocation do not move. Descriptor height remains 2, flags `0x80→0x81` select renderA 12×12, and `0x2BCE8` supplies plate-only penY+3. The scoped helper extends frame rows through tile x=16 and WIN1 through x=133; `c31.bin` provides the matching main-green frame edge. Gate: `dialogue_nameplate_geometry` |
 | engine-B generic text helper | `0x12EFC` | `0x02012EFC(ctx,Xpx,Ypx,str,[sp]=count)`; init veneer `0x02012F75 → 0x02013D64(ctx,mapbase)` |

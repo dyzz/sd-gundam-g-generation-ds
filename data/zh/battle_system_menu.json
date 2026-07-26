@@ -1,0 +1,94 @@
+{
+ "format": "arm9_battle_system_graphics",
+ "what": "In-battle START system menu, turn-end prompt, and yes/no confirmation. The writer rebuilds all shared tile layouts atomically while translating only the runtime-proven P1 surfaces.",
+ "source": {
+  "arm9_base": "0x02000000",
+  "arm9_size": 1797560,
+  "graphics_offset": "0x168598",
+  "graphics_descriptor": "0x800009b6",
+  "graphics_block_sha256": "77fcb0aea681dd2799583af6efc0238ca6748e4c136e9aababaebd9ce8cb050a",
+  "decoded_size": 5824,
+  "decoded_sha256": "6d68d6c21b8d9638a38478ea698e6a7709e44d4fc906d4fa915def3071f7fb57",
+  "tile_capacity": 182,
+  "layout_start": "0x168fb8",
+  "layout_end": "0x1692dc",
+  "layout_region_sha256": "683246408444fa5a16f274d8c7bac771cf93404de4cf0f6872518f2d5189ffbb",
+  "pointer_table_offset": "0x1692dc",
+  "first_layout": 2,
+  "last_layout": 22,
+  "pointer_table_sha256": "13a190ecf6802ee310d5f92ee2c3404847c3328a1cee95fb76720b52cf7c689a"
+ },
+ "palette_indices": {
+  "stroke": 15,
+  "shadow": 2,
+  "fallback_background": 7,
+  "clear": [2, 10, 11, 12, 13, 14, 15]
+ },
+ "menu_base_indices": [5, 6, 7, 8, 9, 10, 11],
+ "menu_box": {
+  "x0": 16,
+  "y0": 0,
+  "x1": 80,
+  "y1": 16
+ },
+ "menu_labels": [
+  {
+   "id": "end_turn",
+   "text": "回合结束",
+   "indices": [5, 12]
+  },
+  {
+   "id": "save",
+   "text": "保存",
+   "indices": [6, 13]
+  },
+  {
+   "id": "load",
+   "text": "读取",
+   "indices": [7, 14]
+  },
+  {
+   "id": "settings",
+   "text": "设置",
+   "indices": [8, 15]
+  }
+ ],
+ "prompt": {
+  "index": 19,
+  "text": "结束回合？",
+  "box": {
+   "x0": 4,
+   "y0": 0,
+   "x1": 200,
+   "y1": 16
+  },
+  "row_backgrounds": [9, 8, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7, 8, 4]
+ },
+ "confirmation": {
+  "dialog_index": 20,
+  "yes_index": 21,
+  "no_index": 22,
+  "yes_text": "是",
+  "no_text": "否",
+  "box": {
+   "x0": 8,
+   "y0": 0,
+   "x1": 80,
+   "y1": 16
+  },
+  "dialog_destination": {
+   "x": 8,
+   "yes_y": 8,
+   "no_y": 24,
+   "width": 80,
+   "height": 16
+  }
+ },
+ "expected": {
+  "used_tiles": 141,
+  "compressed_size": 2211,
+  "layout_size": 792,
+  "graphics_sha256": "4e5a808d156ccb254240850f1967030f9d426f75e21dd0467e3ecf85b069fa91",
+  "layouts_sha256": "1cf0a9f3a89a632f14bd69203ede5cb3bd154c48e29b6ae860fbbf0a1c4c35e9"
+ }
+}

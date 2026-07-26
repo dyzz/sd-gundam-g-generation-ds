@@ -1,7 +1,7 @@
 {
  "file": "3d3.bin",
  "what": "BG tile bitmap for the four strategy-hub tabs. Labels are rebuilt from the committed 12x12 atlas; no host font rasterizer is involved.",
- "_note": "MS retains its crisp original pixels. 作战 is redrawn as one atlas label so both glyphs have the same raster size. The resource is repacked after repainting because its Japanese tilemap shares letter-bearing tiles between different buttons.",
+ "_note": "MS retains its crisp original pixels, with S shifted one pixel right for readable tracking and 开发 following by the same amount. 作战 is redrawn as one atlas label so both glyphs have the same raster size. The resource is repacked after repainting because its Japanese tilemap shares letter-bearing tiles between different buttons.",
  "format": "atlas_graphics",
  "repack_tiles": true,
  "palette_indices": {
@@ -35,7 +35,7 @@
   },
   {
    "text": "开发",
-   "x": 44,
+   "x": 45,
    "y": 70,
    "clear": {
     "x": 43,
@@ -56,6 +56,21 @@
     "height": 14,
     "sample_x": 18
    }
+  }
+ ],
+ "pixel_moves": [
+  {
+   "what": "add one pixel of tracking between the original M and S",
+   "source": {
+    "x": 36,
+    "y": 70,
+    "width": 7,
+    "height": 12
+   },
+   "dx": 1,
+   "dy": 0,
+   "sample_x": 20,
+   "indices": [2, 15]
   }
  ]
 }

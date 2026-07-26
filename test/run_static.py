@@ -24,6 +24,8 @@ in-game failure the gate protects against.
   assignment_unit_name_tile_partition  配属 long unit-name corruption from pilot-bank overlap
   ui_font_atlas_dispatch      8px mush ZH on the UI-font path / corrupt render trampoline
   post_clear_pilot_cids       Kamille/Jerid earned forms reverting after campaign clear
+  settings_graphics           settings descriptions/focus sprites or NG+ row drift
+  battle_system_menu_graphics shared START-menu tile damage / compressed or layout overflow
   code_image_parity           ANY unexplained arm9 byte change vs the JP source (combat!)
   unit_icon_bank_frozen       Turn A / unit thumbnails corrupted by misplaced text bytes
   dialogue_dict_frozen        the battle-entry freeze from a clobbered dialogue dictionary
@@ -1255,6 +1257,151 @@ def gate_post_clear_pilot_cids(rep, ctx):
         rep.add("post_clear_pilot_cids", True,
                 "Kamille slot-16 CID44->43 guard pinned; SP7S Jerid row "
                 "base84 / earned85(flag0x4F) pinned")
+
+
+def gate_battle_system_menu_graphics(rep, ctx):
+    """The START menu is one compressed shared tile set plus 21 layouts.
+
+    Rebuild the owned spans directly from the Japanese oracle and semantic
+    translation spec, then require the candidate to match them byte-for-byte.
+    The writer itself validates source hashes, visible-pixel round trips, tile
+    capacity, compressed capacity, layout capacity, and every repointed layout.
+    """
+    try:
+        if str(REPO) not in sys.path:
+            sys.path.insert(0, str(REPO))
+        from utils import battle_system_graphics
+
+        spec = json.loads(
+            (REPO / "data" / "zh" / "battle_system_menu.json").read_text()
+        )
+        charmap = json.loads(CHARMAP_PATH.read_text())
+        slots = {
+            char: int(slot)
+            for slot, char in charmap["jp_slot_chars"].items()
+        }
+        slots.update(
+            {
+                char: int(slot)
+                for char, slot in charmap["one_byte"].items()
+            }
+        )
+        slots.update(
+            {
+                char: int(slot)
+                for char, slot in charmap["two_byte_zh"].items()
+            }
+        )
+        expected = bytearray(ctx["jp_a9"][:APPEND_TAIL_OFF])
+        facts = battle_system_graphics.patch_arm9(
+            ctx["jp_a9"],
+            expected,
+            spec,
+            atlas=(REPO / "data" / "font" / "atlas12.bin").read_bytes(),
+            char_slots=slots,
+        )
+        source = spec["source"]
+        graphics_offset = int(source["graphics_offset"], 0)
+        compressed_capacity = int(source["graphics_descriptor"], 0) & 0xFFFF
+        layout_start = int(source["layout_start"], 0)
+        layout_end = int(source["layout_end"], 0)
+        pointer_table = int(source["pointer_table_offset"], 0)
+        first_layout = int(source["first_layout"])
+        last_layout = int(source["last_layout"])
+        spans = (
+            (
+                graphics_offset,
+                graphics_offset + 4 + compressed_capacity,
+                "graphics",
+            ),
+            (layout_start, layout_end, "layouts"),
+            (
+                pointer_table + first_layout * 4,
+                pointer_table + (last_layout + 1) * 4,
+                "pointers",
+            ),
+        )
+        mismatches = [
+            name
+            for start, end, name in spans
+            if ctx["a9"][start:end] != expected[start:end]
+        ]
+    except Exception as exc:
+        rep.add(
+            "battle_system_menu_graphics",
+            False,
+            f"{type(exc).__name__}: {exc}",
+        )
+        return
+    if mismatches:
+        rep.add(
+            "battle_system_menu_graphics",
+            False,
+            "candidate differs from the deterministic Japanese-source rebuild "
+            f"in: {', '.join(mismatches)}",
+        )
+    else:
+        rep.add(
+            "battle_system_menu_graphics",
+            True,
+            f"{facts['used_tiles']}/{facts['tile_capacity']} tiles, "
+            f"{facts['compressed_size']}/{facts['compressed_capacity']} "
+            f"compressed bytes, {facts['layout_size']}/"
+            f"{facts['layout_capacity']} layout bytes; layouts 2-22 "
+            "pixel-round-trip",
+        )
+
+
+def gate_settings_graphics(rep, ctx):
+    """Rebuild both settings BG resources from the Japanese ROM and require the
+    candidate files to match. The semantic writer pins source hashes/geometry,
+    preserved focus-only regions, fixed file lengths, tile budgets, all option
+    descriptions, and the hidden-until-New-Game+ row."""
+    try:
+        if str(REPO) not in sys.path:
+            sys.path.insert(0, str(REPO))
+        from utils import data_files, static_graphics
+
+        facts = []
+        mismatches = []
+        for name in ("3e3.bin", "3e4.bin"):
+            source = ctx["jp_file"](name)
+            candidate = ctx["cand_file"](name)
+            if source is None or candidate is None:
+                mismatches.append(f"{name} missing")
+                continue
+            expected = data_files.build_data_file(
+                name, source, verify=False
+            )
+            if candidate != expected:
+                mismatches.append(f"{name} bytes")
+                continue
+            mapping = static_graphics.tile_map(candidate)
+            used_tiles = len(
+                {entry & 0x3FF for entry in mapping.entries}
+            )
+            facts.append(f"{name} {used_tiles}/{mapping.gfx_len // 32} tiles")
+    except Exception as exc:
+        rep.add(
+            "settings_graphics",
+            False,
+            f"{type(exc).__name__}: {exc}",
+        )
+        return
+    if mismatches:
+        rep.add(
+            "settings_graphics",
+            False,
+            "candidate differs from the Japanese-source rebuild: "
+            + ", ".join(mismatches),
+        )
+    else:
+        rep.add(
+            "settings_graphics",
+            True,
+            "; ".join(facts)
+            + "; first-play/NG+ visibility remains runtime-owned",
+        )
 
 
 def gate_code_image_parity(rep, ctx):
@@ -4049,6 +4196,8 @@ GATES = [
     gate_assignment_unit_name_tile_partition,
     gate_ui_font_atlas_dispatch,
     gate_post_clear_pilot_cids,
+    gate_settings_graphics,
+    gate_battle_system_menu_graphics,
     gate_code_image_parity,
     gate_unit_icon_bank_frozen,
     gate_dialogue_dict_frozen,

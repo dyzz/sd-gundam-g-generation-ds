@@ -1,6 +1,6 @@
 # data/zh/files — translated miscellaneous NitroFS data files
 
-Twenty-five flat data files outside the stage-dialogue (`_STG*`) system carry translated
+Twenty-seven flat data files outside the stage-dialogue (`_STG*`) system carry translated
 content. Each JSON table here rebuilds exactly one of them; the builder is
 `utils/data_files.py` (`build_data_file(name, jp_bytes)`), which self-checks every
 result against `data/manifest.json`. All files are in-place, size-preserving edits of
@@ -37,6 +37,9 @@ enforces it. A record that cannot round-trip through the codec carries a canonic
   `00 03 00 01` + zero padding to a 4-byte boundary.
 * **`table`** — full rebuild of a fixed-total-size table: entries written at explicit
   offsets, 0x00-padded to their slot (`size`).
+* **`bio_bank`** — full rebuild of an encyclopedia biography bank. Records are
+  encoded at explicit offsets while the original file size and index topology stay
+  fixed.
 * **`graphics`** — raw-tile bitmap repaints (not text): regions of
   `{offset, size, jp_hex, zh_hex}`; the build asserts the original bytes (`jp_hex`)
   before writing `zh_hex`.
@@ -45,6 +48,9 @@ enforces it. A record that cannot round-trip through the codec carries a canonic
   background sample. Resources with shared tiles opt into a deterministic
   fixed-capacity copy-on-write repack, so one label cannot contaminate another
   screen cell and the NitroFS file never grows.
+* **`settings_graphics`** — the paired settings resources are decoded into their
+  native tile canvases, repainted from semantic labels/button styles, and
+  copy-on-write repacked within the original per-file tile capacities.
 
 ## The files
 
@@ -109,7 +115,8 @@ run (the in-combat decoder stops at the first 0x00 of a run).
 * `388.json` — ship-info panel BG tiles: the captain badge 艦長 → 舰长.
 * `3d3.json` — strategy-hub root tabs: 作戦/編成/MS開発/システム →
   作战/编成/MS开发/系统. `作战` is redrawn as one same-size atlas label; unchanged
-  `MS` retains the original crisp pixels.
+  `MS` retains the original crisp pixels, with one pixel of added tracking between
+  `M` and `S`.
 * `3d4.json` — 作战 submenu: 作戦内容/マップ/索敵/進撃 →
   作战内容/地图/索敌/进击.
 * `3d5.json` — 编成 submenu: 配属/一覧/別働隊 → 配属/列表/别动队.
@@ -118,7 +125,14 @@ run (the in-combat decoder stops at the first 0x00 of a run).
   All five resources are rebuilt from the committed WQY-backed 12x12 atlas and
   repacked within their original tile capacities. Every submenu label is centered
   on the common button-content axis at x=34 (2/3/4 glyph starts: x=22/16/10).
+* `3e3.json` / `3e4.json` — settings header, functional descriptions, normal
+  values, focused values, and Confirm button. The original runtime gate still hides
+  `显示我军战斗动画` on a first playthrough and exposes it in New Game+. The
+  Confirm repaint clears the full 26×12 source `決定` ink bounds before drawing
+  `确定`, including both one-pixel edge columns.
 * `478.json` — in-combat force-HUD faction table BG tiles: 戦艦/自軍/友軍/敵軍 →
   战舰/自军/友军/敌军.
 * `48a.json` — in-combat terrain-legend OBJ tiles: 汎→通, 飛→飞 (legend reads
   回避/通/宇/飞/地/水).
+* `c31.json` — the extended dialogue-nameplate frame edge, repainted to match the
+  main green plate while preserving its transparent/border pixels.

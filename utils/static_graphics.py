@@ -83,6 +83,11 @@ def _tile_map(data: bytes) -> TileMap:
     )
 
 
+def tile_map(data: bytes) -> TileMap:
+    """Parse and validate one fixed-capacity BG tile resource."""
+    return _tile_map(data)
+
+
 def decode_index_canvas(data: bytes) -> tuple[list[list[int]], TileMap]:
     """Decode the visible nibble indices, applying screen-entry flips."""
     tile_map = _tile_map(data)
@@ -207,6 +212,21 @@ def _repack_canvas(
     return bytes(output)
 
 
+def repack_canvas(
+    source: bytes,
+    canvas: list[list[int]],
+    mapping: TileMap,
+    *,
+    where: str,
+) -> bytes:
+    """Copy-on-write every visible cell inside the fixed source tile budget."""
+    if len(canvas) != mapping.height or any(
+        len(row) != mapping.width for row in canvas
+    ):
+        raise ValueError(f"{where}: canvas geometry differs from source")
+    return _repack_canvas(source, canvas, mapping, where=where)
+
+
 def _atlas_cell(atlas: bytes, slot: int) -> list[list[int]]:
     start = slot * ATLAS_CELL_BYTES
     cell = atlas[start:start + ATLAS_CELL_BYTES]
@@ -218,6 +238,76 @@ def _atlas_cell(atlas: bytes, slot: int) -> list[list[int]]:
             bit = y * ATLAS_CELL + x
             pixels[y][x] = (cell[bit // 4] >> ((bit % 4) * 2)) & 0x3
     return pixels
+
+
+def atlas_cell(atlas: bytes, slot: int) -> list[list[int]]:
+    """Decode one committed 12x12 2bpp atlas cell."""
+    return _atlas_cell(atlas, slot)
+
+
+def _apply_pixel_moves(
+    canvas: list[list[int]], table: dict
+) -> None:
+    """Move selected palette pixels while restoring their original background.
+
+    This is for small typography corrections to source artwork that should
+    otherwise remain intact (for example adding one pixel of tracking between
+    two crisp Latin letters). Moves run after semantic labels are repainted.
+    """
+    height = len(canvas)
+    width = len(canvas[0])
+    for index, move in enumerate(table.get("pixel_moves", [])):
+        source = move["source"]
+        source_x = int(source["x"])
+        source_y = int(source["y"])
+        source_width = int(source["width"])
+        source_height = int(source["height"])
+        delta_x = int(move.get("dx", 0))
+        delta_y = int(move.get("dy", 0))
+        sample_x = int(move["sample_x"])
+        indices = {int(value) for value in move["indices"]}
+        where = (
+            f"{table['file']} pixel move {index} "
+            f"{move.get('what', '')!r}"
+        )
+        if (
+            source_width <= 0
+            or source_height <= 0
+            or source_x < 0
+            or source_y < 0
+            or source_x + source_width > width
+            or source_y + source_height > height
+            or source_x + delta_x < 0
+            or source_y + delta_y < 0
+            or source_x + delta_x + source_width > width
+            or source_y + delta_y + source_height > height
+            or not 0 <= sample_x < width
+            or not indices
+            or any(not 0 <= value <= 15 for value in indices)
+        ):
+            raise ValueError(f"{where}: invalid source/destination geometry")
+
+        snapshot = [
+            canvas[y][source_x:source_x + source_width]
+            for y in range(source_y, source_y + source_height)
+        ]
+        for local_y, row in enumerate(snapshot):
+            y = source_y + local_y
+            background = canvas[y][sample_x]
+            if background in indices:
+                raise ValueError(
+                    f"{where}: background sample ({sample_x}, {y}) "
+                    f"uses a moved palette index"
+                )
+            for local_x, value in enumerate(row):
+                if value in indices:
+                    canvas[y][source_x + local_x] = background
+        for local_y, row in enumerate(snapshot):
+            target_y = source_y + delta_y + local_y
+            for local_x, value in enumerate(row):
+                if value in indices:
+                    target_x = source_x + delta_x + local_x
+                    canvas[target_y][target_x] = value
 
 
 def repaint_atlas_text(
@@ -337,6 +427,8 @@ def repaint_atlas_text(
                         raise ValueError(
                             f"{where}: atlas slot {slot} contains unsupported value {value}"
                         )
+
+    _apply_pixel_moves(canvas, table)
 
     if table.get("repack_tiles", False):
         return _repack_canvas(

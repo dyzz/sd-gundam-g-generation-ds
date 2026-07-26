@@ -73,6 +73,37 @@ class StaticGraphicsTest(unittest.TestCase):
         self.assertNotEqual(tile_map.entries[0] & 0x3FF, tile_map.entries[1] & 0x3FF)
         self.assertEqual(len(output), len(source))
 
+    def test_pixel_move_adds_tracking_without_moving_the_background(self):
+        source = bytearray(resource((0, 1, 2, 3)))
+        # One stroke pixel at visible (0, 0); the rest of tile 0 is index 6.
+        source[20] = 0x6F
+        spec = {
+            "file": "synthetic.bin",
+            "palette_indices": {"stroke": 15, "shadow": 2},
+            "labels": [],
+            "repack_tiles": True,
+            "pixel_moves": [
+                {
+                    "what": "tracking",
+                    "source": {"x": 0, "y": 0, "width": 1, "height": 1},
+                    "dx": 2,
+                    "dy": 0,
+                    "sample_x": 7,
+                    "indices": [15],
+                }
+            ],
+        }
+        output = static_graphics.repaint_atlas_text(
+            bytes(source),
+            spec,
+            atlas=bytes(static_graphics.ATLAS_CELL_BYTES),
+            char_slots={},
+        )
+        canvas, _tile_map = static_graphics.decode_index_canvas(output)
+        self.assertEqual(canvas[0][0], 6)
+        self.assertEqual(canvas[0][2], 15)
+        self.assertEqual(len(output), len(source))
+
 
 if __name__ == "__main__":
     unittest.main()

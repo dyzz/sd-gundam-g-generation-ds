@@ -59,6 +59,8 @@ import json
 import struct
 from pathlib import Path
 
+from . import battle_system_graphics
+
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 RAM_BASE = 0x02000000
@@ -318,6 +320,30 @@ def _apply_patches(img: _Image, data_dir: Path, rel: str):
                     f"{rel}: {e.get('what', '?')}", old_hex=e.get("old_hex"))
 
 
+def _apply_battle_system_graphics(img: _Image, data_dir: Path):
+    """Rebuild the shared in-battle START-menu graphics and layouts."""
+    table = _load(data_dir, "zh/battle_system_menu.json")
+    charmap = _load(data_dir, "charmap.json")
+    char_slots = {
+        char: int(slot)
+        for slot, char in charmap["jp_slot_chars"].items()
+    }
+    char_slots.update(
+        {char: int(slot) for char, slot in charmap["one_byte"].items()}
+    )
+    char_slots.update(
+        {char: int(slot) for char, slot in charmap["two_byte_zh"].items()}
+    )
+    atlas = (data_dir / "font" / "atlas12.bin").read_bytes()
+    battle_system_graphics.patch_arm9(
+        img.jp,
+        img.buf,
+        table,
+        atlas=atlas,
+        char_slots=char_slots,
+    )
+
+
 # ---------------------------------------------------------------------------
 # appended autoload banks
 # ---------------------------------------------------------------------------
@@ -392,6 +418,7 @@ def build_arm9(jp_arm9: bytes, data_dir: Path | str | None = None,
     _apply_event_blocks(img, data_dir)
     _apply_patches(img, data_dir, "patches/code_patches.json")
     _apply_patches(img, data_dir, "patches/raw_regions.json")
+    _apply_battle_system_graphics(img, data_dir)
 
     # 2. appended autoload banks + relocation plumbing
     font = (data_dir / "font" / "atlas12.bin").read_bytes()

@@ -1,10 +1,10 @@
 """Builders for the miscellaneous translated NitroFS data files.
 
-Twenty-five flat data files outside the stage-dialogue (_STG*) system carry
+Twenty-seven flat data files outside the stage-dialogue (_STG*) system carry
 translated content: battle-voice barks, battle cut-in quotes, ID command /
 ability effect labels, special ability & defense descriptions, encyclopedia
 biographies, weapon and part names, and a handful of raw-tile UI graphics.
-Their translation data lives under ``data/zh/files/`` in five JSON layouts:
+Their translation data lives under ``data/zh/files/`` in seven JSON layouts:
 
   * ``edits``         — in-place rewrites of a fixed-layout text bank: each edit
                         re-encodes ``zh`` (utils.text_codec) at ``offset`` and
@@ -19,6 +19,9 @@ Their translation data lives under ``data/zh/files/`` in five JSON layouts:
                         record-offset table lives in the code binary image.
   * ``table``         — full rebuild of a fixed-total-size name table: entries
                         written at explicit offsets, 0x00-padded to their slots.
+  * ``bio_bank``      — full rebuild of an encyclopedia biography bank from
+                        explicit record offsets and encoded Chinese prose,
+                        preserving the source file's total size.
   * ``graphics``      — raw-tile bitmap repaints (not text): each region carries
                         the original bytes (``jp_hex``, asserted before writing)
                         and the replacement bytes (``zh_hex``).
@@ -26,6 +29,9 @@ Their translation data lives under ``data/zh/files/`` in five JSON layouts:
                         12x12 atlas cells, with explicit text boxes. Shared-tile
                         resources use a fixed-capacity copy-on-write repack
                         (no host font rasterizer and no file growth).
+  * ``settings_graphics`` — paired system-settings BG canvases repainted from
+                        semantic labels and button styles, then copy-on-write
+                        repacked inside each source resource's tile capacity.
 
 Text fields use the game text codec (utils.text_codec): plain characters plus
 byte-faithful escapes — ``{00}`` separators/padding, ``{03}``/``{04}`` control
@@ -46,7 +52,7 @@ import json
 from functools import lru_cache
 from pathlib import Path
 
-from . import static_graphics, text_codec
+from . import settings_graphics, static_graphics, text_codec
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 FILES_DIR = DATA_DIR / "zh" / "files"
@@ -75,6 +81,8 @@ DATA_FILE_TABLES = {
     "3d5.bin": "graphics/3d5.json",
     "3d6.bin": "graphics/3d6.json",
     "3d7.bin": "graphics/3d7.json",
+    "3e3.bin": "graphics/3e3.json",
+    "3e4.bin": "graphics/3e4.json",
     "478.bin": "graphics/478.json",
     "48a.bin": "graphics/48a.json",
     "c31.bin": "graphics/c31.json",
@@ -218,12 +226,25 @@ def _build_atlas_graphics(table: dict, jp: bytes) -> bytes:
     )
 
 
+def _build_settings_graphics(table: dict, jp: bytes) -> bytes:
+    """System-settings canvas rebuilt from committed atlas cells."""
+    charmap = json.loads((DATA_DIR / "charmap.json").read_text(encoding="utf-8"))
+    atlas = (DATA_DIR / "font" / "atlas12.bin").read_bytes()
+    return settings_graphics.repaint_settings(
+        jp,
+        table,
+        atlas=atlas,
+        char_slots=charmap["two_byte_zh"],
+    )
+
+
 _BUILDERS = {
     "edits": _build_edits,
     "cutin_groups": _build_cutin_groups,
     "table": _build_table,
     "graphics": _build_graphics,
     "atlas_graphics": _build_atlas_graphics,
+    "settings_graphics": _build_settings_graphics,
     "bio_bank": _build_bio_bank,
 }
 
