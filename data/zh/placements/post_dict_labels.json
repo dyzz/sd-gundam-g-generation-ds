@@ -1,5 +1,5 @@
 {
- "_about": "Menu descriptor strings living after the dialogue dictionary; in-place edits ending before the unit-thumbnail graphics bank.",
+ "_about": "Menu descriptor strings living after the dialogue dictionary; in-place edits ending before the unit-thumbnail graphics bank. Session chrome, terrain abbreviations, next-session help, and save/load labels are fixed-length source-asserted replacements.",
  "file_offset": "0x14AC34",
  "end": "0x14BD84",
  "entries": [
@@ -30,8 +30,9 @@
   },
   {
    "offset": "0x24F",
-   "text": "进程",
-   "payload_hex": "e892ea7d0000"
+   "text": "章节",
+   "payload_hex": "ed9debec0000",
+   "old_hex": "575b53e06279"
   },
   {
    "offset": "0x256",
@@ -44,19 +45,118 @@
    "payload_hex": "e7c9ef67"
   },
   {
+   "offset": "0x2D2",
+   "text": "没有存档",
+   "payload_hex": "e7d8e7cbe993ed78000000",
+   "old_hex": "57dc69f2f410f047301b40"
+  },
+  {
    "offset": "0x5D4",
    "text": "水陆",
    "payload_hex": "ebd4efda"
   },
   {
    "offset": "0x614",
-   "text": "通",
-   "payload_hex": "ef59"
+   "text": "泛",
+   "payload_hex": "e1dc",
+   "old_hex": "e4da"
   },
   {
    "offset": "0x61A",
-   "text": "飞",
-   "payload_hex": "ea45"
+   "text": "空",
+   "payload_hex": "e93f",
+   "old_hex": "e4f2"
+  },
+  {
+   "offset": "0x6A9",
+   "text": "章节",
+   "leading_blanks": 2,
+   "payload_hex": "0101ed9debec00",
+   "old_hex": "63675fe0738500"
+  },
+  {
+   "offset": "0x6B0",
+   "text": "进入下一章节",
+   "payload_hex": "e892e891ef4defb6ed9debec00000000",
+   "old_hex": "e29f3763675fe0738534e33f3ef02500"
+  },
+  {
+   "offset": "0x74D",
+   "text": "保存中",
+   "payload_hex": "ea47e993c000",
+   "old_hex": "63feecc03025"
+  },
+  {
+   "offset": "0x754",
+   "text": "读取中",
+   "payload_hex": "eea0e987c000",
+   "old_hex": "f2446cc03025"
+  },
+  {
+   "offset": "0x75B",
+   "text": "请勿关闭电源",
+   "payload_hex": "e83aecb8e8bbebabead3ebd600",
+   "old_hex": "e467e1f44cfe59331730f08317"
+  },
+  {
+   "offset": "0x769",
+   "text": "保存失败",
+   "payload_hex": "ea47e993e8a5e88f0000",
+   "old_hex": "63feec34f08ef012232a"
+  },
+  {
+   "offset": "0x77F",
+   "text": "完成",
+   "payload_hex": "e87ee83700",
+   "old_hex": "63feecf27c"
+  },
+  {
+   "offset": "0x785",
+   "text": "完成",
+   "payload_hex": "e87ee83700",
+   "old_hex": "f2446cf27c"
+  },
+  {
+   "offset": "0x78B",
+   "text": "保存",
+   "payload_hex": "ea47e99300",
+   "old_hex": "63feecf004"
+  },
+  {
+   "offset": "0x791",
+   "text": "读取",
+   "payload_hex": "eea0e98700",
+   "old_hex": "f2446cf004"
+  },
+  {
+   "offset": "0x797",
+   "text": "取消",
+   "payload_hex": "e987e92800",
+   "old_hex": "f1fffae082"
+  },
+  {
+   "offset": "0x79D",
+   "text": "保存数据吗？",
+   "payload_hex": "ea47e993e914e8cce80205",
+   "old_hex": "f2f04c63feecf012251b05"
+  },
+  {
+   "offset": "0x7AE",
+   "text": "读取失败",
+   "payload_hex": "eea0e987e8a5e88f000000",
+   "old_hex": "f2f01ce4953ef6633d274d"
+  },
+  {
+   "offset": "0x7BA",
+   "text": "请关机并将卡",
+   "payload_hex": "e83ae8bbe7e4e957e84ae80100",
+   "old_hex": "e467e1f44ce3812d2f02fa8a4c"
+  },
+  {
+   "offset": "0x7C8",
+   "text": "重新插入",
+   "payload_hex": "e8a1ef8aeb08e8910000000000",
+   "old_hex": "e24923e23e3ee438232ff08317"
   },
   {
    "offset": "0x1140",

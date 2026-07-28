@@ -1,0 +1,223 @@
+{
+ "_about": "Composable glyph relocation/mint plan for the reviewed chapter titles. Nine characters used only by renderA encyclopedia biographies move into candidate-ROM-token-free JP-band cells; one title character reuses a same-character native atlas cell. Their freed ZH cells and two unused ZH cells receive every title glyph required by both the stage-card renderA path and the save/load-slot trampoline path. The committed atlas stays at the shared baseline; normal builds apply this layer in memory. New cells are byte-exact reviewed WenQuanYi or same-character native atlas rasters.",
+ "source_atlas_sha256": "9df98204c9037b2c0e6a9da3848d5077e43c22f4e64d3bd9716beee423ed310c",
+ "target_atlas_sha256": "81375d621f8c1a1bb0330553f65be9a133fadc0e6e5c1e0176b955b2fa082882",
+ "candidate_rom": {
+  "path_hint": "/private/tmp/sdgundam-pr24-baseline.nds",
+  "sha1": "06c86732ebf14e6c7f4d660157a01a742ae6c683",
+  "proof": "All nine JP-band destination tokens were absent from the candidate ROM's text-bearing NitroFS files, all _STG files, and ARM9 text/dictionary bands. The moved characters occur only in the listed renderA encyclopedia sources."
+ },
+ "moves": [
+  {
+   "char": "咖",
+   "from_slot": 2549,
+   "to_slot": 1881,
+   "allowed_text_sources": [
+    "data/zh/files/library/character_bios.json"
+   ],
+   "source_cell_sha256": "3a0c1f4d3f37af3e8dc11d69e0f0d2afe98cd5d90d41e233d9a9dcf86bdd768d",
+   "target_old_cell_sha256": "7ff0189cd852c16b4c56bb5b3df78a1c4346c639f550650d22710ab3840b0bd6",
+   "cell_hex": "0009000009005595959999999999999999999999999599999999996a9a959096aaa0a800"
+  },
+  {
+   "char": "啡",
+   "from_slot": 2805,
+   "to_slot": 1937,
+   "allowed_text_sources": [
+    "data/zh/files/library/character_bios.json"
+   ],
+   "source_cell_sha256": "dbe8169d154ddcab1a68bd445d8565b68500ec775d3316af1b7b870205632479",
+   "target_old_cell_sha256": "247ae5d9fcdeac4925b0e594561103c6b3380fce1f8462f8b71cbc24b560a601",
+   "cell_hex": "009009559209699595499aa9499209499595499aa9559209a995950a9aa900900900a00a"
+  },
+  {
+   "char": "膝",
+   "from_slot": 3573,
+   "to_slot": 2003,
+   "allowed_text_sources": [
+    "data/zh/files/library/unit_bios.json"
+   ],
+   "source_cell_sha256": "31461a689f89510c092f7b022e2519a3b3563c330f58e7cdb78726ce1b0aab12",
+   "target_old_cell_sha256": "cf510ec1eb8dcec5cac3fadf56fae7162476c23f985c6a54e8db8b5352ef20d6",
+   "cell_hex": "5442026455956466a654699a645aa9646626546596645aa964662669699a595aa2aaa202"
+  },
+  {
+   "char": "弑",
+   "from_slot": 3227,
+   "to_slot": 2107,
+   "allowed_text_sources": [
+    "data/zh/files/library/character_bios.json"
+   ],
+   "source_cell_sha256": "fcbc3de3366c38e4664c6c9e333812e9ee69b00d8baf0c76676014f4bb7b905c",
+   "target_old_cell_sha256": "770617972379c878b891adae979c6fcee827d5ee51a8825f8fffd3a87dc29fbf",
+   "cell_hex": "090925660a9998569564aaa99955095599099a9a095492269959269aa59a942a90a800a0"
+  },
+  {
+   "char": "峰",
+   "from_slot": 3829,
+   "to_slot": 1028,
+   "allowed_text_sources": [
+    "data/zh/files/library/character_bios.json"
+   ],
+   "source_cell_sha256": "e05745efbcf5a983712b8089ee8e0eaa6087bf9d36539a3b3e8dbed7ce8918c1",
+   "target_old_cell_sha256": "bbc11b5cbcaf5216a71532c086141fe9d3764819910a65de78527b3c609dda5d",
+   "cell_hex": "9090009050959995a69969299999269955959969aa595525a56a2a2a5595006aaa008002"
+  },
+  {
+   "char": "罕",
+   "from_slot": 2287,
+   "to_slot": 1080,
+   "allowed_text_sources": [
+    "data/zh/files/library/unit_bios.json"
+   ],
+   "source_cell_sha256": "3a8a5bc0854b7e25126560b5671ae6ad569237b3b9e62337a12c4b57ba9818ca",
+   "target_old_cell_sha256": "4c7eda53ee3c772eff31526c243f3dbb0c634d125627832d0c2b1bd6edddfdcc",
+   "cell_hex": "555595696a9a5a82a9a40226585529a0a60a002400555595aaa6aa002400002400002800"
+  },
+  {
+   "char": "黎",
+   "from_slot": 2293,
+   "to_slot": 2162,
+   "allowed_text_sources": [
+    "data/zh/files/library/character_bios.json"
+   ],
+   "source_cell_sha256": "a438e6fe674b8972bb48897e2d3c9a0fe2d862b01482772961934d90579d1970",
+   "target_old_cell_sha256": "0005865bd2a0489ea037d3f3720b17917abb2d6b810587c9234fd0cb17312cc4",
+   "cell_hex": "5592009a529555a599562a9999659a9a99a560662a556695aa95aa546625a8a52a002a00"
+  },
+  {
+   "char": "诀",
+   "from_slot": 4037,
+   "to_slot": 2164,
+   "allowed_text_sources": [
+    "data/zh/files/library/character_bios.json"
+   ],
+   "source_cell_sha256": "710e552f9269df993acbb97b55d63d233996fed4bb53432b2223a5e84bf720f5",
+   "target_old_cell_sha256": "06a9638008549e0f02e83f24e36f48887b9437662ec4baf9a4456ddb004b4f05",
+   "cell_hex": "244002984002a054250068269540269a5595906aaa904902509a0990a626a02998000aa0"
+  },
+  {
+   "char": "描",
+   "from_slot": 4085,
+   "to_slot": 1400,
+   "allowed_text_sources": [
+    "data/zh/files/library/character_bios.json"
+   ],
+   "source_cell_sha256": "558577142b163c8ccbd508b463caf33731dc14768f92bd44e8b233969d740c06",
+   "target_old_cell_sha256": "c05b6fe363b383cc104c1414712fcda3402885e7f0a690c38439eeb70cbd1e54",
+   "cell_hex": "909009905595559aa99aa20a90549550669a9466929954959a649a90549595a49aaa28a0"
+  }
+ ],
+ "remaps": [],
+ "mints": [
+  {
+   "char": "歧",
+   "slot": 2549,
+   "old_char": "咖",
+   "old_cell_sha256": "3a0c1f4d3f37af3e8dc11d69e0f0d2afe98cd5d90d41e233d9a9dcf86bdd768d",
+   "new_cell_sha256": "32a86bdd7b6c75b97db718987bdbb1a2f928d1ca239ca47843aa6760a0ffdff7",
+   "cell_hex": "404202404202405695646aaa645925649a2664922964620954490aa59a092aa596002aa8"
+  },
+  {
+   "char": "篇",
+   "slot": 2805,
+   "old_char": "啡",
+   "old_cell_sha256": "dbe8169d154ddcab1a68bd445d8565b68500ec775d3316af1b7b870205632479",
+   "new_cell_sha256": "a2e987a976d8e74e1e55861b417d2c5e58e84b97a3d863c11cacc62d92dbf9fb",
+   "cell_hex": "24900054599569a6a95a552590aa2650552590aa2a50559550669a6455956966968aaaaa"
+  },
+  {
+   "char": "胎",
+   "slot": 3573,
+   "old_char": "膝",
+   "old_cell_sha256": "31461a689f89510c092f7b022e2519a3b3563c330f58e7cdb78726ce1b0aab12",
+   "new_cell_sha256": "8033cbe06e944876879e306eb5a5675cdd25124704f50d151de75e619aa5fb54",
+   "cell_hex": "544902a44902249926545595a4a99a2459a5549926a499242499242959254999268aaa28"
+  },
+  {
+   "char": "盐",
+   "slot": 3227,
+   "old_char": "弑",
+   "old_cell_sha256": "fcbc3de3366c38e4664c6c9e333812e9ee69b00d8baf0c76676014f4bb7b905c",
+   "new_cell_sha256": "5124b5e7fa5cc32f133f96e9a30f732671ba5acbec45b7b5ab2bc37560b8e9cb",
+   "cell_hex": "404202404202546509686a9640659a546aa2a88202505525906926904926545595a8aaaa"
+  },
+  {
+   "char": "玻",
+   "slot": 3829,
+   "old_char": "峰",
+   "old_cell_sha256": "e05745efbcf5a983712b8089ee8e0eaa6087bf9d36539a3b3e8dbed7ce8918c1",
+   "new_cell_sha256": "7e846a0d017008fd127a996226212ab8a709ce9ca6a51cfe6a5fb7d93d447f13",
+   "cell_hex": "0000095556959aa6999024a9545625989626906426506626a5a6292a692640969a80aaa0"
+  },
+  {
+   "char": "璃",
+   "slot": 4055,
+   "old_char": null,
+   "old_cell_sha256": "b95cb34d3af9a7efa554237525e1df8601413e8450f0f63d2bae293594b311d5",
+   "new_cell_sha256": "022b8678ef944bb73f967a319c7332514c5e72faa8a83784359dadb7c62b9468",
+   "cell_hex": "0040025556959a9aa990699a549999985595906aaa505595a599992a599900a996000aa8"
+  },
+  {
+   "char": "邂",
+   "slot": 2287,
+   "old_char": "罕",
+   "old_cell_sha256": "3a8a5bc0854b7e25126560b5671ae6ad569237b3b9e62337a12c4b57ba9818ca",
+   "new_cell_sha256": "ced42102ab317f202c7cea30e3f7e79f1f5094557f691c310cc36bfb78bd9123",
+   "cell_hex": "0955952699996455996866a66555266666956455a66466956466a6595a26a955950aaaaa"
+  },
+  {
+   "char": "逅",
+   "slot": 4276,
+   "old_char": null,
+   "old_cell_sha256": "24f06baf53abd6d079857c3a63e52de1818bdd2617c70da5684dddc67c93a3b2",
+   "new_cell_sha256": "5090917d76184c09d589535a4e5b34992dcca32849ce9426d59c94a9ddcf4194",
+   "cell_hex": "24002598552a90a902a0559595a9aa9a592590992690992490592564aa2aa955950aaaaa"
+  }
+ ],
+ "promotions": [
+  {
+   "char": "疾",
+   "from_slot": 908,
+   "slot": 2293,
+   "old_char": "黎",
+   "source_cell_sha256": "b1ca99b1a8af7cd6beeafa0c3a38de8623255be7c8593faa09425e55b2afe2a6",
+   "old_cell_sha256": "a438e6fe674b8972bb48897e2d3c9a0fe2d862b01482772961934d90579d1970",
+   "cell_hex": "009000545595a4aaaa250900265525649a2aa59200665595a466aa29a909590a96aa02a8"
+  },
+  {
+   "char": "凋",
+   "from_slot": 1786,
+   "slot": 4037,
+   "old_char": "诀",
+   "source_cell_sha256": "1787b1e694312e668d785ed617b10a51b74ab10613bc8eb2a4d8a49200f3f57e",
+   "old_cell_sha256": "710e552f9269df993acbb97b55d63d233996fed4bb53432b2223a5e84bf720f5",
+   "cell_hex": "09559526699a24559528699a90559590a99aa5599926999924599964aa9a980295a000aa"
+  },
+  {
+   "char": "湖",
+   "from_slot": 1944,
+   "slot": 4085,
+   "old_char": "描",
+   "source_cell_sha256": "1041b9673475ab02d112ea5a0d2e8df0338d07408e442dba86fe509532a80f67",
+   "old_cell_sha256": "558577142b163c8ccbd508b463caf33731dc14768f92bd44e8b233969d740c06",
+   "cell_hex": "24249598249960559949a695662699989599909995a59999269599246a9a24909628a0a8"
+  }
+ ],
+ "native_reuses": [
+  {
+   "char": "方",
+   "slot": 4241,
+   "cell_sha256": "d16f4733eea5193fae6aa943a64e8c7923a0de35f7440b06951df41b5ef1befa"
+  }
+ ],
+ "restores": [
+  {
+   "slot": 1944,
+   "what": "retired JP-band 湖 mint; candidate-ROM token is unused",
+   "old_cell_sha256": "1041b9673475ab02d112ea5a0d2e8df0338d07408e442dba86fe509532a80f67",
+   "new_cell_sha256": "b41d9536dc8ac8a0e29381668bc2f6def6610695336449592b4c4b163064855e",
+   "cell_hex": "09499526499a585592a9699526499a28499240659564669a6466926466926995968aaaa8"
+  }
+ ]
+}

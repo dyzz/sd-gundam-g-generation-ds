@@ -1,7 +1,7 @@
 {
  "_about": "Self-check hashes: every built component and the final ROM must match. source_rom is the Japanese cartridge dump the build starts from.",
  "components": {
-  "0.bin": "0b41f9495250c472f7cafd4b540fa02ac8115090",
+  "0.bin": "b5a50b99a0d29cdf6c9f65737acd1c3b52e0b377",
   "1.bin": "6b775f40580672a1251e8000ec594faefc31f628",
   "1da.bin": "210aa5bc7ff833b36fccc445c754e51c0193b5eb",
   "1db.bin": "c568d56018343138546ac2f69860fc57eb2a8d4e",
@@ -11,12 +11,12 @@
   "1df.bin": "108397d60fa3ca691c6e96d8f932565d3cf1e802",
   "1e0.bin": "d922b5034a13fc724a8bc452e018dd960297b924",
   "31e.bin": "954863d33ed5ba3594095e619c83639c8bf11c3b",
-  "324.bin": "4c55fef80dd61b980f8d2a6ad156f2f1af243529",
+  "324.bin": "d6089c2a15c6ebed0b351a2766ba75206c1312a6",
   "388.bin": "daff60ffb20a9d77bdea126e4b928de166a70f86",
-  "3d3.bin": "937741c1a8481958f9e93dd9c2ef3fd515b44727",
-  "3d5.bin": "7161607f2d87793dbb7ca41fecb7f79ce9f3ae2e",
-  "478.bin": "3141220b21099e79f1ca730b88fa9a52907dca2f",
-  "48a.bin": "321e02923a5d3dee7581c3994231915036e45dae",
+  "3d3.bin": "602bb306de74c7d13e8d34396b3180e3d00b3108",
+  "3d5.bin": "b4a2eadaabef233b321535d0fb0693ec77363195",
+  "478.bin": "c204da47680f16a40f23a38872128f349db85cb5",
+  "48a.bin": "985d7f78766a07497f6255aeefb9a853364343bc",
   "_STG00.bin": "fc095b76fe3a6a314e00ac26297c38fedf4ef6d5",
   "_STG00S.bin": "02e32f1d898972df9851716e3574236271b4d699",
   "_STG01.bin": "9d89ff3da574c88c6575026c8d41bcc5315b9a2b",
@@ -118,19 +118,26 @@
   "_STGXXA.bin": "590415e5b8a73b528747fe3327c58a3d878649e7",
   "_STGXXB.bin": "fb7c8701f78232cc0b8d034b611cba586fa8afc8",
   "_STGXXS.bin": "d712c3aa6a15da195e35b4fa30514170cbb20722",
-  "arm9": "f98c4f6bd4b57ed59e1862a6a5342cd382211c1a",
+  "arm9": "f8c71f83ca5ff40758702fa3a68eca47d2244b30",
   "b6e.bin": "a9d52829b9f7bb20962b39982361b69e7541e18d",
   "b6f.bin": "370c0dc0b8db4aba2b74f9c49a199f17aa1ea14f",
-  "c4b.bin": "92d9563b9cf4f1a30e51efe83a4b5bddabc47e1c",
+  "c4b.bin": "a3a42b9845440155517acf58a8e9b7268af5ff48",
   "c4f.bin": "62c96e462fff8708244339f82c52b530095b658e",
-  "c31.bin": "ff967a39ea0b8c115c66562d46fe4558dde3ec22"
+  "c31.bin": "ff967a39ea0b8c115c66562d46fe4558dde3ec22",
+  "3d4.bin": "a7f12f91e3860e3563eba147236f7ee39cca3e09",
+  "3d6.bin": "ea6cf84171f0d56f53acd07fbbecb365aafba452",
+  "3d7.bin": "3313770b6bf1f0bea74b594ceaf129ba42a5199d",
+  "3e3.bin": "c99ffc32ad3da3987935e0d2e14593a000c6782e",
+  "3e4.bin": "4fb2f93528e035039402ad224a9cec503f1297ab",
+  "42d.bin": "dafb8cbc815d7b59452fe77f17e00bf6d9dfa263",
+  "c34.bin": "bb088c49ded799f9a5f9279879cd16a7b160ffef"
  },
  "output_rom": {
-  "sha1": "96e4ed45c280d0cc58f8348ca5fe6384114a2af3",
-  "size": 30359400
+  "sha1": "d2c446db3a98f310065f0b6eb0e20011cc8c980a",
+  "size": 30361960
  },
  "output_rom_padded": {
-  "sha1": "f886b4f2ccb62b14b42317eb0d3928f262b53efd",
+  "sha1": "646b0ae6a877677c39c9ce1699ccd91d9b5d8a46",
   "size": 33554432
  },
  "source_rom": {

@@ -296,6 +296,13 @@
    "why": "gameplay tweak: every stage transition gated on a free-battle (recon) count required 3-4 battles; each `cmp rN,#count ; bne` becomes `cmp rN,#1 ; blo` so a single free battle unlocks the next stage."
   },
   {
+   "file_offset": "0x3AEB0",
+   "old_hex": "1021",
+   "new_hex": "2021",
+   "what": "battle terrain-page 章节 label x=16 -> 32",
+   "why": "章节 occupies the complete 24 px field ending at x=56. The following numeric chapter code stays at x=56 and uses the stock compact renderB digit/Latin identities, so the two fields visually join without overlap; moving the label farther right lets the later number-field clear clip 节. The independently bounded title remains at x=96."
+  },
+  {
    "file_offset": "0x4A340",
    "old_hex": "207e0228",
    "new_hex": "d1f09cff",

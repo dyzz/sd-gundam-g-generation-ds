@@ -56,7 +56,12 @@ Starting from the Japanese arm9 image (1,797,560 B):
 3. **Write string pools** (`data/zh/placements/` + `zh/event_text.json`): in-place pools (battle names, detail pool,
    menu descriptors, resident caves), the 1,267 event/briefing text blocks in
    `0x1985A4..0x1AD520`, and the two relocated banks that later become autoload
-   payloads (pool B also owns the 18 BackStage help strings).
+   payloads (pool B also owns the 18 BackStage help strings and the deduplicated
+   chapter-title strings). The 101 stage descriptors retarget both their
+   shared load-list/battle-header fields (`+0x0C/+0x10`) and chapter-card
+   fields (`+0x1C/+0x20`);
+   the generic free-battle load-list fallback reuses the same bank-safe
+   `自由战斗` payload.
 4. **Apply code patches** (`data/patches/code_patches.json`, 39 entries, then
    `data/patches/raw_regions.json`, currently empty): render-path trampolines + caves,
    decoder hooks, one-byte fixes, gameplay threshold tweaks. Every patch asserts its
@@ -70,7 +75,7 @@ Starting from the Japanese arm9 image (1,797,560 B):
    `是/否` states; recompress the existing 182-tile bank and repack layouts 2–22
    inside their original ARM9 arenas, then repoint only those existing layout entries.
 6. **Append the autoload tail**: 12×12 glyph atlas (`data/font/atlas12.bin`, `0x25F80` B)
-   + pool A (`0x2028C` B) + pool B (`0x9A9C` B) + the new 5-entry autoload list; patch
+   + pool A (`0x2028C` B) + pool B (`0xA3D8` B) + the new 5-entry autoload list; patch
    ModuleParams (`0xB0C/0xB10`), the renderer atlas pointer (`0x1315C` → `0x023027A0`)
    and the heap floor (`0xA48F8` → `0x02348A00`). Mechanism: `ROM_STRUCTURE.md` §3.
 7. **Self-check** — sha1 vs `data/manifest.json`.
@@ -94,12 +99,13 @@ For each of the 101 `_STG*.bin` files (data in `data/zh/stages/<name>.json`):
 
 ### Phase 3 — misc data files (`utils/data_files.py`)
 
-Twenty-seven files, seven data layouts (schemas in `DATA_FORMATS.md`): bark banks
+Twenty-eight files, eight data layouts (schemas in `DATA_FORMATS.md`): bark banks
 (in-place re-encoded runs), the grown cut-in quote bank (whole-file rebuild; its offset
 table lives in arm9 and was already written in phase 1 — the two must agree), fixed-size
 name and biography tables, raw-tile graphics repaints (asserted against original bytes),
 all five BackStage menu resources regenerated from committed 12x12 atlas cells, and the
-paired settings canvases. Shared-tile resources are copy-on-write
+paired settings canvases, plus the compressed save/load screen (`c34.bin`).
+Shared-tile resources are copy-on-write
 repacked/deduplicated within their original fixed capacities.
 
 ### Phase 4 — container assembly (`utils/rom.py` + ndspy)

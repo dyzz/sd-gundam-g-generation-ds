@@ -154,7 +154,7 @@ offsets into arm9, or bank-relative for the autoload banks):
 
 ## zh/files/ (→ `utils/data_files.py`)
 
-`data/zh/files/README.md` documents each of the 27 files; seven layouts:
+`data/zh/files/README.md` documents each of the 28 files; eight layouts:
 
 | layout | used by | model |
 |---|---|---|
@@ -165,6 +165,7 @@ offsets into arm9, or bank-relative for the autoload banks):
 | `graphics` | `42d`, `388`, `478`, `48a`, `c31` | raw-tile repaints `{offset, jp_hex, zh_hex}` with original-byte asserts (tiles, not text) |
 | `atlas_graphics` | `3d3`–`3d7` | static BG labels rebuilt from committed 12x12 atlas cells; clear boxes and clean donor rows are explicit, and shared-tile resources are copy-on-write repacked/deduplicated within their original capacity |
 | `settings_graphics` | `3e3`, `3e4` | paired settings canvases rebuilt from semantic descriptions and focused/unfocused button styles, with fixed-capacity copy-on-write repacking |
+| `save_load_graphics` | `c34` | custom-LZSS save/load tile set plus layouts 2–21, rebuilt atomically so shared header/slot tiles cannot cross-contaminate |
 
 ## Cross-component couplings (regenerate together)
 

@@ -177,6 +177,11 @@
    "what": "backstage stage-progression threshold immediates (owner gameplay tweak)"
   },
   {
+   "lo": "0x03AEB0",
+   "hi": "0x03AEB2",
+   "what": "battle terrain-page 章节 label x-coordinate 16->32 (joins the unchanged chapter number at x=56)"
+  },
+  {
    "lo": "0x04A340",
    "hi": "0x04A344",
    "what": "roster list detail-panel populate trampoline (browse view fix)"

@@ -37,6 +37,9 @@ Exit 0 iff every gate passes.  One line on what each gate protects against:
 | `dialogue_nameplate_geometry` | clipped 8th/9th speaker-name glyphs, portrait/name or body/cursor/choice tile overlap, wrong-green frame extensions, or an unbalanced enlarged stack frame |
 | `ui_font_atlas_dispatch` | 8px-mush Chinese on the UI-font path — the ZH→atlas trampoline must be intact (or absent) |
 | `post_clear_pilot_cids` | original-ROM post-clear weakening — pins Kamille's narrow earned-CID 44 guard and Jerid's SP7S baseline 84 / earned 85 row |
+| `settings_graphics` | settings description/focus corruption or accidental loss of the New-Game+ animation row |
+| `save_load_graphics` | cross-contaminated save/load labels or overflow of the 185-tile/custom-LZSS container |
+| `battle_system_menu_graphics` | shared START-menu tile damage or overflow of its compressed/layout arenas |
 | `code_image_parity` | ANY unexplained code/data byte change vs the JP source (the combat-breakage class); allow-list + pointer-repoint rule, forbidden bands can never be allow-listed |
 | `unit_icon_bank_frozen` | corrupted Turn A / unit thumbnails — all 250 24×24 4bpp slots must remain byte-identical to JP |
 | `dialogue_dict_frozen` | the battle-entry freeze — the dialogue compression dictionary physically overlaps the UI font and must stay byte-identical to JP |
@@ -91,6 +94,16 @@ JIT off, software renderer, the 12-button keyboard map, optional gdb stub).
 # py-desmume normal-flow capture of all 4 BackStage roots and all 12 submenu
 # items. No savestate or RAM mutation.
 .venv/bin/python test/live/capture_backstage_tabs.py <rom> [--sav PATH] [--slot 1]
+
+# py-desmume normal New Game proof of the localized 章节 prefix and first
+# chapter title. No savestate or RAM mutation.
+.venv/bin/python test/live/test_stage_title_render.py <rom> [--out DIR]
+
+# py-desmume + RAM cheat proof for late special prefixes such as SP1A/X3A.
+# The cartridge save is preserved; all 101 live descriptor pointers temporarily
+# expose one real translated record on either the load or battle surface.
+.venv/bin/python test/live/test_special_stage_title_render.py \
+    <rom> <sav> {load,battle} SP1A [--out DIR]
 
 # in-combat ID cut-in freeze grind (~15-25 min, run 3x for a shipping verdict):
 # fresh grind to combat, queue ID commands, battle start; frame-identity + gdb

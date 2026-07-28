@@ -59,7 +59,7 @@ import json
 import struct
 from pathlib import Path
 
-from . import battle_system_graphics
+from . import battle_system_graphics, font_atlas
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
@@ -298,8 +298,18 @@ def _apply_placements(img: _Image, data_dir: Path):
             stop = start + len(payload)
             if start < base or stop > end:
                 raise ValueError(f"{rel} @+{e['offset']}: write "
-                                 f"[{start:#x},{stop:#x}) outside arena "
-                                 f"[{base:#x},{end:#x})")
+                             f"[{start:#x},{stop:#x}) outside arena "
+                             f"[{base:#x},{end:#x})")
+            if "old_hex" in e:
+                old = bytes.fromhex(e["old_hex"])
+                if len(old) != len(payload):
+                    raise ValueError(
+                        f"{rel} @+{e['offset']}: old/new fixed lengths differ"
+                    )
+                if img.jp[start:stop] != old:
+                    raise ValueError(
+                        f"{rel} @+{e['offset']}: original bytes drifted"
+                    )
             img.put(start, payload, f"{rel} @+{e['offset']}")
 
 
@@ -311,6 +321,147 @@ def _apply_event_blocks(img: _Image, data_dir: Path):
             raise ValueError(f"event block {e['offset']}: payload length "
                              f"{len(payload)} != recorded {e['length']}")
         img.put(_i(e["offset"]), payload, f"event block {e['offset']}")
+
+
+def _apply_stage_titles(img: _Image, data_dir: Path):
+    """Retarget all four title pointers in the 101 stage descriptors."""
+    d = _load(data_dir, "zh/placements/stage_titles.json")
+    table = d["table"]
+    base = _i(table["file_offset"])
+    count = int(table["record_count"])
+    stride = _i(table["stride"])
+    fields = {
+        ("save_slot", "stage_title_prefix"):
+            _i(table["save_slot_prefix_ptr_offset"]),
+        ("save_slot", "stage_title_stream"):
+            _i(table["save_slot_title_ptr_offset"]),
+        ("chapter_card", "stage_title_prefix"):
+            _i(table["chapter_card_prefix_ptr_offset"]),
+        ("chapter_card", "stage_title_stream"):
+            _i(table["chapter_card_title_ptr_offset"]),
+    }
+    if count != L.STAGE_DESC_N or stride != L.STAGE_DESC_STRIDE:
+        raise ValueError(
+            f"stage title table geometry changed: count={count}, "
+            f"stride={stride:#x}"
+        )
+    source = d["source"]
+    if hashlib.sha256(img.jp).hexdigest() != source["source_arm9_sha256"]:
+        raise ValueError("stage title source ARM9 hash mismatch")
+    source_table = img.jp[base:base + count * stride]
+    if hashlib.sha256(source_table).hexdigest() != source["source_table_sha256"]:
+        raise ValueError("stage title source table hash mismatch")
+
+    bank = d["bank"]
+    bank_ram = _i(bank["ram_base"])
+    bank_size = _i(bank["required_parent_size"])
+    fragment_start = _i(bank["fragment_offset"])
+    fragment_end = _i(bank["fragment_end"])
+    expected_sites = {
+        base + record * stride + field
+        for record in range(count)
+        for field in fields.values()
+    }
+    seen_sites: set[int] = set()
+    unique_payloads: set[tuple[int, bytes]] = set()
+    for entry in d["entries"]:
+        key = (entry["view"], entry["domain"])
+        if key not in fields:
+            raise ValueError(f"stage title {entry['id']}: unknown field {key!r}")
+        expected_surface = (
+            "stage" if entry["view"] == "chapter_card" else "bank"
+        )
+        if entry["surface"] != expected_surface:
+            raise ValueError(
+                f"stage title {entry['id']}: surface/view mismatch"
+            )
+        old = _i(entry["old_ptr"])
+        target = _i(entry["ptr"])
+        off = _i(entry["offset"])
+        payload = bytes.fromhex(entry["payload_hex"])
+        if not payload or payload[-1] != 0:
+            raise ValueError(
+                f"stage title {entry['id']}: payload is not NUL-terminated"
+            )
+        if (
+            target != bank_ram + off
+            or off < fragment_start
+            or off + len(payload) > fragment_end
+            or off + len(payload) > bank_size
+        ):
+            raise ValueError(
+                f"stage title {entry['id']}: target/bank range mismatch"
+            )
+        unique_payloads.add((off, payload))
+        for site_text in entry["sites"]:
+            site = _i(site_text)
+            if site in seen_sites:
+                raise ValueError(f"stage title pointer site repeated: {site:#x}")
+            record, within = divmod(site - base, stride)
+            if not (0 <= record < count) or within != fields[key]:
+                raise ValueError(
+                    f"stage title {entry['id']}: site {site:#x} is outside "
+                    "its structured field"
+                )
+            img.put_u32(
+                site,
+                target,
+                f"stage title {entry['id']}",
+                expect_old=old,
+            )
+            seen_sites.add(site)
+    if seen_sites != expected_sites:
+        raise ValueError(
+            f"stage title pointer ownership mismatch: got {len(seen_sites)}, "
+            f"expected {len(expected_sites)}"
+        )
+    extra_sites: set[int] = set()
+    for entry in d.get("extra_pointer_entries", []):
+        key = (entry["view"], entry["domain"])
+        if key != ("save_slot", "stage_title_stream"):
+            raise ValueError(
+                f"stage title {entry['id']}: unsupported extra field {key!r}"
+            )
+        if entry["surface"] != "bank":
+            raise ValueError(
+                f"stage title {entry['id']}: extra pointer is not bank-safe"
+            )
+        old = _i(entry["old_ptr"])
+        target = _i(entry["ptr"])
+        off = _i(entry["offset"])
+        payload = bytes.fromhex(entry["payload_hex"])
+        if (off, payload) not in unique_payloads:
+            raise ValueError(
+                f"stage title {entry['id']}: extra pointer does not reuse "
+                "a declared title payload"
+            )
+        if target != bank_ram + off:
+            raise ValueError(
+                f"stage title {entry['id']}: extra target/bank mismatch"
+            )
+        for site_text in entry["sites"]:
+            site = _i(site_text)
+            if site in seen_sites or site in extra_sites:
+                raise ValueError(
+                    f"stage title extra pointer site repeated: {site:#x}"
+                )
+            img.put_u32(
+                site,
+                target,
+                f"stage title {entry['id']}",
+                expect_old=old,
+            )
+            extra_sites.add(site)
+    counts = d["counts"]
+    if (
+        len(d["entries"]) != counts["entries"]
+        or len(unique_payloads) != counts["unique_payloads"]
+        or len(seen_sites) != counts["pointer_sites"]
+        or len(d.get("extra_pointer_entries", []))
+        != counts.get("extra_pointer_entries", 0)
+        or len(extra_sites) != counts.get("extra_pointer_sites", 0)
+    ):
+        raise ValueError("stage title entry/payload/site count mismatch")
 
 
 def _apply_patches(img: _Image, data_dir: Path, rel: str):
@@ -334,7 +485,7 @@ def _apply_battle_system_graphics(img: _Image, data_dir: Path):
     char_slots.update(
         {char: int(slot) for char, slot in charmap["two_byte_zh"].items()}
     )
-    atlas = (data_dir / "font" / "atlas12.bin").read_bytes()
+    atlas = font_atlas.load_effective_atlas(data_dir)
     battle_system_graphics.patch_arm9(
         img.jp,
         img.buf,
@@ -349,16 +500,39 @@ def _apply_battle_system_graphics(img: _Image, data_dir: Path):
 # ---------------------------------------------------------------------------
 
 def _bank_bytes(data_dir: Path, rel: str) -> tuple[int, bytes]:
-    """Rebuild an autoload string bank from its arena file -> (ram_base, blob)."""
+    """Rebuild an autoload string bank and its declared fragments."""
     d = _load(data_dir, rel)
     size = _i(d["size"])
     blob = bytearray(size)
-    for e in d["entries"]:
-        off = _i(e["offset"])
-        payload = bytes.fromhex(e["payload_hex"])
-        if off + len(payload) > size:
-            raise ValueError(f"{rel}: entry @+{off:#x} overruns the bank")
-        blob[off:off + len(payload)] = payload
+    written = bytearray(size)
+    documents = [(rel, d)]
+    for fragment_rel in d.get("fragments", []):
+        fragment = _load(data_dir, fragment_rel)
+        bank = fragment.get("bank") or {}
+        if bank.get("parent") != rel:
+            raise ValueError(f"{fragment_rel}: parent is not {rel}")
+        if _i(bank["ram_base"]) != _i(d["ram_base"]):
+            raise ValueError(f"{fragment_rel}: bank RAM base differs from {rel}")
+        if _i(bank["required_parent_size"]) != size:
+            raise ValueError(
+                f"{fragment_rel}: required parent size differs from {rel}"
+            )
+        documents.append((fragment_rel, fragment))
+    for source_rel, source in documents:
+        for e in source["entries"]:
+            off = _i(e["offset"])
+            payload = bytes.fromhex(e["payload_hex"])
+            if off + len(payload) > size:
+                raise ValueError(
+                    f"{source_rel}: entry @+{off:#x} overruns the bank"
+                )
+            for index, value in enumerate(payload, off):
+                if written[index] and blob[index] != value:
+                    raise ValueError(
+                        f"{source_rel}: conflicting bank overlap @+{index:#x}"
+                    )
+                blob[index] = value
+                written[index] = 1
     return _i(d["ram_base"]), bytes(blob)
 
 
@@ -416,12 +590,13 @@ def build_arm9(jp_arm9: bytes, data_dir: Path | str | None = None,
     _apply_ui(img, data_dir)
     _apply_placements(img, data_dir)
     _apply_event_blocks(img, data_dir)
+    _apply_stage_titles(img, data_dir)
     _apply_patches(img, data_dir, "patches/code_patches.json")
     _apply_patches(img, data_dir, "patches/raw_regions.json")
     _apply_battle_system_graphics(img, data_dir)
 
     # 2. appended autoload banks + relocation plumbing
-    font = (data_dir / "font" / "atlas12.bin").read_bytes()
+    font = font_atlas.load_effective_atlas(data_dir)
     ui_ram, ui_bank = _bank_bytes(data_dir, "zh/placements/ui_names_bank.json")
     brief_ram, brief_bank = _bank_bytes(data_dir, "zh/placements/briefing_blobs.json")
     for name, blob in (("font", font), ("UI bank", ui_bank),

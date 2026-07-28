@@ -1,7 +1,10 @@
 {
  "_about": "Autoload string bank copied to RAM 0x023E7000 at boot (5th autoload payload; a verified always-zero RAM gap above the heap ceiling). Holds the mission-briefing line blobs referenced by inline pointers from the briefing records (arenas/event_text_blocks.json), followed by BackStage help strings referenced by ordinary ARM9 pointer words. Briefing blob start addresses avoid 0x00 bytes in their inline pointer encoding; 0x01 pad bytes fill those skipped gaps.",
  "ram_base": "0x23E7000",
- "size": "0x9A9C",
+ "size": "0xA3D8",
+ "fragments": [
+  "zh/placements/stage_titles.json"
+ ],
  "entries": [
   {
    "offset": "0x0",

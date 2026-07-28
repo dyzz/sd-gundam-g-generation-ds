@@ -1,6 +1,6 @@
 # data/zh/files — translated miscellaneous NitroFS data files
 
-Twenty-seven flat data files outside the stage-dialogue (`_STG*`) system carry translated
+Twenty-eight flat data files outside the stage-dialogue (`_STG*`) system carry translated
 content. Each JSON table here rebuilds exactly one of them; the builder is
 `utils/data_files.py` (`build_data_file(name, jp_bytes)`), which self-checks every
 result against `data/manifest.json`. All files are in-place, size-preserving edits of
@@ -51,6 +51,9 @@ enforces it. A record that cannot round-trip through the codec carries a canonic
 * **`settings_graphics`** — the paired settings resources are decoded into their
   native tile canvases, repainted from semantic labels/button styles, and
   copy-on-write repacked within the original per-file tile capacities.
+* **`save_load_graphics`** — the shared save/load resource is decoded from its
+  custom-LZSS tile set plus twenty layouts; all visible labels are repainted and
+  every layout is repacked atomically within the original file size.
 
 ## The files
 
@@ -132,7 +135,7 @@ run (the in-combat decoder stops at the first 0x00 of a run).
   `确定`, including both one-pixel edge columns.
 * `478.json` — in-combat force-HUD faction table BG tiles: 戦艦/自軍/友軍/敵軍 →
   战舰/自军/友军/敌军.
-* `48a.json` — in-combat terrain-legend OBJ tiles: 汎→通, 飛→飞 (legend reads
-  回避/通/宇/飞/地/水).
+* `48a.json` — in-combat terrain-legend OBJ tiles: 汎→泛, 飛→空 (legend reads
+  回避/万/泛/宇/空/地/水).
 * `c31.json` — the extended dialogue-nameplate frame edge, repainted to match the
   main green plate while preserving its transparent/border pixels.

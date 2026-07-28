@@ -1,6 +1,6 @@
 """Builders for the miscellaneous translated NitroFS data files.
 
-Twenty-seven flat data files outside the stage-dialogue (_STG*) system carry
+Twenty-eight flat data files outside the stage-dialogue (_STG*) system carry
 translated content: battle-voice barks, battle cut-in quotes, ID command /
 ability effect labels, special ability & defense descriptions, encyclopedia
 biographies, weapon and part names, and a handful of raw-tile UI graphics.
@@ -32,6 +32,9 @@ Their translation data lives under ``data/zh/files/`` in seven JSON layouts:
   * ``settings_graphics`` — paired system-settings BG canvases repainted from
                         semantic labels and button styles, then copy-on-write
                         repacked inside each source resource's tile capacity.
+  * ``save_load_graphics`` — the compressed save/load BG tile set and all of
+                        its shared layouts rebuilt atomically inside the
+                        original fixed-size container.
 
 Text fields use the game text codec (utils.text_codec): plain characters plus
 byte-faithful escapes — ``{00}`` separators/padding, ``{03}``/``{04}`` control
@@ -52,7 +55,13 @@ import json
 from functools import lru_cache
 from pathlib import Path
 
-from . import settings_graphics, static_graphics, text_codec
+from . import (
+    font_atlas,
+    save_load_graphics,
+    settings_graphics,
+    static_graphics,
+    text_codec,
+)
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 FILES_DIR = DATA_DIR / "zh" / "files"
@@ -86,6 +95,7 @@ DATA_FILE_TABLES = {
     "478.bin": "graphics/478.json",
     "48a.bin": "graphics/48a.json",
     "c31.bin": "graphics/c31.json",
+    "c34.bin": "graphics/c34.json",
 }
 
 CUTIN_TERMINATOR = b"\x00\x03\x00\x01"
@@ -217,7 +227,7 @@ def _build_graphics(table: dict, jp: bytes) -> bytes:
 def _build_atlas_graphics(table: dict, jp: bytes) -> bytes:
     """Static BG labels rebuilt from the committed 12x12 atlas."""
     charmap = json.loads((DATA_DIR / "charmap.json").read_text(encoding="utf-8"))
-    atlas = (DATA_DIR / "font" / "atlas12.bin").read_bytes()
+    atlas = font_atlas.load_effective_atlas(DATA_DIR)
     return static_graphics.repaint_atlas_text(
         jp,
         table,
@@ -229,8 +239,20 @@ def _build_atlas_graphics(table: dict, jp: bytes) -> bytes:
 def _build_settings_graphics(table: dict, jp: bytes) -> bytes:
     """System-settings canvas rebuilt from committed atlas cells."""
     charmap = json.loads((DATA_DIR / "charmap.json").read_text(encoding="utf-8"))
-    atlas = (DATA_DIR / "font" / "atlas12.bin").read_bytes()
+    atlas = font_atlas.load_effective_atlas(DATA_DIR)
     return settings_graphics.repaint_settings(
+        jp,
+        table,
+        atlas=atlas,
+        char_slots=charmap["two_byte_zh"],
+    )
+
+
+def _build_save_load_graphics(table: dict, jp: bytes) -> bytes:
+    """Shared save/load layouts rebuilt from committed atlas cells."""
+    charmap = json.loads((DATA_DIR / "charmap.json").read_text(encoding="utf-8"))
+    atlas = font_atlas.load_effective_atlas(DATA_DIR)
+    return save_load_graphics.repaint_save_load(
         jp,
         table,
         atlas=atlas,
@@ -245,6 +267,7 @@ _BUILDERS = {
     "graphics": _build_graphics,
     "atlas_graphics": _build_atlas_graphics,
     "settings_graphics": _build_settings_graphics,
+    "save_load_graphics": _build_save_load_graphics,
     "bio_bank": _build_bio_bank,
 }
 

@@ -40,7 +40,7 @@ overlays and is not compressed).
 
 ### Text-bearing NitroFS files (the complete changed set)
 
-101 `_STG*.bin` stage scripts (grown; see `STAGE_FORMAT.md`) plus 27 misc files:
+101 `_STG*.bin` stage scripts (grown; see `STAGE_FORMAT.md`) plus 28 misc files:
 
 | file | JP size | role |
 |---|---|---|
@@ -61,8 +61,9 @@ overlays and is not compressed).
 | `42d.bin` | 20,332 | Title and bonus-menu OBJ tiles (按START键！/开始/继续/附加; 普通模式/特殊模式/返回; 资料/角色/机体; EV回顾; 声音/BGM/SE) — original `START`/`EV`/`SE` rasters retained; Chinese labels use outlined, softened paint |
 | `3d3.bin`–`3d7.bin` | 3,068 / 2,088 / 1,588 / 1,244 / 1,556 | BackStage root + all submenus (作战/编成/MS开发/系统; 作战内容/地图/索敌/进击; 配属/列表/别动队; 格纳库/系统图; 保存/读取/设置) — BG tiles regenerated and fixed-capacity repacked from committed 12x12 atlas cells; `MS` gets one pixel of added tracking |
 | `3e3.bin` / `3e4.bin` | 9,744 / 5,616 | settings descriptions and normal/focused values (including the New Game+ animation row); both BG canvases are regenerated and repacked within their original tile capacities |
+| `c34.bin` | 7,120 | save/load screen header, three `章节/回合/游戏时间` rows, and status badges (`开始前/普通/SP/通关`); 185 shared tiles and layouts 2–21 are rebuilt atomically inside the original custom-LZSS container |
 | `478.bin` | 3,312 | in-combat force-HUD faction table (战舰/自军/友军/敌军) — raw 4bpp BG tiles (file id 949; tile block @ 0x610) |
-| `48a.bin` | 3,312 | terrain/movement badge OBJ tiles (回避/通/宇/飞/地/水) — raw tiles, `offset = tile*32 + 784` |
+| `48a.bin` | 3,312 | terrain/movement badge OBJ tiles (回避/万/泛/宇/空/地/水) — raw tiles, `offset = tile*32 + 784` |
 | `c31.bin` | 2,744 | compressed dialogue-frame graphics; the extended nameplate edge is recolored to match the main green plate |
 | `b6e.bin` | 416 | parts **names** (40 entries: 30 real + 10 予備 spares; arm9 offset table, see map) |
 | `b6f.bin` | 1,936 | parts **captions/descriptions** (own arm9 offset table) |
@@ -82,9 +83,9 @@ Everything not listed above (3,126 files incl. `sound_data.sdat`) is byte-identi
 ─ appended payloads (translated build only; contiguous in file AND in RAM) ─
 0x023027A0  glyph atlas       (autoload #3)  0x25F80 B = 4,320 slots × 36 B   file 0x1B6DA0
 0x02328720  relocated pool A  (autoload #4)  0x2028C B                        file 0x1DCD20
-0x023E7000  relocated pool B  (autoload #5)  0x09A9C B                        file 0x1FCFAC
-            new 5-entry autoload list @ file 0x206A48 (RAM 0x02206A48), 0x3C B;
-            arm9 image ends at file 0x206A84
+0x023E7000  relocated pool B  (autoload #5)  0x0A3D8 B                        file 0x1FCFAC
+            new 5-entry autoload list @ file 0x207384 (RAM 0x02207384), 0x3C B;
+            arm9 image ends at file 0x2073C0
 ─ fixed runtime regions (same in JP and translated) ─
 [0x021B6860, 0x023027A0)  crt0 BSS-clear range (StaticBssStart..StaticBssEnd)
  0x0232C800               stage (_STG) load buffer base, size 0x13800 → ends 0x02340000
@@ -92,7 +93,7 @@ Everything not listed above (3,126 files incl. `sound_data.sdat`) is byte-identi
 [0x02340000, 0x023489AC)  upper work buffer
  0x02348A00               arena-lo (heap base) in the translated build (JP: 0x023027A0)
  0x023C0000               arena-hi (heap top; unchanged)
-[0x023E7000, 0x023F0A9C)  relocated pool B — ABOVE arena-hi ⇒ never heap-touched (always safe)
+[0x023E7000, 0x023F13D8)  relocated pool B — ABOVE arena-hi ⇒ never heap-touched (always safe)
  0x027C0000               DTCM (renderer contexts/scratch live here — invisible to main-RAM dumps)
  0x01FF8000               ITCM
 0xFFFF0104 / 0xFFFF0108   BIOS unhandled data-abort spin (every hard "black screen" freeze
@@ -143,9 +144,9 @@ for each 12-byte list entry {ramAddr, size, bssSize}:
   `+0x10` StaticBssEnd (`0x023027A0`). Only the first two words are patched.
 * **JP list** (file `0x1B6DA0`): 2 entries — ITCM `{0x01FF8000, 0x520, 0}`,
   DTCM `{0x027C0000, 0x020, 0}`.
-* **Translated list** (file `0x206A48`): 5 entries — ITCM, DTCM, then
+* **Translated list** (file `0x207384`): 5 entries — ITCM, DTCM, then
   `{0x023027A0, 0x25F80, 0}` (glyph atlas), `{0x02328720, 0x2028C, 0}` (pool A),
-  `{0x023E7000, 0x9A9C, 0}` (pool B). Adjacency must be exact: the payloads are inserted at
+  `{0x023E7000, 0xA3D8, 0}` (pool B). Adjacency must be exact: the payloads are inserted at
   file `0x1B6DA0` (displacing the old list), and
   `0x520 + 0x20 + ΣpayloadSizes == newListFileOff − 0x1B6860` or the source cursor lands in
   the wrong place. Payload sizes must be multiples of 4 (the copy loop is word-wise).
@@ -163,14 +164,14 @@ RAM = `0x02000000 + file` unless stated. JP→ZH columns show patched literals.
 | what | file | RAM / value |
 |---|---|---|
 | autoload copier routine | `0x9C4` | `0x020009C4` (called from crt0 `0x02000888`) |
-| ModuleParams | `0xB0C` | ListStart JP `0x021B6DA0` → ZH `0x02206A48`; ListEnd JP `0x021B6DB8` → ZH `0x02206A84`; AutoloadStart/BssStart `0x021B6860`; BssEnd `0x023027A0` (all others unchanged) |
+| ModuleParams | `0xB0C` | ListStart JP `0x021B6DA0` → ZH `0x02207384`; ListEnd JP `0x021B6DB8` → ZH `0x022073C0`; AutoloadStart/BssStart `0x021B6860`; BssEnd `0x023027A0` (all others unchanged) |
 | BSS clear range | — | `[0x021B6860, 0x023027A0)` — nothing translated may live here |
 | arena-lo literal | `0xA48F8` | JP `0x023027A0` → ZH **`0x02348A00`** (heap base, bumped above the payloads) |
 | arena-hi literal | `0xA496C` | `0x023C0000` (unchanged; do not touch) |
 | glyph-atlas autoload payload | `0x1B6DA0` | → RAM `0x023027A0`, `0x25F80` B (4,320 × 36) |
 | pool A autoload payload | `0x1DCD20` | → RAM `0x02328720`, `0x2028C` B |
-| pool B autoload payload | `0x1FCFAC` | → RAM `0x023E7000`, `0x9A9C` B; mission briefings + 18 BackStage help strings |
-| new autoload list | `0x206A48` | 5 × 12 B; arm9 image ends `0x206A84` |
+| pool B autoload payload | `0x1FCFAC` | → RAM `0x023E7000`, `0xA3D8` B; mission briefings, 18 BackStage help strings, and chapter titles |
+| new autoload list | `0x207384` | 5 × 12 B; arm9 image ends `0x2073C0` |
 
 ### 4.2 Text decode / render engine
 
@@ -190,7 +191,7 @@ RAM = `0x02000000 + file` unless stated. JP→ZH columns show patched literals.
 | renderB 8×16 UI font | `0x133F14` | `0x02133F14`, 32 B/glyph |
 | primary dictionary | `0x1444B4..0x14AC34` | `0x021444B4` — dialogue/data macro store. **Clobbering it freezes combat** — treat as read-only |
 | dictionary selector | `0x16B868` | `[0x0216B868]=0x021444B4` (primary), `[+4]=0x0212D770` (alt) |
-| renderB label arena | `0x14AC34..0x14BD84` | stat/UI label strings; bounded immediately before the unit-icon bank |
+| renderB/direct label arena | `0x14AC34..0x14BD84` | stat/UI label strings; includes the source-asserted `万/泛/宇/空/地/水` abbreviations, two-leading-blank `章节` chrome, and `进入下一章节` help text; bounded immediately before the unit-icon bank |
 | unit-icon graphics bank | `0x14BD84..0x15D6C4` | 250 × 24×24 4bpp thumbnails; immutable vs JP (`unit_icon_bank_frozen`) |
 | battle START-menu graphics | `0x168598..0x168F52` | existing LZSS block: descriptor `0x800009B6` reserves 2,486 compressed bytes and expands to 5,824 B / 182 tiles. The Chinese rebuild uses 2,211 B and 141 tiles; the remaining bytes/tiles stay capacity slack, not appended data |
 | battle START-menu layouts | `0x168FB8..0x169338` | layouts 2–22 are atomically rebuilt in the existing 804-byte arena (792 B used); pointer entries 2–22 at `0x1692E4..0x169338` are repointed inside that arena. Proven translated surfaces are `回合结束/保存/读取/设置`, `结束回合？`, and `是/否`; unobserved layout labels remain JP |
@@ -245,7 +246,8 @@ RAM = `0x02000000 + file` unless stated. JP→ZH columns show patched literals.
 
 | what | file | RAM / notes |
 |---|---|---|
-| stage descriptor table | `0x175560` | 101 records × 0x34, one per `_STG` file; word[0] = `0x0232C800` for every stage (single fixed load buffer) |
+| stage descriptor table | `0x175560` | 101 records × 0x34, one per `_STG` file; word[0] = `0x0232C800` for every stage (single fixed load buffer). The load-list/battle-header prefix/title pointers at `+0x0C/+0x10` and chapter-card prefix/title pointers at `+0x1C/+0x20` are all retargeted to reviewed Chinese strings in pool B. The generic free-battle fallback pointer `0x0214B00B`, used outside those records, is separately retargeted at file sites `0x32550/0x3B098/0x8540C` to the shared `自由战斗` save-slot payload |
+| battle terrain-page chapter header | `0x3AEB0` | `章节` is moved from x=16 to x=32, filling the 24 px field before the chapter code at x=56. Every save-list/battle prefix keeps the stock compact renderB identities for ASCII digits/letters instead of 12 px ZH clones; this covers numeric, SP, X, TR, TU/TL and FB codes without overlapping the later number-field clear or the title. The shared title starts at x=96 with a hard 10-glyph cap and `回` starts at x=216. |
 | stage load buffer | — | `0x0232C800`, size `0x13800` (79,872 B), ends `0x02340000`. Whole `_STG` file is read here verbatim |
 | resident stage context | — | ptr @ `0x0227D444`; `[+4]` (= `0x0227D448`) holds the buffer base; `header[8]` = the name table |
 | stage name-string reader | — | `0x0202E838` (`ldr r4,[r2,#4]` @ `0x0202E850` — the instruction behind the alignment crash) |
