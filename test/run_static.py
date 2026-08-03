@@ -22,6 +22,7 @@ in-game failure the gate protects against.
   engine_a_clamp_scope        战场情报 ID-panel paving / SPECIAL-description re-truncation (A16)
   assignment_id_tile_partition  配属 third-ID-title corruption from an overlapping ability tile bank
   assignment_unit_name_tile_partition  配属 long unit-name corruption from pilot-bank overlap
+  assignment_carrier_slot_frames  永恒号容量 6 但第四编队仍沿用原版两格栏框
   ui_font_atlas_dispatch      8px mush ZH on the UI-font path / corrupt render trampoline
   post_clear_pilot_cids       Kamille/Jerid earned forms reverting after campaign clear
   code_image_parity           ANY unexplained arm9 byte change vs the JP source (combat!)
@@ -611,6 +612,19 @@ ASSIGN_UNIT_TILE_BASE = 0x1FF
 ASSIGN_UNIT_NEXT_TILE_BASE = 0x21D
 ASSIGN_UNIT_TEXT_HEIGHT_TILES = 2
 ASSIGN_UNIT_MAX_ROW_TILES = 15
+ASSIGN_CARRIER_BG2_WIDTH_OFF = 0x422B8
+ASSIGN_CARRIER_BG2_WIDTH_ORIG = bytes.fromhex("0e20")  # movs r0,#14 tiles
+ASSIGN_CARRIER_BG2_WIDTH_FIX = bytes.fromhex("2020")   # movs r0,#32 tiles
+ASSIGN_CARRIER_BG2_EDGE_CALL_OFF = 0x422E2
+ASSIGN_CARRIER_BG2_EDGE_CALL_ORIG = bytes.fromhex("00f04bfa")  # bl 0x0204277c
+ASSIGN_CARRIER_BG2_EDGE_CALL_FIX = bytes.fromhex("c046c046")   # nop; nop
+ASSIGN_CARRIER_BG1_WIDTH_OFF = 0x42302
+ASSIGN_CARRIER_BG1_WIDTH_ORIG = bytes.fromhex("0e20")  # movs r0,#14 tiles
+ASSIGN_CARRIER_BG1_WIDTH_FIX = bytes.fromhex("2020")   # movs r0,#32 tiles
+ETERNAL_UTID = 639
+MASTER_CARRIER_CAP_OFF = 0x0D
+ETERNAL_CAPACITY_JP = 2
+ETERNAL_CAPACITY_ZH = 6
 UI_FONT_INJ_OFF = 0x131D8
 UI_FONT_INJ_ORIG = bytes.fromhex("48011618")     # stock 8x16 glyph-blit opening insns
 UI_FONT_INJ_FIX = bytes.fromhex("07f162f8")      # bl -> ZH-to-atlas trampoline cave
@@ -1184,6 +1198,45 @@ def gate_assignment_unit_name_tile_partition(rep, ctx):
                 f"exact 配属 signature capped to {ASSIGN_UNIT_MAX_ROW_TILES} tiles/row; "
                 f"unit tiles {ASSIGN_UNIT_TILE_BASE:#x}..{name_end - 1:#x}; "
                 f"pilot bank starts {ASSIGN_UNIT_NEXT_TILE_BASE:#x}")
+
+
+def gate_assignment_carrier_slot_frames(rep, ctx):
+    """Pin the complete six-slot fourth-carrier layout used by Eternal.
+
+    JP copies only 14 tiles of both BG2 backing and BG1 frames, then overlays a
+    short-row terminal edge after slot 2.  The translated unit master raises
+    Eternal's capacity to 6, so both copies must span the full 32-tile screen
+    row and the obsolete two-slot edge overlay must be skipped."""
+    aj, az = ctx["jp_a9"], ctx["a9"]
+    problems = []
+    patches = (
+        ("BG2 backing width", ASSIGN_CARRIER_BG2_WIDTH_OFF,
+         ASSIGN_CARRIER_BG2_WIDTH_ORIG, ASSIGN_CARRIER_BG2_WIDTH_FIX),
+        ("BG2 short-row edge call", ASSIGN_CARRIER_BG2_EDGE_CALL_OFF,
+         ASSIGN_CARRIER_BG2_EDGE_CALL_ORIG, ASSIGN_CARRIER_BG2_EDGE_CALL_FIX),
+        ("BG1 frame width", ASSIGN_CARRIER_BG1_WIDTH_OFF,
+         ASSIGN_CARRIER_BG1_WIDTH_ORIG, ASSIGN_CARRIER_BG1_WIDTH_FIX),
+    )
+    for label, off, orig, fix in patches:
+        jp = aj[off:off + len(orig)]
+        got = az[off:off + len(fix)]
+        if jp != orig:
+            problems.append(f"JP {label} @{off:#x}={jp.hex()} != {orig.hex()}")
+        if got != fix:
+            problems.append(f"ZH {label} @{off:#x}={got.hex()} != {fix.hex()}")
+    cap_off = MASTER_TABLE_OFF + ETERNAL_UTID * MASTER_STRIDE + MASTER_CARRIER_CAP_OFF
+    jp_cap = struct.unpack_from("<H", aj, cap_off)[0]
+    zh_cap = struct.unpack_from("<H", az, cap_off)[0]
+    if jp_cap != ETERNAL_CAPACITY_JP:
+        problems.append(f"JP Eternal capacity @{cap_off:#x}={jp_cap} != {ETERNAL_CAPACITY_JP}")
+    if zh_cap != ETERNAL_CAPACITY_ZH:
+        problems.append(f"ZH Eternal capacity @{cap_off:#x}={zh_cap} != {ETERNAL_CAPACITY_ZH}")
+    if problems:
+        rep.add("assignment_carrier_slot_frames", False, "; ".join(problems))
+    else:
+        rep.add("assignment_carrier_slot_frames", True,
+                "BG2 backing and BG1 frame copies cover all 32 tiles; stock "
+                "two-slot BG2 edge overlay skipped; Eternal capacity remains 6")
 
 
 def gate_ui_font_atlas_dispatch(rep, ctx):
@@ -4047,6 +4100,7 @@ GATES = [
     gate_engine_a_clamp_scope,
     gate_assignment_id_tile_partition,
     gate_assignment_unit_name_tile_partition,
+    gate_assignment_carrier_slot_frames,
     gate_ui_font_atlas_dispatch,
     gate_post_clear_pilot_cids,
     gate_code_image_parity,
@@ -4182,6 +4236,18 @@ def self_test(rom_path: Path, jp_path: Path) -> int:
                 ["assignment_unit_name_tile_partition"],
                 lambda c: mut_a9(c, ASSIGN_UNIT_CLAMP_CAVE_OFF + 0x32,
                                  bytes.fromhex("1027")))
+    expect_fail("restore the fourth-carrier BG2 backing copy to 14 tiles",
+                ["assignment_carrier_slot_frames"],
+                lambda c: mut_a9(c, ASSIGN_CARRIER_BG2_WIDTH_OFF,
+                                 ASSIGN_CARRIER_BG2_WIDTH_ORIG))
+    expect_fail("restore the fourth-carrier stock two-slot BG2 edge overlay",
+                ["assignment_carrier_slot_frames"],
+                lambda c: mut_a9(c, ASSIGN_CARRIER_BG2_EDGE_CALL_OFF,
+                                 ASSIGN_CARRIER_BG2_EDGE_CALL_ORIG))
+    expect_fail("restore the fourth-carrier BG1 frame copy to 14 tiles",
+                ["assignment_carrier_slot_frames"],
+                lambda c: mut_a9(c, ASSIGN_CARRIER_BG1_WIDTH_OFF,
+                                 ASSIGN_CARRIER_BG1_WIDTH_ORIG))
     expect_fail("drop the col-3 scope off the SPECIAL widen (the v1.3 ID-panel paving)",
                 ["engine_a_clamp_scope"],
                 # overwrite 'ldrh r2,[r5,#4]; cmp r2,#3; bne clamp50' with nops:

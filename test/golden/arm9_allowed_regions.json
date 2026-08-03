@@ -177,6 +177,21 @@
    "what": "backstage stage-progression threshold immediates (owner gameplay tweak)"
   },
   {
+   "lo": "0x0422B8",
+   "hi": "0x0422BA",
+   "what": "配属 four-carrier BG2 backing-template copy width 14->32 tiles (Eternal six-slot outer border)"
+  },
+  {
+   "lo": "0x0422E2",
+   "hi": "0x0422E6",
+   "what": "配属 skip stock two-slot BG2 terminal-edge overlay after expanding Eternal to six slots"
+  },
+  {
+   "lo": "0x042302",
+   "hi": "0x042304",
+   "what": "配属 four-carrier BG1 frame-template copy width 14->32 tiles (Eternal six-slot outlines)"
+  },
+  {
    "lo": "0x04A340",
    "hi": "0x04A344",
    "what": "roster list detail-panel populate trampoline (browse view fix)"
