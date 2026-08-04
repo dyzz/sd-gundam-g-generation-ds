@@ -6696,11 +6696,11 @@
    "ids": [
     547
    ],
-   "text": "双联超高初速防盾炮",
+   "text": "超高初速防盾炮",
    "pool": "data/zh/placements/resident_caves.json",
    "offset": "0xA11A",
    "ram": "0x219011A",
-   "bytes": 18,
+   "bytes": 14,
    "reserved": 19,
    "vacated": [
     {
@@ -6710,7 +6710,7 @@
      "ram": "0x2189B7C"
     }
    ],
-   "note": "MOVED 2026-07-19: original span = live BtlS_Crea attract-demo table (audit /tmp/spanaudit)"
+   "note": "MOVED 2026-07-19: original span = live BtlS_Crea attract-demo table (audit /tmp/spanaudit). DISPLAY-SAFE 2026-07-26: shortened 双联超高初速防盾炮 to 超高初速防盾炮 so the shared current-weapon field stays within its exact 96px budget."
   },
   {
    "date": "2026-07-17",

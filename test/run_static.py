@@ -18,7 +18,7 @@ in-game failure the gate protects against.
   ui_text_dispatch            the unit-info/ID screen 乱码 (garble) regression
   nameplate_render_path       illegible or vertically misaligned speaker names
   dialogue_nameplate_geometry clipped long names / wrong-green frame extension
-  glyph_row_clip              issue #2 lower-strip glyph loss on Profile/development-tree rows
+  glyph_row_clip              scoped row-wrap guard incl. battle-current weapon 96px / ID 64px
   engine_a_clamp_scope        战场情报 ID-panel paving / SPECIAL-description re-truncation (A16)
   assignment_id_tile_partition  配属 third-ID-title corruption from an overlapping ability tile bank
   assignment_unit_name_tile_partition  配属 long unit-name corruption from pilot-bank overlap
@@ -46,6 +46,7 @@ in-game failure the gate protects against.
   assignment_unit_name_budget 配属 unit names wider than its exact 120px reservation
   label_render_consistency    mixed-size "floating" glyphs in one label list
   unit_weapon_names           unit/weapon name garbage or coverage regression
+  weapon_name_width           pre-battle current-weapon 96px row overrun / black-screen freeze
   id_command_names            ID-command name/summary/detail garbage or coverage loss
   name_pointer_band           the 出击/deploy HARD-FREEZE from a unit/pilot name ptr >= 0x02190000
   effect_line_stops           special-box record bleed (duplicate/phantom ability lines)
@@ -583,7 +584,26 @@ GLYPH_ROW_CLIP_CAVE = bytes.fromhex(
     "11d104890d2c0ed14489022c0bd1047c032c08d1448a6418e4080589ac42"
     "02d3f0bc08bc184787b0041c7047c046"
     "0098000600f0200600e0000600f80006"
-    "014dac42e7d09be700e00106"                # +0x601E000 tier-1 (weapon-select); no-match b -> tier-2 @0x11C3E4
+    "014dac42e7d075e700e00106"                # +0x601E000 tier-1 (weapon-select); no-match b -> tier-3 @0x11C398
+)
+# Tier-3 whole-context admission of raster destination 0x0620E800.
+# The battle-confirmation current-weapon and current-ID labels share this
+# raster destination but declare different row widths: 12 tiles / 96px for
+# the weapon and 8 tiles / 64px for the ID.  Pin both call-site sequences
+# below so a future width change cannot silently widen the protected row.
+# The main cave's tier-1 miss lands here; a miss continues to the existing
+# tier-2 0x0600F000 admission, preserving the prior chain exactly.
+#   ldr r5,[pc,#4]; cmp r4,r5; beq 0x211C47A (clip test); b 0x211C3E4 (tier-2); .word 0x0620E800
+GLYPH_ROW_CLIP_T3_OFF = 0x11C398
+GLYPH_ROW_CLIP_T3_ORIG = bytes.fromhex("090000090000090000090000")   # JP dead in-image atlas
+GLYPH_ROW_CLIP_T3 = bytes.fromhex("014dac426dd021e000e82006")
+BATTLE_CURRENT_WEAPON_FIELD_OFF = 0x7EEE2
+BATTLE_CURRENT_WEAPON_FIELD = bytes.fromhex(
+    "0c2028810398049991f793f8031c0c200090281cf904090ce204120c94f72bf8"
+)
+BATTLE_CURRENT_ID_FIELD_OFF = 0x7F168
+BATTLE_CURRENT_ID_FIELD = bytes.fromhex(
+    "082028810598069990f7aef8031c08200090281cf904090ce204120c93f7e8fe"
 )
 # Tier-2 whole-map admission of map 0x0600F000 (编成 别働队 detachment nameplate; issue #18),
 # parked in the 12-byte dead-atlas gap between the 0x11C3A8 and 0x11C3F0 caves.
@@ -649,6 +669,7 @@ CHAR_DB_OFF, CHAR_DB_STRIDE = 0xDCF18, 0x48      # pilot record table, +0x04 = n
 CHAR_DB_BASE_COUNT, CHAR_DB_FULL_COUNT = 256, 563
 MASTER_TABLE_OFF, MASTER_STRIDE, MASTER_MAX = 0xB94BC, 0xD8, 945
 MASTER_NAME_OFF, MASTER_WPN_OFF, MASTER_WPN_STRIDE, MASTER_WPN_N = 0x00, 0x2C, 0x1C, 6
+MASTER_UNIT_COUNT = 676  # real unit records utid 0..675; utid 676 enters the char-DB alias
 ID_CMD_TABLE_OFF, ID_CMD_REC = 0xEC994, 0x24
 ID_CMD_NAME_OFF, ID_CMD_SUMMARY_OFF, ID_CMD_DETAIL_IDX_OFF = 0x00, 0x08, 0x22
 ID_CMD_DETAIL_OFFTAB, ID_CMD_DETAIL_OFFTAB_RAM = 0xF9048, 0x020F9048
@@ -668,13 +689,14 @@ TRAMPOLINE_SLOT_ADVANCE = {4156: 6, 4253: 6,          # ( )  narrow parens
 FREF_MAX_DEPTH = 8
 
 # On-screen field pixel budgets (measured against the real engine):
-ID_TITLE_BUDGET_PX = 64          # ID-command box title row (engine truncates + '~' past this)
+ID_TITLE_BUDGET_PX = 64          # narrowest binding surface: battle-current ID stride8=8
 ID_EFFECT_BUDGET_PX = 76         # ID-command effect summary line in the box body
 ID_DETAIL_LINE_CELLS = 20        # full-width renderA cells in the in-battle detail panel
 ID_DETAIL_MAX_LINES = 3          # condition/target + two effect rows
 ABILITY_NAME_BUDGET_PX = 76      # ID-ability name cell
 UNIT_NAME_BUDGET_PX = 144        # widest unit-name context (status/database field)
 ASSIGN_UNIT_NAME_BUDGET_PX = 120  # 配属 exact 15-tile row reservation
+WEAPON_NAME_BUDGET_PX = 96   # pre-battle current-weapon ctx 0x027C3308: stride8=12
 SPEAKER_PLATE_CELLS = 9          # widened dialogue speaker nameplate (9 glyph cells)
 # Pilot-name pixel cap across EVERY surface a char-DB name reaches: the battle
 # focus/formation plates fit ~81px before the fixed LV badge (pen x=51, badge
@@ -1071,13 +1093,17 @@ def gate_engine_a_clamp_scope(rep, ctx):
 
 
 def gate_glyph_row_clip(rep, ctx):
-    """The 12px glyph plot rasterizer's 2-row tile context aliases
-    row1[col0] onto row0[col13] (stride8=13): writes crossing the 13-tile
-    row boundary wrap and erase the lower strip of the row's first glyphs
-    (issue #2 — Profile lists and the MS development tree).  The candidate
+    """The 12px glyph plot rasterizer's 2-row tile contexts alias
+    row1[col0] onto row0[stride8]: writes crossing a declared row boundary
+    wrap and erase/corrupt neighbouring graphics (issue #2 plus the Raider
+    pre-battle black-screen class).  The candidate
     must keep the scoped clip: hook 0x12FE6 -> cave 0x11C448 admitting maps
     0x06009800/0x0620F000/0x0601E000 whole-map (the third is the in-battle
     weapon-select list, added 2026-07-20 to stop the Mk2-class freeze) plus
+    raster context 0x0620E800 whole-context via the tier-3 block at 0x11C398
+    (the pre-battle current weapon at stride8=12/96px and current ID at
+    stride8=8/64px; added 2026-07-26 for the 强夺高达 slot-0 freeze and the
+    matching current-ID corruption class) plus
     map 0x0600F000 whole-map via the tier-2 block at 0x11C3E4 (the 编成 别働队
     detachment top-screen nameplate, added 2026-07-22 for issue #18) and
     0x0600E000/0x0600F800 only with the exact (origin 0, stride8 13, height 2,
@@ -1104,6 +1130,31 @@ def gate_glyph_row_clip(rep, ctx):
         rep.add("glyph_row_clip", False,
                 f"row-clip cave differs at {GLYPH_ROW_CLIP_CAVE_OFF + first:#x}")
         return
+    if aj[GLYPH_ROW_CLIP_T3_OFF:GLYPH_ROW_CLIP_T3_OFF + len(GLYPH_ROW_CLIP_T3_ORIG)] != GLYPH_ROW_CLIP_T3_ORIG:
+        rep.add("glyph_row_clip", False,
+                f"JP 0x11C398 tier-3 gap != dead-atlas baseline {GLYPH_ROW_CLIP_T3_ORIG.hex()}")
+        return
+    t3 = az[GLYPH_ROW_CLIP_T3_OFF:GLYPH_ROW_CLIP_T3_OFF + len(GLYPH_ROW_CLIP_T3)]
+    if t3 != GLYPH_ROW_CLIP_T3:
+        rep.add("glyph_row_clip", False,
+                f"tier-3 (0x0620E800) clip block missing/altered at {GLYPH_ROW_CLIP_T3_OFF:#x}: {t3.hex()}")
+        return
+    for label, off, expected in (
+        ("battle-current weapon stride8=12/96px", BATTLE_CURRENT_WEAPON_FIELD_OFF,
+         BATTLE_CURRENT_WEAPON_FIELD),
+        ("battle-current ID stride8=8/64px", BATTLE_CURRENT_ID_FIELD_OFF,
+         BATTLE_CURRENT_ID_FIELD),
+    ):
+        jp_field = aj[off:off + len(expected)]
+        if jp_field != expected:
+            rep.add("glyph_row_clip", False,
+                    f"JP {label} path drifted at {off:#x}: {jp_field.hex()}")
+            return
+        field = az[off:off + len(expected)]
+        if field != expected:
+            rep.add("glyph_row_clip", False,
+                    f"{label} path missing/altered at {off:#x}: {field.hex()}")
+            return
     if aj[GLYPH_ROW_CLIP_T2_OFF:GLYPH_ROW_CLIP_T2_OFF + len(GLYPH_ROW_CLIP_T2_ORIG)] != GLYPH_ROW_CLIP_T2_ORIG:
         rep.add("glyph_row_clip", False,
                 f"JP 0x11C3E4 tier-2 gap != dead-atlas baseline {GLYPH_ROW_CLIP_T2_ORIG.hex()}")
@@ -1115,7 +1166,9 @@ def gate_glyph_row_clip(rep, ctx):
         return
     rep.add("glyph_row_clip", True,
             "management 0x06009800 + info-panel 0x0620F000 + weapon-select 0x0601E000 + "
-            "detachment-nameplate 0x0600F000 whole-map, Profile 0x0600F800 and "
+            "battle-current weapon 96px / ID 64px context 0x0620E800 + "
+            "detachment-nameplate 0x0600F000 whole-map, "
+            "Profile 0x0600F800 and "
             "development-tree 0x0600E000 13x2-signature contexts pinned")
 
 
@@ -2560,7 +2613,9 @@ def gate_field_width_budgets(rep, ctx):
     a9 = ctx["a9"]
     exp = _fref_off_expander(a9, PRIMARY_DICT_OFF)
     viol, checked = [], 0
-    # (1) ID-command box titles — exhaustive over every distinct record
+    # (1) ID-command titles — exhaustive over every distinct record.  The
+    # narrowest binding consumer is the battle-confirmation current-ID row
+    # (stride8=8, hence exactly 64px); wider ID panels do not relax this cap.
     seen = set()
     over = total = 0
     for idx in range(1408):
@@ -2624,7 +2679,8 @@ def gate_field_width_budgets(rep, ctx):
     else:
         rep.add("field_width_budgets", True,
                 f"{checked} registered field strings within budget "
-                f"(ID titles {total} distinct <= {ID_TITLE_BUDGET_PX}px; 0 heap-window pointers)")
+                f"(battle-current ID titles {total} distinct <= "
+                f"{ID_TITLE_BUDGET_PX}px; 0 heap-window pointers)")
 
 
 def gate_label_render_consistency(rep, ctx):
@@ -2793,6 +2849,73 @@ def gate_unit_weapon_names(rep, ctx, update=False):
                 f"{N} master records: {zh_u} ZH units / {zh_w} ZH weapons "
                 f"({jp_u}/{jp_w} still-JP), 0 garbage"
                 + (" [baseline captured]" if update else ""))
+
+
+def gate_weapon_name_width(rep, ctx):
+    """Every real unit weapon can become the selected/current weapon rendered
+    by 0x0207EEFE -> 0x02012F58.  That renderA-direct path uses DTCM context
+    0x027C3308 with stride8=12 (96px), height=2 and map 0x0620E800.  A ninth
+    12px glyph crosses the row and historically corrupted the following battle
+    graphics: 强夺高达 slot 0's 108px 双联超高初速防盾炮 then black-screened before
+    combat.  Scan only utid 0..675: at utid 676 the same raw stride has already
+    entered the char-DB, where pilot names would be misclassified as weapons."""
+    a9 = ctx["a9"]
+    cm = ctx["cm"]
+    atlas_n = ctx["atlas_slots"]
+    names: dict[int, dict] = {}
+    for utid in range(MASTER_UNIT_COUNT):
+        ro = MASTER_TABLE_OFF + utid * MASTER_STRIDE
+        for slot in range(MASTER_WPN_N):
+            p = struct.unpack_from(
+                "<I", a9, ro + MASTER_WPN_OFF + slot * MASTER_WPN_STRIDE
+            )[0]
+            f = _ram_to_file(a9, p)
+            if f is None or a9[f] == 0:
+                continue
+            entry = names.get(p)
+            if entry is None:
+                slots, issues = _scan_name_string(a9, f, atlas_n)
+                entry = names[p] = {
+                    "slots": slots,
+                    "issues": issues,
+                    "uses": [],
+                }
+            entry["uses"].append((utid, slot))
+
+    def label(slots):
+        return "".join(
+            cm.sb_rev.get(s) or cm.zh_rev.get(s) or cm.jp_slots.get(s) or f"<slot{s}>"
+            for s in slots
+        )
+
+    over = []
+    exact = 0
+    for p, entry in names.items():
+        if entry["issues"]:
+            continue  # unit_weapon_names owns malformed/out-of-atlas diagnostics
+        width = len(entry["slots"]) * RENDER_A_ADVANCE
+        if width == WEAPON_NAME_BUDGET_PX:
+            exact += 1
+        elif width > WEAPON_NAME_BUDGET_PX:
+            utid, slot = entry["uses"][0]
+            over.append((label(entry["slots"]), width, p, utid, slot))
+    if over:
+        shown = "; ".join(
+            f"{name}={width}px @UTID{utid}/slot{slot} ptr={p:#010x}"
+            for name, width, p, utid, slot in over[:8]
+        )
+        rep.add(
+            "weapon_name_width",
+            False,
+            f"{len(over)} distinct weapon name(s) exceed {WEAPON_NAME_BUDGET_PX}px: {shown}",
+        )
+    else:
+        rep.add(
+            "weapon_name_width",
+            True,
+            f"{len(names)} distinct real-unit weapon names <= {WEAPON_NAME_BUDGET_PX}px "
+            f"({exact} exactly {WEAPON_NAME_BUDGET_PX}px)",
+        )
 
 
 def gate_id_command_names(rep, ctx, update=False):
@@ -4144,6 +4267,7 @@ GATES = [
     gate_assignment_unit_name_budget,
     gate_label_render_consistency,
     gate_unit_weapon_names,
+    gate_weapon_name_width,
     gate_id_command_names,
     gate_name_pointer_band,
     gate_bank_onebyte_regression,
@@ -4246,6 +4370,19 @@ def self_test(rom_path: Path, jp_path: Path) -> int:
     expect_fail("drop the tier-2 (0x0600F000 detachment-nameplate) row-clip block",
                 ["glyph_row_clip"],
                 lambda c: mut_a9(c, GLYPH_ROW_CLIP_T2_OFF, GLYPH_ROW_CLIP_T2_ORIG))
+    expect_fail("drop the tier-3 (0x0620E800 battle-current labels) row-clip block",
+                ["glyph_row_clip"],
+                lambda c: mut_a9(c, GLYPH_ROW_CLIP_T3_OFF, GLYPH_ROW_CLIP_T3_ORIG))
+    expect_fail("widen the battle-current ID row from 64px to 96px",
+                ["glyph_row_clip"],
+                lambda c: mut_a9(c, BATTLE_CURRENT_ID_FIELD_OFF, bytes.fromhex("0c20")))
+    expect_fail("restore the 108px 强夺高达 weapon name into the 96px current-weapon field",
+                ["weapon_name_width"],
+                lambda c: mut_a9(
+                    c,
+                    _ram_to_file(c["a9"], 0x0219011A),
+                    bytes.fromhex("eabcef2eeaf6e812eb4fe9dae968eb63e95a00"),
+                ))
     expect_fail("restore the overlapping JP 配属 ability tile bank",
                 ["assignment_id_tile_partition"],
                 lambda c: mut_a9(c, ASSIGN_ID_ABILITY_TILE_BASE_OFF,
@@ -4288,6 +4425,10 @@ def self_test(rom_path: Path, jp_path: Path) -> int:
                 ["field_width_budgets"],
                 lambda c: mut_a9(c, ID_CMD_TABLE_OFF + 273 * ID_CMD_REC,
                                  struct.pack("<I", 0x0232D000)))
+    expect_fail("point an ID title at an 84px string beyond the 64px battle-current row",
+                ["field_width_budgets"],
+                lambda c: mut_a9(c, ID_CMD_TABLE_OFF + 201 * ID_CMD_REC + ID_CMD_NAME_OFF,
+                                 struct.pack("<I", 0x0219011A)))
     expect_fail("relocate a unit name into the 0x0219 band (the 出击 deploy freeze)",
                 ["name_pointer_band"],
                 lambda c: mut_a9(c, MASTER_TABLE_OFF + 184 * MASTER_STRIDE + MASTER_NAME_OFF,

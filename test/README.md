@@ -53,9 +53,11 @@ Exit 0 iff every gate passes.  One line on what each gate protects against:
 | `untranslated_dialogue` | whole stages silently shipping in Japanese — every reachable dialogue block must render Chinese (audited allowlist exempt) |
 | `translation_coverage` | silent translation regression — kana-displacement ratchet vs the baseline floor |
 | `glyph_width` | the too-wide-line blank/freeze class — re-encoded UI strings must fit the field the JP fit |
-| `field_width_budgets` | ID-box title overflow past the engine's 64px cap and display pointers landing in runtime-heap windows (render live garbage) |
+| `glyph_row_clip` | the scoped row-wrap guard plus the exact pre-battle current-weapon 96px / current-ID 64px call paths |
+| `field_width_budgets` | any of all 1,408 ID-command titles exceeding the binding 64px pre-battle current-ID row, or display pointers landing in runtime-heap windows (render live garbage) |
 | `label_render_consistency` | mixed-store / mixed-size "floating" glyphs inside one label list |
 | `unit_weapon_names` | unit/weapon name garbage (out-of-atlas tokens) or translated-count regression |
+| `weapon_name_width` | any real-unit weapon name exceeding the exact 96px pre-battle current-weapon row |
 | `id_command_names` | ID-command name/summary/detail garbage, squad records reverting to Japanese, coverage regression |
 
 `--self-test` mutates a copy of the ROM under test in targeted ways
