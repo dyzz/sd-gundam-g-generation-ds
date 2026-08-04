@@ -1,7 +1,7 @@
 {
  "_about": "Composable glyph relocation/mint plan for the reviewed chapter titles. Nine characters used only by renderA encyclopedia biographies move into candidate-ROM-token-free JP-band cells; one title character reuses a same-character native atlas cell. Their freed ZH cells and two unused ZH cells receive every title glyph required by both the stage-card renderA path and the save/load-slot trampoline path. The committed atlas stays at the shared baseline; normal builds apply this layer in memory. New cells are byte-exact reviewed WenQuanYi or same-character native atlas rasters.",
- "source_atlas_sha256": "9df98204c9037b2c0e6a9da3848d5077e43c22f4e64d3bd9716beee423ed310c",
- "target_atlas_sha256": "81375d621f8c1a1bb0330553f65be9a133fadc0e6e5c1e0176b955b2fa082882",
+ "source_atlas_sha256": "bb41342f15ac89da9beabeca4e5358f51bd4195e04000c178cd4407ffa12e501",
+ "target_atlas_sha256": "a181561b36ceebbb0bd21d00911c18888c9220e67e0fa06f86814cfe53b61ac1",
  "candidate_rom": {
   "path_hint": "/private/tmp/sdgundam-pr24-baseline.nds",
   "sha1": "06c86732ebf14e6c7f4d660157a01a742ae6c683",
