@@ -63,13 +63,13 @@ class Charmap:
             self.slot_to_char.setdefault(code, ch)                   # slot == code (<224)
         for slot_s, ch in raw["jp_slot_chars"].items():
             self.slot_to_char.setdefault(int(slot_s), ch)            # JP slots 224..2195
-        for ch, slot in self.two_byte_zh.items():
-            self.slot_to_char.setdefault(slot, ch)                   # ZH slots 2196+
         # decode-side refinements: slots whose glyph was established from in-game
-        # text evidence later; they override DECODING only — encoding preferences
-        # (and therefore build output) are deliberately unaffected.
+        # JP/source evidence later. They refine the original atlas identity but
+        # never override a translated-ROM glyph registration.
         for slot_s, ch in raw.get("slot_chars_extra", {}).items():
             self.slot_to_char[int(slot_s)] = ch
+        for ch, slot in self.two_byte_zh.items():
+            self.slot_to_char[slot] = ch                             # ZH ROM wins
         # slot_chars_extra stays decode-only: entries whose identity has been
         # bitmap-verified get PROMOTED into two_byte_zh in data/charmap.json
         # (verification procedure: docs/LESSONS_LEARNED.md §G / AGENTS.md

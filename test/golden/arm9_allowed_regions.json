@@ -177,6 +177,11 @@
    "what": "backstage stage-progression threshold immediates (owner gameplay tweak)"
   },
   {
+   "lo": "0x03AEB0",
+   "hi": "0x03AEB2",
+   "what": "battle terrain-page 章节 label x-coordinate 16->32 (joins the unchanged chapter number at x=56)"
+  },
+  {
    "lo": "0x0422B8",
    "hi": "0x0422BA",
    "what": "配属 four-carrier BG2 backing-template copy width 14->32 tiles (Eternal six-slot outer border)"
@@ -290,6 +295,21 @@
    "lo": "0x14AC34",
    "hi": "0x14BD84",
    "what": "post-dictionary resident label arena; ends before the unit-thumbnail graphics bank"
+  },
+  {
+   "lo": "0x168598",
+   "hi": "0x168F52",
+   "what": "in-battle START-menu compressed 182-tile graphics block (descriptor plus original fixed payload capacity)"
+  },
+  {
+   "lo": "0x168FB8",
+   "hi": "0x1692DC",
+   "what": "in-battle START-menu layout arena for shared normal/focused/confirmation surfaces"
+  },
+  {
+   "lo": "0x1692E4",
+   "hi": "0x169338",
+   "what": "in-battle START-menu layout pointer entries 2 through 22"
   },
   {
    "lo": "0x16B474",

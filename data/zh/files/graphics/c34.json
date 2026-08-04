@@ -1,0 +1,139 @@
+{
+ "file": "c34.bin",
+ "what": "Shared save/load screen BG graphics. All layouts are rebuilt atomically because the header variants and three save slots reuse Japanese letter tiles.",
+ "format": "save_load_graphics",
+ "source": {
+  "sha256": "62066d9ace7403c4a179cb81c10eda6f807dcb9722e0066c40b6f05a038da88b",
+  "size": 7120,
+  "pointer_table_offset": "0x1b78",
+  "pointer_count": 22,
+  "pointer_table_sha256": "f53bd3a7496b98111e3f83f9c84f0c9972f3a734701712a224d9ac92dd6c904f",
+  "graphics_offset": "0x4",
+  "graphics_descriptor": "0x8000087d",
+  "graphics_region_sha256": "63bde6253b5e7f8d088423208864fe760923b904d00c7298430abbed98eb2933",
+  "decoded_size": 5920,
+  "decoded_sha256": "b8901430851e676bd31cae4503580ab5495e9594e75ad5d5298ae862ba1f4327",
+  "tile_capacity": 185,
+  "palette_offset": "0x888",
+  "palette_region_sha256": "8993b8501a510eedce10713ad882869d3829dbadf06af3609a25649d0c972b63",
+  "layout_start": "0x90c",
+  "layout_end": "0x1b78",
+  "layout_region_sha256": "fcef11e874982a2019d1b5a86057bca6347951054ed458bd1426d138e4900edd",
+  "first_layout": 2,
+  "last_layout": 21
+ },
+ "labels": [
+  {
+   "id": "header_data",
+   "layout": 2,
+   "text": "数据",
+   "box": {"x": 8, "y": 0, "width": 40, "height": 24},
+   "background": 0,
+   "palette_bank": 1,
+   "palette_indices": {"stroke": 15, "shadow": 9}
+  },
+  {
+   "id": "header_save_base",
+   "layout": 2,
+   "text": "保存",
+   "box": {"x": 48, "y": 0, "width": 48, "height": 24},
+   "background": 0,
+   "palette_bank": 1,
+   "palette_indices": {"stroke": 15, "shadow": 9}
+  },
+  {
+   "id": "session",
+   "layout": 2,
+   "text": "章节",
+   "boxes": [
+    {"x": 24, "y": 32, "width": 48, "height": 16},
+    {"x": 24, "y": 88, "width": 48, "height": 16},
+    {"x": 24, "y": 144, "width": 48, "height": 16}
+   ],
+   "background": 0,
+   "palette_indices": {"stroke": 15, "shadow": 2}
+  },
+  {
+   "id": "turn",
+   "layout": 2,
+   "text": "回合",
+   "boxes": [
+    {"x": 120, "y": 32, "width": 32, "height": 16},
+    {"x": 120, "y": 88, "width": 32, "height": 16},
+    {"x": 120, "y": 144, "width": 32, "height": 16}
+   ],
+   "background": 0,
+   "palette_indices": {"stroke": 15, "shadow": 2}
+  },
+  {
+   "id": "play_time",
+   "layout": 2,
+   "text": "游戏时间",
+   "boxes": [
+    {"x": 152, "y": 32, "width": 56, "height": 16},
+    {"x": 152, "y": 88, "width": 56, "height": 16},
+    {"x": 152, "y": 144, "width": 56, "height": 16}
+   ],
+   "background": 0,
+   "palette_indices": {"stroke": 15, "shadow": 2}
+  },
+  {
+   "id": "header_save_overlay",
+   "layout": 3,
+   "text": "保存",
+   "box": {"x": 0, "y": 0, "width": 48, "height": 24},
+   "background": 0,
+   "palette_bank": 1,
+   "palette_indices": {"stroke": 15, "shadow": 9}
+  },
+  {
+   "id": "header_load_overlay",
+   "layout": 4,
+   "text": "读取",
+   "box": {"x": 0, "y": 0, "width": 48, "height": 24},
+   "background": 0,
+   "palette_bank": 1,
+   "palette_indices": {"stroke": 15, "shadow": 9}
+  },
+  {
+   "id": "before_start",
+   "layout": 5,
+   "text": "开始前",
+   "box": {"x": 2, "y": 2, "width": 44, "height": 12},
+   "background": 3,
+   "palette_indices": {"stroke": 8, "shadow": 3}
+  },
+  {
+   "id": "normal",
+   "layout": 6,
+   "text": "普通",
+   "box": {"x": 2, "y": 2, "width": 44, "height": 12},
+   "background": 3,
+   "palette_indices": {"stroke": 8, "shadow": 3}
+  },
+  {
+      "id": "special",
+      "layout": 7,
+      "text": "SP",
+      "advance": 6,
+   "box": {"x": 2, "y": 2, "width": 44, "height": 12},
+   "background": 3,
+   "palette_indices": {"stroke": 8, "shadow": 3}
+  },
+  {
+   "id": "cleared",
+   "layout": 18,
+   "text": "通关",
+   "box": {"x": 2, "y": 2, "width": 44, "height": 12},
+   "background": 3,
+   "palette_indices": {"stroke": 8, "shadow": 3}
+  }
+ ],
+  "expected": {
+    "used_tiles": 185,
+    "compressed_size": 1998,
+    "graphics_sha256": "8614cfa413d5a0964875136448e5c5398ef0f0b9c2557c7f44a471fa4f06257e",
+    "layouts_sha256": "a605d7901327955e338c1e6af3be1560c81ae31a0e39bad5b6f99806fb607cbc",
+    "file_sha256": "0c3e58511d43c77c7845c6bae2649201ed969eb9e15ff6cb5d1ce6a39f593b03"
+  }
+}

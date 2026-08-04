@@ -25,12 +25,16 @@ in-game failure the gate protects against.
   assignment_carrier_slot_frames  永恒号容量 6 但第四编队仍沿用原版两格栏框
   ui_font_atlas_dispatch      8px mush ZH on the UI-font path / corrupt render trampoline
   post_clear_pilot_cids       Kamille/Jerid earned forms reverting after campaign clear
+  settings_graphics           settings descriptions/focus sprites or NG+ row drift
+  save_load_graphics          shared save/load label tiles or compressed-layout overflow
+  battle_system_menu_graphics shared START-menu tile damage / compressed or layout overflow
   code_image_parity           ANY unexplained arm9 byte change vs the JP source (combat!)
   unit_icon_bank_frozen       Turn A / unit thumbnails corrupted by misplaced text bytes
   dialogue_dict_frozen        the battle-entry freeze from a clobbered dialogue dictionary
   font_relocation             boot crash / unreadable text from a bad font relocation
   relocated_pointer_sanity    the off-by-N name-relocation pointer → mid-stage data abort
   charmap_font_consistency    encoding text to glyph slots the ROM font does not have
+  glyph_identity_consistency  charmap slots silently painted with another character's bitmap
   glyph_style_uniformity      mixed-weight 'ghost' glyphs (stroke/shadow raster grammar)
   stage_header_alignment      the stage-load black screen from a misaligned header table
   stage_file_structure        stage-file overrun / dangling pointer → load freeze
@@ -83,6 +87,7 @@ REPO = TEST_DIR.parent
 GOLDEN = TEST_DIR / "golden"
 DEFAULT_JP = REPO / "0098 - SD Gundam G Generation DS (Japan).nds"
 CHARMAP_PATH = REPO / "data" / "charmap.json"
+STAGE_TITLE_GLYPH_PLAN_PATH = REPO / "data" / "font" / "stage_title_glyphs.json"
 
 RAM_BASE = 0x02000000
 
@@ -1365,6 +1370,196 @@ def gate_post_clear_pilot_cids(rep, ctx):
                 "base84 / earned85(flag0x4F) pinned")
 
 
+def gate_battle_system_menu_graphics(rep, ctx):
+    """The START menu is one compressed shared tile set plus 21 layouts.
+
+    Rebuild the owned spans directly from the Japanese oracle and semantic
+    translation spec, then require the candidate to match them byte-for-byte.
+    The writer itself validates source hashes, visible-pixel round trips, tile
+    capacity, compressed capacity, layout capacity, and every repointed layout.
+    """
+    try:
+        if str(REPO) not in sys.path:
+            sys.path.insert(0, str(REPO))
+        from utils import battle_system_graphics, font_atlas
+
+        spec = json.loads(
+            (REPO / "data" / "zh" / "battle_system_menu.json").read_text()
+        )
+        charmap = json.loads(CHARMAP_PATH.read_text())
+        slots = {
+            char: int(slot)
+            for slot, char in charmap["jp_slot_chars"].items()
+        }
+        slots.update(
+            {
+                char: int(slot)
+                for char, slot in charmap["one_byte"].items()
+            }
+        )
+        slots.update(
+            {
+                char: int(slot)
+                for char, slot in charmap["two_byte_zh"].items()
+            }
+        )
+        expected = bytearray(ctx["jp_a9"][:APPEND_TAIL_OFF])
+        facts = battle_system_graphics.patch_arm9(
+            ctx["jp_a9"],
+            expected,
+            spec,
+            atlas=font_atlas.load_effective_atlas(REPO / "data"),
+            char_slots=slots,
+        )
+        source = spec["source"]
+        graphics_offset = int(source["graphics_offset"], 0)
+        compressed_capacity = int(source["graphics_descriptor"], 0) & 0xFFFF
+        layout_start = int(source["layout_start"], 0)
+        layout_end = int(source["layout_end"], 0)
+        pointer_table = int(source["pointer_table_offset"], 0)
+        first_layout = int(source["first_layout"])
+        last_layout = int(source["last_layout"])
+        spans = (
+            (
+                graphics_offset,
+                graphics_offset + 4 + compressed_capacity,
+                "graphics",
+            ),
+            (layout_start, layout_end, "layouts"),
+            (
+                pointer_table + first_layout * 4,
+                pointer_table + (last_layout + 1) * 4,
+                "pointers",
+            ),
+        )
+        mismatches = [
+            name
+            for start, end, name in spans
+            if ctx["a9"][start:end] != expected[start:end]
+        ]
+    except Exception as exc:
+        rep.add(
+            "battle_system_menu_graphics",
+            False,
+            f"{type(exc).__name__}: {exc}",
+        )
+        return
+    if mismatches:
+        rep.add(
+            "battle_system_menu_graphics",
+            False,
+            "candidate differs from the deterministic Japanese-source rebuild "
+            f"in: {', '.join(mismatches)}",
+        )
+    else:
+        rep.add(
+            "battle_system_menu_graphics",
+            True,
+            f"{facts['used_tiles']}/{facts['tile_capacity']} tiles, "
+            f"{facts['compressed_size']}/{facts['compressed_capacity']} "
+            f"compressed bytes, {facts['layout_size']}/"
+            f"{facts['layout_capacity']} layout bytes; layouts 2-22 "
+            "pixel-round-trip",
+        )
+
+
+def gate_settings_graphics(rep, ctx):
+    """Rebuild both settings BG resources from the Japanese ROM and require the
+    candidate files to match. The semantic writer pins source hashes/geometry,
+    preserved focus-only regions, fixed file lengths, tile budgets, all option
+    descriptions, and the hidden-until-New-Game+ row."""
+    try:
+        if str(REPO) not in sys.path:
+            sys.path.insert(0, str(REPO))
+        from utils import data_files, static_graphics
+
+        facts = []
+        mismatches = []
+        for name in ("3e3.bin", "3e4.bin"):
+            source = ctx["jp_file"](name)
+            candidate = ctx["cand_file"](name)
+            if source is None or candidate is None:
+                mismatches.append(f"{name} missing")
+                continue
+            expected = data_files.build_data_file(
+                name, source, verify=False
+            )
+            if candidate != expected:
+                mismatches.append(f"{name} bytes")
+                continue
+            mapping = static_graphics.tile_map(candidate)
+            used_tiles = len(
+                {entry & 0x3FF for entry in mapping.entries}
+            )
+            facts.append(f"{name} {used_tiles}/{mapping.gfx_len // 32} tiles")
+    except Exception as exc:
+        rep.add(
+            "settings_graphics",
+            False,
+            f"{type(exc).__name__}: {exc}",
+        )
+        return
+    if mismatches:
+        rep.add(
+            "settings_graphics",
+            False,
+            "candidate differs from the Japanese-source rebuild: "
+            + ", ".join(mismatches),
+        )
+    else:
+        rep.add(
+            "settings_graphics",
+            True,
+            "; ".join(facts)
+            + "; first-play/NG+ visibility remains runtime-owned",
+        )
+
+
+def gate_save_load_graphics(rep, ctx):
+    """Require c34.bin to equal the deterministic Japanese-source rebuild.
+
+    This protects the shared header/save-slot tiles, every layout pointer, and
+    both the 185-tile and custom-LZSS capacities.
+    """
+    try:
+        if str(REPO) not in sys.path:
+            sys.path.insert(0, str(REPO))
+        from utils import data_files, save_load_graphics
+
+        name = "c34.bin"
+        source = ctx["jp_file"](name)
+        candidate = ctx["cand_file"](name)
+        if source is None or candidate is None:
+            raise ValueError(f"{name} missing from ROM")
+        expected = data_files.build_data_file(name, source, verify=False)
+        if candidate != expected:
+            rep.add(
+                "save_load_graphics",
+                False,
+                "candidate c34.bin differs from the deterministic "
+                "Japanese-source rebuild",
+            )
+            return
+        table = data_files._load_table(
+            data_files.DATA_FILE_TABLES[name]
+        )
+        facts = save_load_graphics.resource_facts(candidate, table)
+    except Exception as exc:
+        rep.add(
+            "save_load_graphics",
+            False,
+            f"{type(exc).__name__}: {exc}",
+        )
+        return
+    rep.add(
+        "save_load_graphics",
+        True,
+        f"{facts['used_tiles']}/{facts['tile_capacity']} tiles, "
+        f"{facts['compressed_size']}/{facts['compressed_capacity']} "
+        "compressed bytes; layouts 2-21 pixel-round-trip",
+    )
+
+
 def gate_code_image_parity(rep, ctx):
     """THE combat-safety anchor: the candidate arm9 must be byte-identical to the
     JAPANESE source everywhere except (a) the annotated translation/render-patch
@@ -1579,8 +1774,8 @@ def gate_charmap_font_consistency(rep, ctx):
                 f"{len(cm.zh_slots)} ZH + {len(cm.one_byte)} single-byte charmap codes all < {slots} font slots")
 
 
-def _atlas_bytes(a9: bytes) -> bytes | None:
-    """The 12x12 glyph atlas payload inside the built arm9 (autoload tail)."""
+def _atlas_span(a9: bytes) -> tuple[int, int] | None:
+    """Return (file offset, size) for the live 12x12 atlas autoload payload."""
     fptr = struct.unpack_from("<I", a9, DIALOGUE_FONT_PTR_OFF)[0]
     if fptr == FONT_RAM_ORIGINAL:
         return None                                  # unpatched JP image
@@ -1591,9 +1786,181 @@ def _atlas_bytes(a9: bytes) -> bytes | None:
     for i in range((le - ls) // 12):
         ram, size, _bss = struct.unpack_from("<III", a9, (ls - RAM_BASE) + i * 12)
         if ram == fptr:
-            return a9[off:off + size]
+            if off < 0 or size <= 0 or off + size > len(a9):
+                return None
+            return off, size
         off += size
     return None
+
+
+def _atlas_bytes(a9: bytes) -> bytes | None:
+    """The 12x12 glyph atlas payload inside the built arm9 (autoload tail)."""
+    span = _atlas_span(a9)
+    if span is None:
+        return None
+    off, size = span
+    return a9[off:off + size]
+
+
+def _stage_title_glyph_identities(plan: dict) -> list[tuple[str, int, str]]:
+    """Return every plan-owned (character, slot, cell hash) identity.
+
+    This deliberately derives the expected hash from the plan's cell payload
+    where one exists.  It therefore protects the whole composable title-glyph
+    layer, rather than naming any one regression character.
+    """
+    identities = []
+    sections = (
+        ("moves", "to_slot", "source_cell_sha256"),
+        ("remaps", "to_slot", None),
+        ("mints", "slot", "new_cell_sha256"),
+        ("promotions", "slot", "source_cell_sha256"),
+    )
+    for section, slot_key, declared_hash_key in sections:
+        for entry in plan.get(section, []):
+            char = entry["char"]
+            payload = bytes.fromhex(entry["cell_hex"])
+            if len(payload) != GLYPH_CELL:
+                raise ValueError(
+                    f"{section} glyph {char!r} has {len(payload)} bytes, "
+                    f"expected {GLYPH_CELL}"
+                )
+            expected_hash = hashlib.sha256(payload).hexdigest()
+            if (declared_hash_key is not None
+                    and entry.get(declared_hash_key) != expected_hash):
+                raise ValueError(
+                    f"{section} glyph {char!r} payload hash does not match "
+                    f"{declared_hash_key}"
+                )
+            identities.append((char, int(entry[slot_key]), expected_hash))
+    for entry in plan.get("native_reuses", []):
+        identities.append(
+            (entry["char"], int(entry["slot"]), entry["cell_sha256"])
+        )
+    return identities
+
+
+def gate_glyph_identity_consistency(rep, ctx):
+    """The built ROM must contain the complete canonical composed atlas, and
+    every plan-owned title character must map to its intended live slot.
+
+    Bounds/style checks cannot catch a valid-looking glyph painted into the
+    wrong live slot (the class that made 方 render as 邂), so compare semantic
+    cell identities after the actual build has composed all glyph layers.  The
+    whole-atlas comparison makes this generic; the plan checks additionally pin
+    the moved/minted character-to-slot meanings.
+    """
+    atlas = _atlas_bytes(ctx["a9"])
+    if atlas is None:
+        rep.add("glyph_identity_consistency", False,
+                "no relocated atlas found in arm9")
+        return
+    try:
+        if str(REPO) not in sys.path:
+            sys.path.insert(0, str(REPO))
+        from utils import font_atlas
+
+        plan = json.loads(
+            STAGE_TITLE_GLYPH_PLAN_PATH.read_text(encoding="utf-8")
+        )
+        identities = _stage_title_glyph_identities(plan)
+        expected_atlas = font_atlas.load_effective_atlas(REPO / "data")
+    except (KeyError, OSError, TypeError, ValueError,
+            json.JSONDecodeError) as exc:
+        rep.add("glyph_identity_consistency", False,
+                f"invalid stage-title glyph identity plan: {exc}")
+        return
+
+    problems = []
+    cm = ctx["cm"]
+    if len(atlas) != len(expected_atlas):
+        problems.append(
+            f"built atlas has {len(atlas)} bytes, canonical composed atlas has "
+            f"{len(expected_atlas)}"
+        )
+    else:
+        mismatched_slot_set = {
+            slot
+            for slot in range(len(atlas) // GLYPH_CELL)
+            if atlas[slot * GLYPH_CELL:(slot + 1) * GLYPH_CELL]
+            != expected_atlas[slot * GLYPH_CELL:(slot + 1) * GLYPH_CELL]
+        }
+        # Report the semantically named title cells first, then every other
+        # canonical atlas difference.  The gate still compares all 4320 cells.
+        owned_slot_order = [slot for _char, slot, _hash in identities]
+        mismatched_slots = [
+            slot for slot in owned_slot_order if slot in mismatched_slot_set
+        ]
+        mismatched_slots.extend(
+            sorted(mismatched_slot_set - set(mismatched_slots))
+        )
+        for slot in mismatched_slots[:4]:
+            char = (
+                cm.zh_rev.get(slot)
+                or cm.jp_slots.get(slot)
+                or cm.sb_rev.get(slot)
+                or "unmapped"
+            )
+            start = slot * GLYPH_CELL
+            actual_hash = hashlib.sha256(
+                atlas[start:start + GLYPH_CELL]
+            ).hexdigest()
+            expected_hash = hashlib.sha256(
+                expected_atlas[start:start + GLYPH_CELL]
+            ).hexdigest()
+            problems.append(
+                f"slot {slot} ({char!r}) built cell {actual_hash} != "
+                f"canonical {expected_hash}"
+            )
+        if len(mismatched_slots) > 4:
+            problems.append(
+                f"{len(mismatched_slots)} atlas slots differ in total"
+            )
+
+    slot_chars = {}
+    for char, slot in cm.zh_slots.items():
+        slot_chars.setdefault(int(slot), []).append(char)
+    duplicate_slots = {
+        slot: chars for slot, chars in slot_chars.items() if len(chars) > 1
+    }
+    if duplicate_slots:
+        slot, chars = next(iter(sorted(duplicate_slots.items())))
+        problems.append(
+            f"two_byte_zh slot {slot} is shared by {chars!r} "
+            f"({len(duplicate_slots)} duplicate slot(s))"
+        )
+
+    owned_chars = set()
+    owned_slots = {}
+    for char, slot, _expected_hash in identities:
+        if char in owned_chars:
+            problems.append(f"glyph plan owns {char!r} more than once")
+            continue
+        owned_chars.add(char)
+        if slot in owned_slots:
+            problems.append(
+                f"glyph plan assigns slot {slot} to both "
+                f"{owned_slots[slot]!r} and {char!r}"
+            )
+            continue
+        owned_slots[slot] = char
+
+        mapped_slot = cm.zh_slots.get(char)
+        if mapped_slot != slot:
+            problems.append(
+                f"{char!r} maps to slot {mapped_slot!r}, expected {slot}"
+            )
+
+    if problems:
+        rep.add("glyph_identity_consistency", False, "; ".join(problems[:4]))
+    else:
+        rep.add(
+            "glyph_identity_consistency",
+            True,
+            f"{len(atlas) // GLYPH_CELL} canonical composed atlas cells and "
+            f"{len(identities)} plan-owned character identities match; "
+            f"{len(cm.zh_slots)} two-byte ZH slots are unique",
+        )
 
 
 def gate_glyph_style_uniformity(rep, ctx):
@@ -4298,12 +4665,16 @@ GATES = [
     gate_assignment_carrier_slot_frames,
     gate_ui_font_atlas_dispatch,
     gate_post_clear_pilot_cids,
+    gate_settings_graphics,
+    gate_save_load_graphics,
+    gate_battle_system_menu_graphics,
     gate_code_image_parity,
     gate_unit_icon_bank_frozen,
     gate_dialogue_dict_frozen,
     gate_font_relocation,
     gate_relocated_pointer_sanity,
     gate_charmap_font_consistency,
+    gate_glyph_identity_consistency,
     gate_glyph_style_uniformity,
     gate_stage_header_alignment,
     gate_stage_file_structure,
@@ -4706,18 +5077,7 @@ def self_test(rom_path: Path, jp_path: Path) -> int:
     def mut_glyph(ctx):
         # erase the drop shadow of one ZH glyph (paint value-2 pixels to 0)
         a = bytearray(ctx["a9"])
-        atlas = _atlas_bytes(bytes(a))
-        # find the atlas source offset again to mutate in place
-        ls = struct.unpack_from("<I", a, MP_LIST_START_OFF)[0]
-        le = struct.unpack_from("<I", a, MP_LIST_END_OFF)[0]
-        src = struct.unpack_from("<I", a, 0xB14)[0] - RAM_BASE
-        off = src
-        for i in range((le - ls) // 12):
-            ram, size, _b = struct.unpack_from("<III", a, (ls - RAM_BASE) + i * 12)
-            fptr = struct.unpack_from("<I", a, DIALOGUE_FONT_PTR_OFF)[0]
-            if ram == fptr:
-                break
-            off += size
+        off, _size = _atlas_span(bytes(a))
         # slot 2196 (first ZH glyph): strip value-2 bits
         cell_off = off + 2196 * GLYPH_CELL
         for k in range(GLYPH_CELL):
@@ -4729,6 +5089,31 @@ def self_test(rom_path: Path, jp_path: Path) -> int:
         ctx["a9"] = bytes(a)
     expect_fail("strip the drop shadow from a ZH glyph (mixed-weight ghost text)",
                 ["glyph_style_uniformity"], mut_glyph)
+
+    def mut_glyph_identity(ctx):
+        # Paint one managed title glyph with another managed glyph's valid,
+        # style-correct bitmap.  Bounds and raster-style gates still pass; only
+        # semantic identity checking can detect this collision class.
+        plan = json.loads(
+            STAGE_TITLE_GLYPH_PLAN_PATH.read_text(encoding="utf-8")
+        )
+        identities = _stage_title_glyph_identities(plan)
+        victim_char, victim_slot, victim_hash = identities[0]
+        donor = next(
+            item for item in identities[1:] if item[2] != victim_hash
+        )
+        donor_char, donor_slot, _donor_hash = donor
+        a = bytearray(ctx["a9"])
+        off, _size = _atlas_span(bytes(a))
+        victim_off = off + victim_slot * GLYPH_CELL
+        donor_off = off + donor_slot * GLYPH_CELL
+        a[victim_off:victim_off + GLYPH_CELL] = (
+            a[donor_off:donor_off + GLYPH_CELL]
+        )
+        ctx["a9"] = bytes(a)
+        ctx["glyph_identity_mutation"] = (victim_char, donor_char)
+    expect_fail("paint one managed title glyph with another character's valid bitmap",
+                ["glyph_identity_consistency"], mut_glyph_identity)
 
     def mut_bark(ctx):
         real = ctx["cand_file"]

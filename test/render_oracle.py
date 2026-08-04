@@ -32,7 +32,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(REPO))
-from utils import text_codec as tc  # noqa: E402
+from utils import font_atlas, text_codec as tc  # noqa: E402
 
 ATLAS_PATH = REPO / "data" / "font" / "atlas12.bin"
 RENDERB_RAM = 0x02133F14
@@ -52,7 +52,11 @@ def _load_arm9(rom_path: Path) -> bytes:
 
 class Oracle:
     def __init__(self, rom_path: Path, atlas_path: Path = ATLAS_PATH):
-        self.atlas = atlas_path.read_bytes()
+        atlas_path = Path(atlas_path)
+        if atlas_path.resolve() == ATLAS_PATH.resolve():
+            self.atlas = font_atlas.load_effective_atlas(REPO / "data")
+        else:
+            self.atlas = atlas_path.read_bytes()
         self.arm9 = _load_arm9(rom_path)
         arm9_ram = 0x02000000
         self.renderb_off = RENDERB_RAM - arm9_ram

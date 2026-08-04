@@ -1,0 +1,159 @@
+{
+ "file": "3e4.bin",
+ "what": "Focused settings values. Both horizontal palette copies and both vertical focus styles are repainted; digits/A and the unobserved normal/high-speed groups remain pixel-identical.",
+ "format": "settings_graphics",
+ "source": {
+  "sha256": "ba3364950399468b5cfb041e637ef8a6fa110b342e4c2f64c5cfa6098cc61a38",
+  "size": 5616,
+  "width_tiles": 28,
+  "height_tiles": 16,
+  "screen_offset": 16,
+  "gfx_offset": 912,
+  "gfx_len": 4704
+ },
+ "expected_used_tiles": 135,
+ "button_styles": {
+  "light": {
+   "width": 32,
+   "height": 16,
+   "text_y": 2,
+   "frame_indices": {
+    "outside": 0,
+    "outer": 2,
+    "middle": 3,
+    "inner_border": 4,
+    "background": 5
+   },
+   "palette_indices": {
+    "stroke": 8,
+    "shadow": 2
+   }
+  },
+  "dark": {
+   "width": 32,
+   "height": 16,
+   "text_y": 2,
+   "frame_indices": {
+    "outside": 0,
+    "outer": 6,
+    "middle": 7,
+    "inner_border": 8,
+    "background": 9
+   },
+   "palette_indices": {
+    "stroke": 5,
+    "shadow": 2
+   }
+  }
+ },
+ "button_groups": [
+  {
+   "id": "light_toggle_values",
+   "style": "light",
+   "origins": [
+    {"x": 0, "y": 16},
+    {"x": 112, "y": 16}
+   ],
+   "buttons": [
+    {"text": "开", "dx": 0},
+    {"text": "关", "dx": 32}
+   ]
+  },
+  {
+   "id": "dark_toggle_values",
+   "style": "dark",
+   "origins": [
+    {"x": 0, "y": 80},
+    {"x": 112, "y": 80}
+   ],
+   "buttons": [
+    {"text": "开", "dx": 0},
+    {"text": "关", "dx": 32}
+   ]
+  },
+  {
+   "id": "light_battle_instruction_values",
+   "style": "light",
+   "origins": [
+    {"x": 0, "y": 48},
+    {"x": 112, "y": 48}
+   ],
+   "buttons": [
+    {"text": "个别", "dx": 0},
+    {"text": "近战", "dx": 32},
+    {"text": "射击", "dx": 64}
+   ]
+  },
+  {
+   "id": "dark_battle_instruction_values",
+   "style": "dark",
+   "origins": [
+    {"x": 0, "y": 112},
+    {"x": 112, "y": 112}
+   ],
+   "buttons": [
+    {"text": "个别", "dx": 0},
+    {"text": "近战", "dx": 32},
+    {"text": "射击", "dx": 64}
+   ]
+  }
+ ],
+ "preserve_regions": [
+  {
+   "what": "left light digits and A",
+   "x": 0,
+   "y": 0,
+   "width": 96,
+   "height": 16
+  },
+  {
+   "what": "right light digits and A",
+   "x": 112,
+   "y": 0,
+   "width": 96,
+   "height": 16
+  },
+  {
+   "what": "left light normal/high-speed group",
+   "x": 0,
+   "y": 32,
+   "width": 96,
+   "height": 16
+  },
+  {
+   "what": "right light normal/high-speed group",
+   "x": 112,
+   "y": 32,
+   "width": 96,
+   "height": 16
+  },
+  {
+   "what": "left dark digits and A",
+   "x": 0,
+   "y": 64,
+   "width": 96,
+   "height": 16
+  },
+  {
+   "what": "right dark digits and A",
+   "x": 112,
+   "y": 64,
+   "width": 96,
+   "height": 16
+  },
+  {
+   "what": "left dark normal/high-speed group",
+   "x": 0,
+   "y": 96,
+   "width": 96,
+   "height": 16
+  },
+  {
+   "what": "right dark normal/high-speed group",
+   "x": 112,
+   "y": 96,
+   "width": 96,
+   "height": 16
+  }
+ ]
+}

@@ -76,7 +76,7 @@ compressed tile text, session-number chrome).
 | **Briefings** (作戦内容) | BackStage operations tab | arm9 briefing table `0x1985A4..0x1A626B`, ZH blobs in the high autoload pool `0x023E7000` | 1,255 records, 2-line viewer |
 | **Encyclopedia** (図鑑 bios/quotes) | collection menus | `324.bin`, `c4b.bin` (+ `31e.bin` weapon copy) | note: combat does NOT read these |
 | **Menus / stat / info labels** | 情報 panels, HUD | arm9 label arena (`0x14AC34..0x14BD84`), other pointer-backed pools, stat table `0x3FC30` | `0x14BD84+` is unit-icon graphics, not string space; some UI is raw tiles instead (below) |
-| **Tile-graphic text** (not strings) | BackStage tabs, force-HUD, terrain badges, captain badge | `3d3/3d5.bin`, `478.bin`, `48a.bin`, `388.bin` | repainted as graphics |
+| **Tile-graphic text** (not strings) | title/bonus menus, BackStage tabs/submenus, settings, save/load screen, battle START menu, force-HUD, terrain badges, captain badge | `42d.bin`, `3d3`–`3d7.bin`, `3e3.bin`, `3e4.bin`, `c34.bin`, arm9 `0x168598..0x169338`, `478.bin`, `48a.bin`, `388.bin` | repainted/repacked as graphics inside original resource capacities |
 | **Untranslatable by decision** | squad sub-menu 個別指示/全機… | compressed custom tile codec (expander `0x020A0A86`) | owner won't-fix |
 
 Two byte-identical-text pitfalls worth remembering when *reading* the game:
@@ -109,7 +109,7 @@ in encyclopedia data files — edit the pool the screen actually reads.
 ## 5. Owner-approved exemptions & conventions (summary)
 
 Kept Japanese: start screen & stage-name banner art, staff-credit studio/person names,
-session chrome (`セッション00` bottom-screen instance), squad sub-menu (tile codec), two
+squad sub-menu (tile codec), two
 scream onomatopoeia, dev-only debug strings. Everything else is Simplified Chinese with
 mainland-convention terminology (see `TRANSLATION_GUIDE.md`): 高达 for Gundam, 吉翁 for
 Zeon, Japanese rank system retained (大佐/中佐/少佐…), `、` for pauses (the font has no

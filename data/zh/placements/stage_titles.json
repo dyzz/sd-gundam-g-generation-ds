@@ -1,0 +1,7875 @@
+{
+ "_about": "Reviewed chapter-title translations for both title streams in the 101-record ARM9 stage descriptor table: chapter-card renderA fields (+0x1C/+0x20) and shared save-list/battle-header trampoline fields (+0x0C/+0x10). All save-list chapter-code prefixes retain the stock renderB ASCII identities and use ZH-band glyphs only for localized suffixes, keeping SP/X/TR/TU/TL/FB codes inside the same fixed battle-header field as numeric codes. All strings are NUL-terminated and deduplicated in one high-bank fragment; every pointer write is source-asserted by the builder. The generic free-battle fallback used by the save/load list shares the same translated payload through three separately declared consumer pointers.",
+ "source": {
+  "unique_tsv": "title_text_translations.tsv",
+  "unique_tsv_sha256": "0434b28f6c52fe6548eace809991f3366b8cd1df90815888280ebc0d85b62ad7",
+  "record_tsv": "stage_title_record_translations.tsv",
+  "record_tsv_sha256": "d78098194b92a22ec241b55ec85e64d8ec3525868a113da3cb02751976c142c9",
+  "source_rom_sha1": "12443b91297a57bcd2ace8da989c26ae635a79fd",
+  "source_arm9_sha256": "e05c11d7b476548489b7862822490bae4de953aba40176c7566e2de43cb1a030",
+  "source_table_sha256": "4d46010414861b2166660c8be00201613021c441bf870daf212073c9ad7eed7b"
+ },
+ "table": {
+  "ram_base": "0x02175560",
+  "file_offset": "0x175560",
+  "record_count": 101,
+  "stride": "0x34",
+  "save_slot_prefix_ptr_offset": "0xC",
+  "save_slot_title_ptr_offset": "0x10",
+  "chapter_card_prefix_ptr_offset": "0x1C",
+  "chapter_card_title_ptr_offset": "0x20"
+ },
+ "bank": {
+  "parent": "zh/placements/briefing_blobs.json",
+  "ram_base": "0x023E7000",
+  "fragment_offset": "0x9AA0",
+  "fragment_end": "0xA3D6",
+  "required_parent_size": "0xA3D8"
+ },
+ "display_limits": {
+  "load_screen": {
+   "title_x": 48,
+   "right_boundary_x": 200,
+   "engine_max_glyphs": 26,
+   "safe_fullwidth_glyphs": 12
+  },
+  "battle_terrain_page": {
+   "title_x": 96,
+   "right_boundary_x": 216,
+   "engine_max_glyphs": 10,
+   "safe_fullwidth_glyphs": 10
+  },
+  "shared_save_slot_cap": 10
+ },
+ "counts": {
+  "records": 101,
+  "entries": 356,
+  "chapter_card_entries": 178,
+  "save_slot_entries": 178,
+  "pointer_sites": 404,
+  "extra_pointer_entries": 1,
+  "extra_pointer_sites": 3,
+  "unique_payloads": 275,
+  "payload_bytes": 2358
+ },
+ "entries": [
+  {
+   "id": "UTXT01876",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x0216982E",
+   "sites": [
+    "0x17557C",
+    "0x1755B0",
+    "0x1755E4"
+   ],
+   "record_ids": [
+    0,
+    1,
+    2
+   ],
+   "jp": "００",
+   "source_zh": "00",
+   "zh": "00",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AA0",
+   "ptr": "0x023F0AA0",
+   "payload_hex": "e998e99800"
+  },
+  {
+   "id": "UTXT01878",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169848",
+   "sites": [
+    "0x17564C"
+   ],
+   "record_ids": [
+    4
+   ],
+   "jp": "０１",
+   "source_zh": "01",
+   "zh": "01",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AA5",
+   "ptr": "0x023F0AA5",
+   "payload_hex": "e9980e00"
+  },
+  {
+   "id": "UTXT01879",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169853",
+   "sites": [
+    "0x175680"
+   ],
+   "record_ids": [
+    5
+   ],
+   "jp": "０２",
+   "source_zh": "02",
+   "zh": "02",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AA9",
+   "ptr": "0x023F0AA9",
+   "payload_hex": "e9980f00"
+  },
+  {
+   "id": "UTXT01880",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169860",
+   "sites": [
+    "0x1756B4"
+   ],
+   "record_ids": [
+    6
+   ],
+   "jp": "０３前",
+   "source_zh": "03前",
+   "zh": "03前",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AAD",
+   "ptr": "0x023F0AAD",
+   "payload_hex": "e99810ba00"
+  },
+  {
+   "id": "UTXT01881",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169870",
+   "sites": [
+    "0x1756E8"
+   ],
+   "record_ids": [
+    7
+   ],
+   "jp": "０３後",
+   "source_zh": "03后",
+   "zh": "03后",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AB2",
+   "ptr": "0x023F0AB2",
+   "payload_hex": "e99810e7fe00"
+  },
+  {
+   "id": "UTXT01884",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x0216989B",
+   "sites": [
+    "0x175784"
+   ],
+   "record_ids": [
+    10
+   ],
+   "jp": "０５",
+   "source_zh": "05",
+   "zh": "05",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AB8",
+   "ptr": "0x023F0AB8",
+   "payload_hex": "e998ec0300"
+  },
+  {
+   "id": "UTXT01885",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021698AC",
+   "sites": [
+    "0x1757B8"
+   ],
+   "record_ids": [
+    11
+   ],
+   "jp": "０６",
+   "source_zh": "06",
+   "zh": "06",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9ABD",
+   "ptr": "0x023F0ABD",
+   "payload_hex": "e998e9cd00"
+  },
+  {
+   "id": "UTXT01893",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169922",
+   "sites": [
+    "0x175958"
+   ],
+   "record_ids": [
+    19
+   ],
+   "jp": "０９",
+   "source_zh": "09",
+   "zh": "09",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AC2",
+   "ptr": "0x023F0AC2",
+   "payload_hex": "e998eca400"
+  },
+  {
+   "id": "UTXT01877",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169838",
+   "sites": [
+    "0x175618"
+   ],
+   "record_ids": [
+    3
+   ],
+   "jp": "００Ｓ□",
+   "source_zh": "00SP",
+   "zh": "00SP",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AC7",
+   "ptr": "0x023F0AC7",
+   "payload_hex": "e998e99814eed400"
+  },
+  {
+   "id": "UTXT01882",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169880",
+   "sites": [
+    "0x17571C"
+   ],
+   "record_ids": [
+    8
+   ],
+   "jp": "０□□",
+   "source_zh": "04A",
+   "zh": "04A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9ACF",
+   "ptr": "0x023F0ACF",
+   "payload_hex": "e998ea9bea9c00"
+  },
+  {
+   "id": "UTXT01883",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x0216988D",
+   "sites": [
+    "0x175750"
+   ],
+   "record_ids": [
+    9
+   ],
+   "jp": "０□□",
+   "source_zh": "04B",
+   "zh": "04B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AD6",
+   "ptr": "0x023F0AD6",
+   "payload_hex": "e998ea9bef6100"
+  },
+  {
+   "id": "UTXT01886",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021698B7",
+   "sites": [
+    "0x1757EC"
+   ],
+   "record_ids": [
+    12
+   ],
+   "jp": "０６Ｓ□",
+   "source_zh": "06SP",
+   "zh": "06SP",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9ADD",
+   "ptr": "0x023F0ADD",
+   "payload_hex": "e998e9cd14eed400"
+  },
+  {
+   "id": "UTXT01887",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021698CC",
+   "sites": [
+    "0x175820"
+   ],
+   "record_ids": [
+    13
+   ],
+   "jp": "０７□",
+   "source_zh": "07A",
+   "zh": "07A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AE5",
+   "ptr": "0x023F0AE5",
+   "payload_hex": "e998eb79ea9c00"
+  },
+  {
+   "id": "UTXT01888",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021698D9",
+   "sites": [
+    "0x175854"
+   ],
+   "record_ids": [
+    14
+   ],
+   "jp": "０７□",
+   "source_zh": "07B",
+   "zh": "07B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AEC",
+   "ptr": "0x023F0AEC",
+   "payload_hex": "e998eb79ef6100"
+  },
+  {
+   "id": "UTXT01889",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021698E8",
+   "sites": [
+    "0x175888"
+   ],
+   "record_ids": [
+    15
+   ],
+   "jp": "０７Ｓ□",
+   "source_zh": "07SP",
+   "zh": "07SP",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AF3",
+   "ptr": "0x023F0AF3",
+   "payload_hex": "e998eb7914eed400"
+  },
+  {
+   "id": "UTXT01890",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021698F5",
+   "sites": [
+    "0x1758BC"
+   ],
+   "record_ids": [
+    16
+   ],
+   "jp": "０８□",
+   "source_zh": "08A",
+   "zh": "08A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9AFB",
+   "ptr": "0x023F0AFB",
+   "payload_hex": "e998ec44ea9c00"
+  },
+  {
+   "id": "UTXT01891",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169904",
+   "sites": [
+    "0x1758F0"
+   ],
+   "record_ids": [
+    17
+   ],
+   "jp": "０８□",
+   "source_zh": "08B",
+   "zh": "08B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B02",
+   "ptr": "0x023F0B02",
+   "payload_hex": "e998ec44ef6100"
+  },
+  {
+   "id": "UTXT01892",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169913",
+   "sites": [
+    "0x175924"
+   ],
+   "record_ids": [
+    18
+   ],
+   "jp": "０８Ｓ□",
+   "source_zh": "08SP",
+   "zh": "08SP",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B09",
+   "ptr": "0x023F0B09",
+   "payload_hex": "e998ec4414eed400"
+  },
+  {
+   "id": "UTXT01894",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x0216992F",
+   "sites": [
+    "0x17598C"
+   ],
+   "record_ids": [
+    20
+   ],
+   "jp": "０９Ｓ□",
+   "source_zh": "09SP",
+   "zh": "09SP",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B11",
+   "ptr": "0x023F0B11",
+   "payload_hex": "e998eca414eed400"
+  },
+  {
+   "id": "UTXT01895",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x0216993A",
+   "sites": [
+    "0x1759C0"
+   ],
+   "record_ids": [
+    21
+   ],
+   "jp": "１０□",
+   "source_zh": "10A",
+   "zh": "10A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B19",
+   "ptr": "0x023F0B19",
+   "payload_hex": "0ee998ea9c00"
+  },
+  {
+   "id": "UTXT01896",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169947",
+   "sites": [
+    "0x1759F4"
+   ],
+   "record_ids": [
+    22
+   ],
+   "jp": "１０□",
+   "source_zh": "10B",
+   "zh": "10B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B1F",
+   "ptr": "0x023F0B1F",
+   "payload_hex": "0ee998ef6100"
+  },
+  {
+   "id": "UTXT01897",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169953",
+   "sites": [
+    "0x175A28"
+   ],
+   "record_ids": [
+    23
+   ],
+   "jp": "１０Ｓ□",
+   "source_zh": "10SP",
+   "zh": "10SP",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B25",
+   "ptr": "0x023F0B25",
+   "payload_hex": "0ee99814eed400"
+  },
+  {
+   "id": "UTXT01898",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x0216995F",
+   "sites": [
+    "0x175A5C"
+   ],
+   "record_ids": [
+    24
+   ],
+   "jp": "１１□",
+   "source_zh": "11A",
+   "zh": "11A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B2C",
+   "ptr": "0x023F0B2C",
+   "payload_hex": "0e0eea9c00"
+  },
+  {
+   "id": "UTXT01899",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x0216996C",
+   "sites": [
+    "0x175A90"
+   ],
+   "record_ids": [
+    25
+   ],
+   "jp": "１１□",
+   "source_zh": "11B",
+   "zh": "11B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B31",
+   "ptr": "0x023F0B31",
+   "payload_hex": "0e0eef6100"
+  },
+  {
+   "id": "UTXT01900",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169977",
+   "sites": [
+    "0x175AC4"
+   ],
+   "record_ids": [
+    26
+   ],
+   "jp": "１１Ｓ□",
+   "source_zh": "11SP",
+   "zh": "11SP",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B36",
+   "ptr": "0x023F0B36",
+   "payload_hex": "0e0e14eed400"
+  },
+  {
+   "id": "UTXT01901",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169986",
+   "sites": [
+    "0x175AF8"
+   ],
+   "record_ids": [
+    27
+   ],
+   "jp": "１２□",
+   "source_zh": "12A",
+   "zh": "12A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B3C",
+   "ptr": "0x023F0B3C",
+   "payload_hex": "0e0fea9c00"
+  },
+  {
+   "id": "UTXT01902",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169991",
+   "sites": [
+    "0x175B2C"
+   ],
+   "record_ids": [
+    28
+   ],
+   "jp": "１２□",
+   "source_zh": "12B",
+   "zh": "12B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B41",
+   "ptr": "0x023F0B41",
+   "payload_hex": "0e0fef6100"
+  },
+  {
+   "id": "UTXT01903",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021699A0",
+   "sites": [
+    "0x175B60"
+   ],
+   "record_ids": [
+    29
+   ],
+   "jp": "１３□",
+   "source_zh": "13A",
+   "zh": "13A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B46",
+   "ptr": "0x023F0B46",
+   "payload_hex": "0e10ea9c00"
+  },
+  {
+   "id": "UTXT01904",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021699AB",
+   "sites": [
+    "0x175B94"
+   ],
+   "record_ids": [
+    30
+   ],
+   "jp": "１３□",
+   "source_zh": "13B",
+   "zh": "13B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B4B",
+   "ptr": "0x023F0B4B",
+   "payload_hex": "0e10ef6100"
+  },
+  {
+   "id": "UTXT01905",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021699B6",
+   "sites": [
+    "0x175BC8"
+   ],
+   "record_ids": [
+    31
+   ],
+   "jp": "１□□",
+   "source_zh": "14A",
+   "zh": "14A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B50",
+   "ptr": "0x023F0B50",
+   "payload_hex": "0eea9bea9c00"
+  },
+  {
+   "id": "UTXT01906",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021699C6",
+   "sites": [
+    "0x175BFC",
+    "0x175C30"
+   ],
+   "record_ids": [
+    32,
+    33
+   ],
+   "jp": "１□□",
+   "source_zh": "14B",
+   "zh": "14B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B56",
+   "ptr": "0x023F0B56",
+   "payload_hex": "0eea9bef6100"
+  },
+  {
+   "id": "UTXT01907",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021699D3",
+   "sites": [
+    "0x175C64"
+   ],
+   "record_ids": [
+    34
+   ],
+   "jp": "１５□前",
+   "source_zh": "15A",
+   "zh": "15A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B5C",
+   "ptr": "0x023F0B5C",
+   "payload_hex": "0eec03ea9c00"
+  },
+  {
+   "id": "UTXT01908",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021699E7",
+   "sites": [
+    "0x175C98"
+   ],
+   "record_ids": [
+    35
+   ],
+   "jp": "１５□後",
+   "source_zh": "15A后",
+   "zh": "15A后",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B62",
+   "ptr": "0x023F0B62",
+   "payload_hex": "0eec03ea9ce7fe00"
+  },
+  {
+   "id": "UTXT01909",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x021699FB",
+   "sites": [
+    "0x175CCC"
+   ],
+   "record_ids": [
+    36
+   ],
+   "jp": "１５□",
+   "source_zh": "15B",
+   "zh": "15B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B6A",
+   "ptr": "0x023F0B6A",
+   "payload_hex": "0eec03ef6100"
+  },
+  {
+   "id": "UTXT01910",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A09",
+   "sites": [
+    "0x175D00"
+   ],
+   "record_ids": [
+    37
+   ],
+   "jp": "１６□",
+   "source_zh": "16A",
+   "zh": "16A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B70",
+   "ptr": "0x023F0B70",
+   "payload_hex": "0ee9cdea9c00"
+  },
+  {
+   "id": "UTXT01911",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A17",
+   "sites": [
+    "0x175D34"
+   ],
+   "record_ids": [
+    38
+   ],
+   "jp": "１６□",
+   "source_zh": "16B",
+   "zh": "16B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B76",
+   "ptr": "0x023F0B76",
+   "payload_hex": "0ee9cdef6100"
+  },
+  {
+   "id": "UTXT01912",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A23",
+   "sites": [
+    "0x175D68"
+   ],
+   "record_ids": [
+    39
+   ],
+   "jp": "１７□",
+   "source_zh": "17A",
+   "zh": "17A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B7C",
+   "ptr": "0x023F0B7C",
+   "payload_hex": "0eeb79ea9c00"
+  },
+  {
+   "id": "UTXT01913",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A2F",
+   "sites": [
+    "0x175D9C"
+   ],
+   "record_ids": [
+    40
+   ],
+   "jp": "１７□",
+   "source_zh": "17B",
+   "zh": "17B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B82",
+   "ptr": "0x023F0B82",
+   "payload_hex": "0eeb79ef6100"
+  },
+  {
+   "id": "UTXT01914",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A3A",
+   "sites": [
+    "0x175DD0"
+   ],
+   "record_ids": [
+    41
+   ],
+   "jp": "１８□",
+   "source_zh": "18A",
+   "zh": "18A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B88",
+   "ptr": "0x023F0B88",
+   "payload_hex": "0eec44ea9c00"
+  },
+  {
+   "id": "UTXT01915",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A45",
+   "sites": [
+    "0x175E04"
+   ],
+   "record_ids": [
+    42
+   ],
+   "jp": "１８□",
+   "source_zh": "18B",
+   "zh": "18B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B8E",
+   "ptr": "0x023F0B8E",
+   "payload_hex": "0eec44ef6100"
+  },
+  {
+   "id": "UTXT01916",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A50",
+   "sites": [
+    "0x175E38"
+   ],
+   "record_ids": [
+    43
+   ],
+   "jp": "１９□",
+   "source_zh": "19A",
+   "zh": "19A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B94",
+   "ptr": "0x023F0B94",
+   "payload_hex": "0eeca4ea9c00"
+  },
+  {
+   "id": "UTXT01917",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A5D",
+   "sites": [
+    "0x175E6C"
+   ],
+   "record_ids": [
+    44
+   ],
+   "jp": "１９□前",
+   "source_zh": "19B前",
+   "zh": "19B前",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9B9A",
+   "ptr": "0x023F0B9A",
+   "payload_hex": "0eeca4ef61ba00"
+  },
+  {
+   "id": "UTXT01918",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A6E",
+   "sites": [
+    "0x175EA0"
+   ],
+   "record_ids": [
+    45
+   ],
+   "jp": "１９□後",
+   "source_zh": "19B后",
+   "zh": "19B后",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BA1",
+   "ptr": "0x023F0BA1",
+   "payload_hex": "0eeca4ef61e7fe00"
+  },
+  {
+   "id": "UTXT01919",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A7A",
+   "sites": [
+    "0x175ED4"
+   ],
+   "record_ids": [
+    46
+   ],
+   "jp": "２０□",
+   "source_zh": "20A",
+   "zh": "20A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BA9",
+   "ptr": "0x023F0BA9",
+   "payload_hex": "0fe998ea9c00"
+  },
+  {
+   "id": "UTXT01920",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A86",
+   "sites": [
+    "0x175F08"
+   ],
+   "record_ids": [
+    47
+   ],
+   "jp": "２０□",
+   "source_zh": "20B",
+   "zh": "20B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BAF",
+   "ptr": "0x023F0BAF",
+   "payload_hex": "0fe998ef6100"
+  },
+  {
+   "id": "UTXT01921",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A93",
+   "sites": [
+    "0x175F3C"
+   ],
+   "record_ids": [
+    48
+   ],
+   "jp": "２１□",
+   "source_zh": "21A",
+   "zh": "21A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BB5",
+   "ptr": "0x023F0BB5",
+   "payload_hex": "0f0eea9c00"
+  },
+  {
+   "id": "UTXT01922",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169A9F",
+   "sites": [
+    "0x175F70"
+   ],
+   "record_ids": [
+    49
+   ],
+   "jp": "２１□",
+   "source_zh": "21B",
+   "zh": "21B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BBA",
+   "ptr": "0x023F0BBA",
+   "payload_hex": "0f0eef6100"
+  },
+  {
+   "id": "UTXT01923",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169AAB",
+   "sites": [
+    "0x175FA4"
+   ],
+   "record_ids": [
+    50
+   ],
+   "jp": "２２□",
+   "source_zh": "22A",
+   "zh": "22A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BBF",
+   "ptr": "0x023F0BBF",
+   "payload_hex": "0f0fea9c00"
+  },
+  {
+   "id": "UTXT01924",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169AB6",
+   "sites": [
+    "0x175FD8"
+   ],
+   "record_ids": [
+    51
+   ],
+   "jp": "２２□",
+   "source_zh": "22B",
+   "zh": "22B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BC4",
+   "ptr": "0x023F0BC4",
+   "payload_hex": "0f0fef6100"
+  },
+  {
+   "id": "UTXT01925",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169AC1",
+   "sites": [
+    "0x17600C"
+   ],
+   "record_ids": [
+    52
+   ],
+   "jp": "２３□",
+   "source_zh": "23A",
+   "zh": "23A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BC9",
+   "ptr": "0x023F0BC9",
+   "payload_hex": "0f10ea9c00"
+  },
+  {
+   "id": "UTXT01926",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169ACC",
+   "sites": [
+    "0x176040"
+   ],
+   "record_ids": [
+    53
+   ],
+   "jp": "２３□",
+   "source_zh": "23B",
+   "zh": "23B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BCE",
+   "ptr": "0x023F0BCE",
+   "payload_hex": "0f10ef6100"
+  },
+  {
+   "id": "UTXT01927",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169AD7",
+   "sites": [
+    "0x176074"
+   ],
+   "record_ids": [
+    54
+   ],
+   "jp": "２□□",
+   "source_zh": "24A",
+   "zh": "24A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BD3",
+   "ptr": "0x023F0BD3",
+   "payload_hex": "0fea9bea9c00"
+  },
+  {
+   "id": "UTXT01928",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169AE6",
+   "sites": [
+    "0x1760A8"
+   ],
+   "record_ids": [
+    55
+   ],
+   "jp": "２□□",
+   "source_zh": "24B",
+   "zh": "24B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BD9",
+   "ptr": "0x023F0BD9",
+   "payload_hex": "0fea9bef6100"
+  },
+  {
+   "id": "UTXT01929",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169AF5",
+   "sites": [
+    "0x1760DC"
+   ],
+   "record_ids": [
+    56
+   ],
+   "jp": "□１前",
+   "source_zh": "X1前",
+   "zh": "X1前",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BDF",
+   "ptr": "0x023F0BDF",
+   "payload_hex": "eed90eba00"
+  },
+  {
+   "id": "UTXT01930",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B0A",
+   "sites": [
+    "0x176110"
+   ],
+   "record_ids": [
+    57
+   ],
+   "jp": "□１後",
+   "source_zh": "X1后",
+   "zh": "X1后",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BE4",
+   "ptr": "0x023F0BE4",
+   "payload_hex": "eed90ee7fe00"
+  },
+  {
+   "id": "UTXT01931",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B1F",
+   "sites": [
+    "0x176144"
+   ],
+   "record_ids": [
+    58
+   ],
+   "jp": "□２",
+   "source_zh": "X2",
+   "zh": "X2",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BEA",
+   "ptr": "0x023F0BEA",
+   "payload_hex": "eed90f00"
+  },
+  {
+   "id": "UTXT01932",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B29",
+   "sites": [
+    "0x176178"
+   ],
+   "record_ids": [
+    59
+   ],
+   "jp": "□３□",
+   "source_zh": "X3A",
+   "zh": "X3A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BEE",
+   "ptr": "0x023F0BEE",
+   "payload_hex": "eed910ea9c00"
+  },
+  {
+   "id": "UTXT01933",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B36",
+   "sites": [
+    "0x1761AC"
+   ],
+   "record_ids": [
+    60
+   ],
+   "jp": "□３□",
+   "source_zh": "X3B",
+   "zh": "X3B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BF4",
+   "ptr": "0x023F0BF4",
+   "payload_hex": "eed910ef6100"
+  },
+  {
+   "id": "UTXT01934",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B43",
+   "sites": [
+    "0x1761E0"
+   ],
+   "record_ids": [
+    61
+   ],
+   "jp": "□□□",
+   "source_zh": "X4A",
+   "zh": "X4A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9BFA",
+   "ptr": "0x023F0BFA",
+   "payload_hex": "eed9ea9bea9c00"
+  },
+  {
+   "id": "UTXT01935",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B54",
+   "sites": [
+    "0x176214"
+   ],
+   "record_ids": [
+    62
+   ],
+   "jp": "□□□",
+   "source_zh": "X4B",
+   "zh": "X4B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C01",
+   "ptr": "0x023F0C01",
+   "payload_hex": "eed9ea9bef6100"
+  },
+  {
+   "id": "UTXT01936",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B66",
+   "sites": [
+    "0x176248"
+   ],
+   "record_ids": [
+    63
+   ],
+   "jp": "□５□",
+   "source_zh": "X5A",
+   "zh": "X5A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C08",
+   "ptr": "0x023F0C08",
+   "payload_hex": "eed9ec03ea9c00"
+  },
+  {
+   "id": "UTXT01937",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B76",
+   "sites": [
+    "0x17627C"
+   ],
+   "record_ids": [
+    64
+   ],
+   "jp": "□５□",
+   "source_zh": "X5B",
+   "zh": "X5B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C0F",
+   "ptr": "0x023F0C0F",
+   "payload_hex": "eed9ec03ef6100"
+  },
+  {
+   "id": "UTXT01938",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B87",
+   "sites": [
+    "0x1762B0"
+   ],
+   "record_ids": [
+    65
+   ],
+   "jp": "□６□",
+   "source_zh": "X6A",
+   "zh": "X6A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C16",
+   "ptr": "0x023F0C16",
+   "payload_hex": "eed9e9cdea9c00"
+  },
+  {
+   "id": "UTXT01939",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169B97",
+   "sites": [
+    "0x1762E4",
+    "0x176318"
+   ],
+   "record_ids": [
+    66,
+    67
+   ],
+   "jp": "□６□",
+   "source_zh": "X6B",
+   "zh": "X6B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C1D",
+   "ptr": "0x023F0C1D",
+   "payload_hex": "eed9e9cdef6100"
+  },
+  {
+   "id": "UTXT01940",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169BA4",
+   "sites": [
+    "0x17634C"
+   ],
+   "record_ids": [
+    68
+   ],
+   "jp": "□７Ｓ□",
+   "source_zh": "X7",
+   "zh": "X7",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C24",
+   "ptr": "0x023F0C24",
+   "payload_hex": "eed9eb7900"
+  },
+  {
+   "id": "UTXT01941",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169BC1",
+   "sites": [
+    "0x176484"
+   ],
+   "record_ids": [
+    74
+   ],
+   "jp": "Ｓ□１□",
+   "source_zh": "SP1A",
+   "zh": "SP1A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C29",
+   "ptr": "0x023F0C29",
+   "payload_hex": "14eed40eea9c00"
+  },
+  {
+   "id": "UTXT01942",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169BD0",
+   "sites": [
+    "0x1764B8"
+   ],
+   "record_ids": [
+    75
+   ],
+   "jp": "Ｓ□１□",
+   "source_zh": "SP1B",
+   "zh": "SP1B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C30",
+   "ptr": "0x023F0C30",
+   "payload_hex": "14eed40eef6100"
+  },
+  {
+   "id": "UTXT01943",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169BE0",
+   "sites": [
+    "0x1764EC"
+   ],
+   "record_ids": [
+    76
+   ],
+   "jp": "Ｓ□２□",
+   "source_zh": "SP2A",
+   "zh": "SP2A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C37",
+   "ptr": "0x023F0C37",
+   "payload_hex": "14eed40fea9c00"
+  },
+  {
+   "id": "UTXT01944",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169BF1",
+   "sites": [
+    "0x176520"
+   ],
+   "record_ids": [
+    77
+   ],
+   "jp": "Ｓ□２□",
+   "source_zh": "SP2B",
+   "zh": "SP2B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C3E",
+   "ptr": "0x023F0C3E",
+   "payload_hex": "14eed40fef6100"
+  },
+  {
+   "id": "UTXT01945",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C02",
+   "sites": [
+    "0x176554"
+   ],
+   "record_ids": [
+    78
+   ],
+   "jp": "Ｓ□３□",
+   "source_zh": "SP3A",
+   "zh": "SP3A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C45",
+   "ptr": "0x023F0C45",
+   "payload_hex": "14eed410ea9c00"
+  },
+  {
+   "id": "UTXT01946",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C13",
+   "sites": [
+    "0x176588"
+   ],
+   "record_ids": [
+    79
+   ],
+   "jp": "Ｓ□３□",
+   "source_zh": "SP3B",
+   "zh": "SP3B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C4C",
+   "ptr": "0x023F0C4C",
+   "payload_hex": "14eed410ef6100"
+  },
+  {
+   "id": "UTXT01947",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C20",
+   "sites": [
+    "0x1765BC",
+    "0x1765F0",
+    "0x176624"
+   ],
+   "record_ids": [
+    80,
+    81,
+    82
+   ],
+   "jp": "Ｓ□□",
+   "source_zh": "SP4",
+   "zh": "SP4",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C53",
+   "ptr": "0x023F0C53",
+   "payload_hex": "14eed4ea9b00"
+  },
+  {
+   "id": "UTXT01948",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C31",
+   "sites": [
+    "0x176658",
+    "0x17668C",
+    "0x1766C0"
+   ],
+   "record_ids": [
+    83,
+    84,
+    85
+   ],
+   "jp": "Ｓ□５",
+   "source_zh": "SP5",
+   "zh": "SP5",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C59",
+   "ptr": "0x023F0C59",
+   "payload_hex": "14eed4ec0300"
+  },
+  {
+   "id": "UTXT01949",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C3D",
+   "sites": [
+    "0x1766F4",
+    "0x176728",
+    "0x17675C"
+   ],
+   "record_ids": [
+    86,
+    87,
+    88
+   ],
+   "jp": "Ｓ□６",
+   "source_zh": "SP6",
+   "zh": "SP6",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C5F",
+   "ptr": "0x023F0C5F",
+   "payload_hex": "14eed4e9cd00"
+  },
+  {
+   "id": "UTXT01950",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C49",
+   "sites": [
+    "0x176790",
+    "0x1767C4",
+    "0x1767F8"
+   ],
+   "record_ids": [
+    89,
+    90,
+    91
+   ],
+   "jp": "Ｓ□７",
+   "source_zh": "SP7",
+   "zh": "SP7",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C65",
+   "ptr": "0x023F0C65",
+   "payload_hex": "14eed4eb7900"
+  },
+  {
+   "id": "UTXT01951",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C5A",
+   "sites": [
+    "0x176964"
+   ],
+   "record_ids": [
+    98
+   ],
+   "jp": "Ｓ□８□",
+   "source_zh": "SP8A",
+   "zh": "SP8A",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C6B",
+   "ptr": "0x023F0C6B",
+   "payload_hex": "14eed4ec44ea9c00"
+  },
+  {
+   "id": "UTXT01952",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C6F",
+   "sites": [
+    "0x176998"
+   ],
+   "record_ids": [
+    99
+   ],
+   "jp": "Ｓ□８□",
+   "source_zh": "SP8B",
+   "zh": "SP8B",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C73",
+   "ptr": "0x023F0C73",
+   "payload_hex": "14eed4ec44ef6100"
+  },
+  {
+   "id": "UTXT01953",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C85",
+   "sites": [
+    "0x1769CC"
+   ],
+   "record_ids": [
+    100
+   ],
+   "jp": "Ｓ□８Ｓ",
+   "source_zh": "SP8S",
+   "zh": "SP8S",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C7B",
+   "ptr": "0x023F0C7B",
+   "payload_hex": "14eed4ec441400"
+  },
+  {
+   "id": "UTXT01954",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169C9B",
+   "sites": [
+    "0x176380"
+   ],
+   "record_ids": [
+    69
+   ],
+   "jp": "Ｔ□１",
+   "source_zh": "TR1",
+   "zh": "TR1",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C82",
+   "ptr": "0x023F0C82",
+   "payload_hex": "eed6eed50e00"
+  },
+  {
+   "id": "UTXT01955",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169CAB",
+   "sites": [
+    "0x1763B4"
+   ],
+   "record_ids": [
+    70
+   ],
+   "jp": "Ｔ□２",
+   "source_zh": "TR2",
+   "zh": "TR2",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C88",
+   "ptr": "0x023F0C88",
+   "payload_hex": "eed6eed50f00"
+  },
+  {
+   "id": "UTXT01956",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169CBB",
+   "sites": [
+    "0x1763E8"
+   ],
+   "record_ids": [
+    71
+   ],
+   "jp": "Ｔ□３",
+   "source_zh": "TR3",
+   "zh": "TR3",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C8E",
+   "ptr": "0x023F0C8E",
+   "payload_hex": "eed6eed51000"
+  },
+  {
+   "id": "UTXT01957",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169CCB",
+   "sites": [
+    "0x17641C"
+   ],
+   "record_ids": [
+    72
+   ],
+   "jp": "□□",
+   "source_zh": "TU",
+   "zh": "TU",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C94",
+   "ptr": "0x023F0C94",
+   "payload_hex": "eed6eed700"
+  },
+  {
+   "id": "UTXT01958",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169CD7",
+   "sites": [
+    "0x176450"
+   ],
+   "record_ids": [
+    73
+   ],
+   "jp": "□□",
+   "source_zh": "TL",
+   "zh": "TL",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C99",
+   "ptr": "0x023F0C99",
+   "payload_hex": "eed6e81a00"
+  },
+  {
+   "id": "UTXT01959",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169CE3",
+   "sites": [
+    "0x17682C"
+   ],
+   "record_ids": [
+    92
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C9E",
+   "ptr": "0x023F0C9E",
+   "payload_hex": "eca5ef6100"
+  },
+  {
+   "id": "UTXT01960",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169CEE",
+   "sites": [
+    "0x176860"
+   ],
+   "record_ids": [
+    93
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C9E",
+   "ptr": "0x023F0C9E",
+   "payload_hex": "eca5ef6100"
+  },
+  {
+   "id": "UTXT01961",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169CF9",
+   "sites": [
+    "0x176894"
+   ],
+   "record_ids": [
+    94
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C9E",
+   "ptr": "0x023F0C9E",
+   "payload_hex": "eca5ef6100"
+  },
+  {
+   "id": "UTXT01962",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169D04",
+   "sites": [
+    "0x1768C8"
+   ],
+   "record_ids": [
+    95
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C9E",
+   "ptr": "0x023F0C9E",
+   "payload_hex": "eca5ef6100"
+  },
+  {
+   "id": "UTXT01963",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169D0F",
+   "sites": [
+    "0x1768FC"
+   ],
+   "record_ids": [
+    96
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C9E",
+   "ptr": "0x023F0C9E",
+   "payload_hex": "eca5ef6100"
+  },
+  {
+   "id": "UTXT01964",
+   "view": "chapter_card",
+   "domain": "stage_title_prefix",
+   "surface": "stage",
+   "old_ptr": "0x02169D1A",
+   "sites": [
+    "0x176930"
+   ],
+   "record_ids": [
+    97
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9C9E",
+   "ptr": "0x023F0C9E",
+   "payload_hex": "eca5ef6100"
+  },
+  {
+   "id": "UTXT01980",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x0216990B",
+   "sites": [
+    "0x1758F4"
+   ],
+   "record_ids": [
+    17
+   ],
+   "jp": "分かたれし道",
+   "source_zh": "分歧之路",
+   "zh": "分歧之路",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CA3",
+   "ptr": "0x023F0CA3",
+   "payload_hex": "cde915e7cde8d200"
+  },
+  {
+   "id": "UTXT02004",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A4B",
+   "sites": [
+    "0x175E08"
+   ],
+   "record_ids": [
+    42
+   ],
+   "jp": "ラクス出撃",
+   "source_zh": "拉克丝出击",
+   "zh": "拉克丝出击",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CAB",
+   "ptr": "0x023F0CAB",
+   "payload_hex": "e7c2e7d5e8a3afe7cc00"
+  },
+  {
+   "id": "UTXT02010",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A98",
+   "sites": [
+    "0x175F40"
+   ],
+   "record_ids": [
+    48
+   ],
+   "jp": "宇宙を駆ける",
+   "source_zh": "驰骋宇宙",
+   "zh": "驰骋宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CB5",
+   "ptr": "0x023F0CB5",
+   "payload_hex": "ee04edf0e8bee8bf00"
+  },
+  {
+   "id": "UTXT02018",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169AF9",
+   "sites": [
+    "0x1760E0"
+   ],
+   "record_ids": [
+    56
+   ],
+   "jp": "ポケットの中の戦争",
+   "source_zh": "口袋里的战争",
+   "zh": "口袋里的战争",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CBE",
+   "ptr": "0x023F0CBE",
+   "payload_hex": "eabded04ef31e7b4ef28e85200"
+  },
+  {
+   "id": "UTXT02019",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B0E",
+   "sites": [
+    "0x176114"
+   ],
+   "record_ids": [
+    57
+   ],
+   "jp": "ポケットの中の戦争",
+   "source_zh": "口袋里的战争",
+   "zh": "口袋里的战争",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CBE",
+   "ptr": "0x023F0CBE",
+   "payload_hex": "eabded04ef31e7b4ef28e85200"
+  },
+  {
+   "id": "UTXT02022",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B3B",
+   "sites": [
+    "0x1761B0"
+   ],
+   "record_ids": [
+    60
+   ],
+   "jp": "作られし者",
+   "source_zh": "被创造者",
+   "zh": "被创造者",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CCB",
+   "ptr": "0x023F0CCB",
+   "payload_hex": "e7f1e893e93ead00"
+  },
+  {
+   "id": "UTXT02023",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B4A",
+   "sites": [
+    "0x1761E4"
+   ],
+   "record_ids": [
+    61
+   ],
+   "jp": "モノアイガンダムズ",
+   "source_zh": "独眼高达",
+   "zh": "独眼高达",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CD3",
+   "ptr": "0x023F0CD3",
+   "payload_hex": "e8eee90be812ef2b00"
+  },
+  {
+   "id": "UTXT02025",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B6D",
+   "sites": [
+    "0x17624C"
+   ],
+   "record_ids": [
+    63
+   ],
+   "jp": "月は出ているか",
+   "source_zh": "月亮升起了吗",
+   "zh": "月亮升起了吗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CDC",
+   "ptr": "0x023F0CDC",
+   "payload_hex": "e850eaa2ed2be847e7bae80200"
+  },
+  {
+   "id": "UTXT02033",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169BF8",
+   "sites": [
+    "0x176524"
+   ],
+   "record_ids": [
+    77
+   ],
+   "jp": "エンドレスワルツ",
+   "source_zh": "无尽的华尔兹",
+   "zh": "无尽的华尔兹",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CE9",
+   "ptr": "0x023F0CE9",
+   "payload_hex": "e7dce8f2e7b4ed2ce7e1e85600"
+  },
+  {
+   "id": "UTXT02040",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C62",
+   "sites": [
+    "0x176968"
+   ],
+   "record_ids": [
+    98
+   ],
+   "jp": "特別演習（プリベンター）",
+   "source_zh": "特别演习（守护者）",
+   "zh": "特别演习（预防者）",
+   "adjustments": [
+    "ref terminology: 守护者 -> 预防者"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9CF6",
+   "ptr": "0x023F0CF6",
+   "payload_hex": "e7cfe7e5ea2feab60aea5ae968ad0b00"
+  },
+  {
+   "id": "UTXT02041",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C77",
+   "sites": [
+    "0x17699C"
+   ],
+   "record_ids": [
+    99
+   ],
+   "jp": "特別演習（ロンド・ベル）",
+   "source_zh": "特别演习（隆德·贝尔）",
+   "zh": "特别演习（隆德·贝尔）",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D06",
+   "ptr": "0x023F0D06",
+   "payload_hex": "e7cfe7e5ea2feab60aed16e82c04e857e7e10b00"
+  },
+  {
+   "id": "UTXT02042",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C8C",
+   "sites": [
+    "0x1769D0"
+   ],
+   "record_ids": [
+    100
+   ],
+   "jp": "特別演習（ガンダム連合）",
+   "source_zh": "特别演习（高达联合）",
+   "zh": "特别演习（高达联合）",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D1A",
+   "ptr": "0x023F0D1A",
+   "payload_hex": "e7cfe7e5ea2feab60ae812ef2bef2ea00b00"
+  },
+  {
+   "id": "UTXT02048",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169CE8",
+   "sites": [
+    "0x176830"
+   ],
+   "record_ids": [
+    92
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D2C",
+   "ptr": "0x023F0D2C",
+   "payload_hex": "abe8a6ef28e7ff00"
+  },
+  {
+   "id": "UTXT02049",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169CF3",
+   "sites": [
+    "0x176864"
+   ],
+   "record_ids": [
+    93
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D2C",
+   "ptr": "0x023F0D2C",
+   "payload_hex": "abe8a6ef28e7ff00"
+  },
+  {
+   "id": "UTXT02050",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169CFE",
+   "sites": [
+    "0x176898"
+   ],
+   "record_ids": [
+    94
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D2C",
+   "ptr": "0x023F0D2C",
+   "payload_hex": "abe8a6ef28e7ff00"
+  },
+  {
+   "id": "UTXT02051",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169D09",
+   "sites": [
+    "0x1768CC"
+   ],
+   "record_ids": [
+    95
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D2C",
+   "ptr": "0x023F0D2C",
+   "payload_hex": "abe8a6ef28e7ff00"
+  },
+  {
+   "id": "UTXT02052",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169D14",
+   "sites": [
+    "0x176900"
+   ],
+   "record_ids": [
+    96
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D2C",
+   "ptr": "0x023F0D2C",
+   "payload_hex": "abe8a6ef28e7ff00"
+  },
+  {
+   "id": "UTXT02053",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169D1F",
+   "sites": [
+    "0x176934"
+   ],
+   "record_ids": [
+    97
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D2C",
+   "ptr": "0x023F0D2C",
+   "payload_hex": "abe8a6ef28e7ff00"
+  },
+  {
+   "id": "UTXT01965",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169833",
+   "sites": [
+    "0x175580",
+    "0x1755B4",
+    "0x1755E8"
+   ],
+   "record_ids": [
+    0,
+    1,
+    2
+   ],
+   "jp": "ザンジバル追撃",
+   "source_zh": "桑吉巴尔级追击",
+   "zh": "桑吉巴尔级追击",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D34",
+   "ptr": "0x023F0D34",
+   "payload_hex": "ea2be7d9e85be7e1eaeee8dde7cc00"
+  },
+  {
+   "id": "UTXT01966",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169840",
+   "sites": [
+    "0x17561C"
+   ],
+   "record_ids": [
+    3
+   ],
+   "jp": "一年戦争の悪夢",
+   "source_zh": "一年战争的噩梦",
+   "zh": "一年战争的噩梦",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D43",
+   "ptr": "0x023F0D43",
+   "payload_hex": "87e909ef28e852e7b4ed3fea4000"
+  },
+  {
+   "id": "UTXT01967",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x0216984C",
+   "sites": [
+    "0x175650"
+   ],
+   "record_ids": [
+    4
+   ],
+   "jp": "宿命の出会い",
+   "source_zh": "宿命的相遇",
+   "zh": "宿命的相遇",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D51",
+   "ptr": "0x023F0D51",
+   "payload_hex": "ec11e853e7b4e8b1ea4300"
+  },
+  {
+   "id": "UTXT01968",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169857",
+   "sites": [
+    "0x175684"
+   ],
+   "record_ids": [
+    5
+   ],
+   "jp": "めぐりあい宇宙",
+   "source_zh": "相逢在宇宙",
+   "zh": "相逢在宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D5C",
+   "ptr": "0x023F0D5C",
+   "payload_hex": "e8b1ed11ef29e8bee8bf00"
+  },
+  {
+   "id": "UTXT01969",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169865",
+   "sites": [
+    "0x1756B8"
+   ],
+   "record_ids": [
+    6
+   ],
+   "jp": "ソロモンの攻防",
+   "source_zh": "所罗门攻防战(前篇)",
+   "zh": "所罗门攻防战(前篇)",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D67",
+   "ptr": "0x023F0D67",
+   "payload_hex": "e7fbe7ece90c9ee968ef28ef5cbaea15efbd00"
+  },
+  {
+   "id": "UTXT01970",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169875",
+   "sites": [
+    "0x1756EC"
+   ],
+   "record_ids": [
+    7
+   ],
+   "jp": "ソロモンの攻防",
+   "source_zh": "所罗门攻防战(后篇)",
+   "zh": "所罗门攻防战(后篇)",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D7A",
+   "ptr": "0x023F0D7A",
+   "payload_hex": "e7fbe7ece90c9ee968ef28ef5ce7feea15efbd00"
+  },
+  {
+   "id": "UTXT01971",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169887",
+   "sites": [
+    "0x175720"
+   ],
+   "record_ids": [
+    8
+   ],
+   "jp": "光る宇宙",
+   "source_zh": "闪耀的宇宙",
+   "zh": "闪耀的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D8E",
+   "ptr": "0x023F0D8E",
+   "payload_hex": "ea44eda6e7b4e8bee8bf00"
+  },
+  {
+   "id": "UTXT01972",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169894",
+   "sites": [
+    "0x175754"
+   ],
+   "record_ids": [
+    9
+   ],
+   "jp": "エース集結！",
+   "source_zh": "王牌集结！",
+   "zh": "王牌集结！",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D99",
+   "ptr": "0x023F0D99",
+   "payload_hex": "e884ec2bea98e8680600"
+  },
+  {
+   "id": "UTXT01973",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021698A0",
+   "sites": [
+    "0x175788"
+   ],
+   "record_ids": [
+    10
+   ],
+   "jp": "宇宙要塞•ア•バオア•クー",
+   "source_zh": "宇宙要塞阿·巴瓦·库",
+   "zh": "宇宙要塞阿·巴瓦·库",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DA3",
+   "ptr": "0x023F0DA3",
+   "payload_hex": "e8bee8bfef2ae950e7d204e85be99f04e9b300"
+  },
+  {
+   "id": "UTXT01974",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021698B1",
+   "sites": [
+    "0x1757BC"
+   ],
+   "record_ids": [
+    11
+   ],
+   "jp": "震える宇宙",
+   "source_zh": "震撼的宇宙",
+   "zh": "震撼的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DB6",
+   "ptr": "0x023F0DB6",
+   "payload_hex": "e341ee37e7b4e8bee8bf00"
+  },
+  {
+   "id": "UTXT01975",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021698BF",
+   "sites": [
+    "0x1757F0"
+   ],
+   "record_ids": [
+    12
+   ],
+   "jp": "震える宇宙，アナザ—サイト",
+   "source_zh": "震撼的宇宙 另一侧",
+   "zh": "震撼的宇宙{01}另一侧",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9DC1",
+   "ptr": "0x023F0DC1",
+   "payload_hex": "e341ee37e7b4e8bee8bf01e99b87ecaa00"
+  },
+  {
+   "id": "UTXT01976",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021698D3",
+   "sites": [
+    "0x175824"
+   ],
+   "record_ids": [
+    13
+   ],
+   "jp": "激突戦域",
+   "source_zh": "激突战域",
+   "zh": "激突战域",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DD2",
+   "ptr": "0x023F0DD2",
+   "payload_hex": "e9b9e8b6ef28eaa700"
+  },
+  {
+   "id": "UTXT01977",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021698E0",
+   "sites": [
+    "0x175858"
+   ],
+   "record_ids": [
+    14
+   ],
+   "jp": "アクシズの残夢",
+   "source_zh": "阿克西斯的残梦",
+   "zh": "阿克西斯的残梦",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DDB",
+   "ptr": "0x023F0DDB",
+   "payload_hex": "e7d2e7d5e7f8e7c8e7b4e97bea4000"
+  },
+  {
+   "id": "UTXT01978",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021698F0",
+   "sites": [
+    "0x17588C"
+   ],
+   "record_ids": [
+    15
+   ],
+   "jp": "開く扉",
+   "source_zh": "开启的门",
+   "zh": "开启的门",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DEA",
+   "ptr": "0x023F0DEA",
+   "payload_hex": "e7faea3be7b4e90c00"
+  },
+  {
+   "id": "UTXT01979",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021698FC",
+   "sites": [
+    "0x1758C0"
+   ],
+   "record_ids": [
+    16
+   ],
+   "jp": "駆け抜ける嵐",
+   "source_zh": "疾驰而过的风暴",
+   "zh": "疾驰而过的风暴",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DF3",
+   "ptr": "0x023F0DF3",
+   "payload_hex": "e815ee04e89cef36e7b4eb75ea4f00"
+  },
+  {
+   "id": "UTXT01981",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x0216991B",
+   "sites": [
+    "0x175928"
+   ],
+   "record_ids": [
+    18
+   ],
+   "jp": "搖れる世界",
+   "source_zh": "动摇的世界",
+   "zh": "动摇的世界",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E02",
+   "ptr": "0x023F0E02",
+   "payload_hex": "ef30ebcce7b4e83ce8f500"
+  },
+  {
+   "id": "UTXT01982",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169927",
+   "sites": [
+    "0x17595C"
+   ],
+   "record_ids": [
+    19
+   ],
+   "jp": "黒いガンダム",
+   "source_zh": "黑色高达",
+   "zh": "黑色高达",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E0D",
+   "ptr": "0x023F0E0D",
+   "payload_hex": "ef3ee89fe812ef2b00"
+  },
+  {
+   "id": "UTXT01983",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169937",
+   "sites": [
+    "0x175990"
+   ],
+   "record_ids": [
+    20
+   ],
+   "jp": "決别",
+   "source_zh": "离别",
+   "zh": "离别",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E16",
+   "ptr": "0x023F0E16",
+   "payload_hex": "e901e7e500"
+  },
+  {
+   "id": "UTXT01984",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x0216993F",
+   "sites": [
+    "0x1759C4"
+   ],
+   "record_ids": [
+    21
+   ],
+   "jp": "月の裏側",
+   "source_zh": "月球背面",
+   "zh": "月球背面",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E1B",
+   "ptr": "0x023F0E1B",
+   "payload_hex": "e85095e9e4e86200"
+  },
+  {
+   "id": "UTXT01985",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x0216994C",
+   "sites": [
+    "0x1759F8"
+   ],
+   "record_ids": [
+    22
+   ],
+   "jp": "闇の胎動",
+   "source_zh": "黑暗的胎动",
+   "zh": "黑暗的胎动",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E23",
+   "ptr": "0x023F0E23",
+   "payload_hex": "ef3eea6ae7b4ed15ef3000"
+  },
+  {
+   "id": "UTXT01986",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169959",
+   "sites": [
+    "0x175A2C"
+   ],
+   "record_ids": [
+    23
+   ],
+   "jp": "終末の光",
+   "source_zh": "终末之光",
+   "zh": "终末之光",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E2E",
+   "ptr": "0x023F0E2E",
+   "payload_hex": "e8e2ec22e7cde83d00"
+  },
+  {
+   "id": "UTXT01987",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169964",
+   "sites": [
+    "0x175A60"
+   ],
+   "record_ids": [
+    24
+   ],
+   "jp": "ハマーンの嘲笑",
+   "source_zh": "哈曼的嘲笑",
+   "zh": "哈曼的嘲笑",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E37",
+   "ptr": "0x023F0E37",
+   "payload_hex": "e7e8e874e7b4ed3eea1c00"
+  },
+  {
+   "id": "UTXT01988",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169971",
+   "sites": [
+    "0x175A94"
+   ],
+   "record_ids": [
+    25
+   ],
+   "jp": "キエルとディアナ",
+   "source_zh": "基艾尔与迪安娜",
+   "zh": "基艾尔与迪安娜",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E42",
+   "ptr": "0x023F0E42",
+   "payload_hex": "e829e8d6e7e1e832ea11e7fce7ea00"
+  },
+  {
+   "id": "UTXT01989",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x0216997D",
+   "sites": [
+    "0x175AC8"
+   ],
+   "record_ids": [
+    26
+   ],
+   "jp": "未来への道標",
+   "source_zh": "通往未来的路标",
+   "zh": "通往未来的路标",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E51",
+   "ptr": "0x023F0E51",
+   "payload_hex": "c2e911e8b4d9e7b4e8d2e96f00"
+  },
+  {
+   "id": "UTXT01990",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x0216998B",
+   "sites": [
+    "0x175AFC"
+   ],
+   "record_ids": [
+    27
+   ],
+   "jp": "燃える地球",
+   "source_zh": "燃烧的地球",
+   "zh": "燃烧的地球",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E5E",
+   "ptr": "0x023F0E5E",
+   "payload_hex": "eb93ec29e7b4bf9500"
+  },
+  {
+   "id": "UTXT01991",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169996",
+   "sites": [
+    "0x175B30"
+   ],
+   "record_ids": [
+    28
+   ],
+   "jp": "正義の名のもとに",
+   "source_zh": "以正义之名",
+   "zh": "以正义之名",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E67",
+   "ptr": "0x023F0E67",
+   "payload_hex": "e7f3ef3be8cee7cde8ac00"
+  },
+  {
+   "id": "UTXT01992",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021699A5",
+   "sites": [
+    "0x175B64"
+   ],
+   "record_ids": [
+    29
+   ],
+   "jp": "キエルとディアナ",
+   "source_zh": "基艾尔与迪安娜",
+   "zh": "基艾尔与迪安娜",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E42",
+   "ptr": "0x023F0E42",
+   "payload_hex": "e829e8d6e7e1e832ea11e7fce7ea00"
+  },
+  {
+   "id": "UTXT01993",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021699B0",
+   "sites": [
+    "0x175B98"
+   ],
+   "record_ids": [
+    30
+   ],
+   "jp": "決意の砲火",
+   "source_zh": "决意的炮火",
+   "zh": "决意的炮火",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E72",
+   "ptr": "0x023F0E72",
+   "payload_hex": "e8abef3ce7b4e95ae8da00"
+  },
+  {
+   "id": "UTXT01994",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021699BC",
+   "sites": [
+    "0x175BCC"
+   ],
+   "record_ids": [
+    31
+   ],
+   "jp": "塩の湖を越えて",
+   "source_zh": "越过盐湖",
+   "zh": "越过盐湖",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E7D",
+   "ptr": "0x023F0E7D",
+   "payload_hex": "ea57ef36ebbbef1500"
+  },
+  {
+   "id": "UTXT01995",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021699CC",
+   "sites": [
+    "0x175C00",
+    "0x175C34"
+   ],
+   "record_ids": [
+    32,
+    33
+   ],
+   "jp": "ガラスの王国",
+   "source_zh": "玻璃王国",
+   "zh": "玻璃王国",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E86",
+   "ptr": "0x023F0E86",
+   "payload_hex": "ee15eef7e884a100"
+  },
+  {
+   "id": "UTXT01996",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021699DA",
+   "sites": [
+    "0x175C68"
+   ],
+   "record_ids": [
+    34
+   ],
+   "jp": "ダカールの灯火",
+   "source_zh": "达卡尔的灯火",
+   "zh": "达卡尔的灯火",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E8E",
+   "ptr": "0x023F0E8E",
+   "payload_hex": "ef2be801e7e1e7b4ef0de8da00"
+  },
+  {
+   "id": "UTXT01997",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x021699EE",
+   "sites": [
+    "0x175C9C"
+   ],
+   "record_ids": [
+    35
+   ],
+   "jp": "ダカールの灯火",
+   "source_zh": "达卡尔的灯火",
+   "zh": "达卡尔的灯火",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E8E",
+   "ptr": "0x023F0E8E",
+   "payload_hex": "ef2be801e7e1e7b4ef0de8da00"
+  },
+  {
+   "id": "UTXT01998",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A01",
+   "sites": [
+    "0x175CD0"
+   ],
+   "record_ids": [
+    36
+   ],
+   "jp": "月世界の門",
+   "source_zh": "月世界之门",
+   "zh": "月世界之门",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E9B",
+   "ptr": "0x023F0E9B",
+   "payload_hex": "e850e83ce8f5e7cde90c00"
+  },
+  {
+   "id": "UTXT01999",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A0F",
+   "sites": [
+    "0x175D04"
+   ],
+   "record_ids": [
+    37
+   ],
+   "jp": "月世界の門",
+   "source_zh": "月世界之门",
+   "zh": "月世界之门",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E9B",
+   "ptr": "0x023F0E9B",
+   "payload_hex": "e850e83ce8f5e7cde90c00"
+  },
+  {
+   "id": "UTXT02000",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A1D",
+   "sites": [
+    "0x175D38"
+   ],
+   "record_ids": [
+    38
+   ],
+   "jp": "衝撃の黒歴史",
+   "source_zh": "冲击的黑历史",
+   "zh": "冲击的黑历史",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EA6",
+   "ptr": "0x023F0EA6",
+   "payload_hex": "e95ee7cce7b4ef3ee8fbe92500"
+  },
+  {
+   "id": "UTXT02001",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A29",
+   "sites": [
+    "0x175D6C"
+   ],
+   "record_ids": [
+    39
+   ],
+   "jp": "衝撃の黒歴史",
+   "source_zh": "冲击的黑历史",
+   "zh": "冲击的黑历史",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EA6",
+   "ptr": "0x023F0EA6",
+   "payload_hex": "e95ee7cce7b4ef3ee8fbe92500"
+  },
+  {
+   "id": "UTXT02002",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A35",
+   "sites": [
+    "0x175DA0"
+   ],
+   "record_ids": [
+    40
+   ],
+   "jp": "宇宙海賊",
+   "source_zh": "宇宙海盗",
+   "zh": "宇宙海盗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EB3",
+   "ptr": "0x023F0EB3",
+   "payload_hex": "e8bee8bfe91be9f300"
+  },
+  {
+   "id": "UTXT02003",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A40",
+   "sites": [
+    "0x175DD4"
+   ],
+   "record_ids": [
+    41
+   ],
+   "jp": "宇宙海賊",
+   "source_zh": "宇宙海盗",
+   "zh": "宇宙海盗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EB3",
+   "ptr": "0x023F0EB3",
+   "payload_hex": "e8bee8bfe91be9f300"
+  },
+  {
+   "id": "UTXT02005",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A56",
+   "sites": [
+    "0x175E3C"
+   ],
+   "record_ids": [
+    43
+   ],
+   "jp": "女たちの戦場",
+   "source_zh": "女人们的战场",
+   "zh": "女人们的战场",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EBC",
+   "ptr": "0x023F0EBC",
+   "payload_hex": "b0b4e7bbe7b4ef28e87600"
+  },
+  {
+   "id": "UTXT02006",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A64",
+   "sites": [
+    "0x175E70"
+   ],
+   "record_ids": [
+    44
+   ],
+   "jp": "螺旋の邂逅",
+   "source_zh": "螺旋的邂逅",
+   "zh": "螺旋的邂逅",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EC7",
+   "ptr": "0x023F0EC7",
+   "payload_hex": "ef98ec1fe7b4e80fefd400"
+  },
+  {
+   "id": "UTXT02007",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A75",
+   "sites": [
+    "0x175EA4"
+   ],
+   "record_ids": [
+    45
+   ],
+   "jp": "開く扉",
+   "source_zh": "开启的门",
+   "zh": "开启的门",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DEA",
+   "ptr": "0x023F0DEA",
+   "payload_hex": "e7faea3be7b4e90c00"
+  },
+  {
+   "id": "UTXT02008",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A7F",
+   "sites": [
+    "0x175ED8"
+   ],
+   "record_ids": [
+    46
+   ],
+   "jp": "命散って",
+   "source_zh": "生命凋零",
+   "zh": "生命凋零",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9ED2",
+   "ptr": "0x023F0ED2",
+   "payload_hex": "b6e853eee5eb7400"
+  },
+  {
+   "id": "UTXT02009",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169A8B",
+   "sites": [
+    "0x175F0C"
+   ],
+   "record_ids": [
+    47
+   ],
+   "jp": "混迷の宇宙",
+   "source_zh": "混迷的宇宙",
+   "zh": "混迷的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EDA",
+   "ptr": "0x023F0EDA",
+   "payload_hex": "ea41eaf7e7b4e8bee8bf00"
+  },
+  {
+   "id": "UTXT02011",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169AA4",
+   "sites": [
+    "0x175F74"
+   ],
+   "record_ids": [
+    49
+   ],
+   "jp": "最後の勝利者",
+   "source_zh": "最后的胜利者",
+   "zh": "最后的胜利者",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EE5",
+   "ptr": "0x023F0EE5",
+   "payload_hex": "e8c5e7fee7b4e8dbe82ead00"
+  },
+  {
+   "id": "UTXT02012",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169AB0",
+   "sites": [
+    "0x175FA8"
+   ],
+   "record_ids": [
+    50
+   ],
+   "jp": "終末の光",
+   "source_zh": "终末之光",
+   "zh": "终末之光",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E2E",
+   "ptr": "0x023F0E2E",
+   "payload_hex": "e8e2ec22e7cde83d00"
+  },
+  {
+   "id": "UTXT02013",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169ABB",
+   "sites": [
+    "0x175FDC"
+   ],
+   "record_ids": [
+    51
+   ],
+   "jp": "終末の光",
+   "source_zh": "终末之光",
+   "zh": "终末之光",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E2E",
+   "ptr": "0x023F0E2E",
+   "payload_hex": "e8e2ec22e7cde83d00"
+  },
+  {
+   "id": "UTXT02014",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169AC6",
+   "sites": [
+    "0x176010"
+   ],
+   "record_ids": [
+    52
+   ],
+   "jp": "甦る亡霊",
+   "source_zh": "复苏的亡灵",
+   "zh": "复苏的亡灵",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EF1",
+   "ptr": "0x023F0EF1",
+   "payload_hex": "e9eeec8de7b4ebb2eaeb00"
+  },
+  {
+   "id": "UTXT02015",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169AD1",
+   "sites": [
+    "0x176044"
+   ],
+   "record_ids": [
+    53
+   ],
+   "jp": "甦る亡霊",
+   "source_zh": "复苏的亡灵",
+   "zh": "复苏的亡灵",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EF1",
+   "ptr": "0x023F0EF1",
+   "payload_hex": "e9eeec8de7b4ebb2eaeb00"
+  },
+  {
+   "id": "UTXT02016",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169ADD",
+   "sites": [
+    "0x176078"
+   ],
+   "record_ids": [
+    54
+   ],
+   "jp": "未来の道標",
+   "source_zh": "未来的路标",
+   "zh": "未来的路标",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EFC",
+   "ptr": "0x023F0EFC",
+   "payload_hex": "e8b4d9e7b4e8d2e96f00"
+  },
+  {
+   "id": "UTXT02017",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169AEC",
+   "sites": [
+    "0x1760AC"
+   ],
+   "record_ids": [
+    55
+   ],
+   "jp": "未来の道標",
+   "source_zh": "未来的路标",
+   "zh": "未来的路标",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EFC",
+   "ptr": "0x023F0EFC",
+   "payload_hex": "e8b4d9e7b4e8d2e96f00"
+  },
+  {
+   "id": "UTXT02020",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B22",
+   "sites": [
+    "0x176148"
+   ],
+   "record_ids": [
+    58
+   ],
+   "jp": "裏切りの宇宙",
+   "source_zh": "背叛的宇宙",
+   "zh": "背叛的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F06",
+   "ptr": "0x023F0F06",
+   "payload_hex": "e9e4ef43e7b4e8bee8bf00"
+  },
+  {
+   "id": "UTXT02021",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B2E",
+   "sites": [
+    "0x17617C"
+   ],
+   "record_ids": [
+    59
+   ],
+   "jp": "宇宙の蜻蛉",
+   "source_zh": "宇宙蜻蜓",
+   "zh": "宇宙蜻蜓",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F11",
+   "ptr": "0x023F0F11",
+   "payload_hex": "e8bee8bfed09ed4b00"
+  },
+  {
+   "id": "UTXT02024",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B5B",
+   "sites": [
+    "0x176218"
+   ],
+   "record_ids": [
+    62
+   ],
+   "jp": "地球に落ちたガンダム",
+   "source_zh": "坠落地球的高达",
+   "zh": "坠落地球的高达",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F1A",
+   "ptr": "0x023F0F1A",
+   "payload_hex": "eb53e92abf95e7b4e812ef2b00"
+  },
+  {
+   "id": "UTXT02026",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B7D",
+   "sites": [
+    "0x176280"
+   ],
+   "record_ids": [
+    64
+   ],
+   "jp": "その名は東方不敗",
+   "source_zh": "其名东方不败",
+   "zh": "其名东方不败",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F27",
+   "ptr": "0x023F0F27",
+   "payload_hex": "e8cfe8ace8bad0e7b5e88f00"
+  },
+  {
+   "id": "UTXT02027",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B8E",
+   "sites": [
+    "0x1762B4"
+   ],
+   "record_ids": [
+    65
+   ],
+   "jp": "そして悲劇が終わる",
+   "source_zh": "然后悲剧终结",
+   "zh": "然后悲剧终结",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F33",
+   "ptr": "0x023F0F33",
+   "payload_hex": "e7efe7fee9dfecb5e8e2e86800"
+  },
+  {
+   "id": "UTXT02028",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169B9E",
+   "sites": [
+    "0x1762E8",
+    "0x17631C"
+   ],
+   "record_ids": [
+    66,
+    67
+   ],
+   "jp": "宿命の戦い",
+   "source_zh": "宿命之战",
+   "zh": "宿命之战",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F40",
+   "ptr": "0x023F0F40",
+   "payload_hex": "ec11e853e7cdef2800"
+  },
+  {
+   "id": "UTXT02029",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169BAC",
+   "sites": [
+    "0x176350"
+   ],
+   "record_ids": [
+    68
+   ],
+   "jp": "モノアイガンダムズ After",
+   "source_zh": "独眼高达 After",
+   "zh": "独眼高达{01}After",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9F49",
+   "ptr": "0x023F0F49",
+   "payload_hex": "e8eee90be812ef2b01ea9ce036e044e035eedf00"
+  },
+  {
+   "id": "UTXT02030",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169BC8",
+   "sites": [
+    "0x176488"
+   ],
+   "record_ids": [
+    74
+   ],
+   "jp": "逆襲のシャア",
+   "source_zh": "逆袭的夏亚",
+   "zh": "逆袭的夏亚",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F5D",
+   "ptr": "0x023F0F5D",
+   "payload_hex": "eeb4e9aee7b4ef37e7d600"
+  },
+  {
+   "id": "UTXT02031",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169BD7",
+   "sites": [
+    "0x1764BC"
+   ],
+   "record_ids": [
+    75
+   ],
+   "jp": "13番目の星座",
+   "source_zh": "第13个星座",
+   "zh": "第13个星座",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F68",
+   "ptr": "0x023F0F68",
+   "payload_hex": "e9400e10e828b5ebc400"
+  },
+  {
+   "id": "UTXT02032",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169BE7",
+   "sites": [
+    "0x1764F0"
+   ],
+   "record_ids": [
+    76
+   ],
+   "jp": "メビウスの輪から",
+   "source_zh": "来自莫比乌斯之环",
+   "zh": "来自莫比乌斯之环",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F72",
+   "ptr": "0x023F0F72",
+   "payload_hex": "d9abeba0e825e94de7c8e7cdef4700"
+  },
+  {
+   "id": "UTXT02034",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C09",
+   "sites": [
+    "0x176558"
+   ],
+   "record_ids": [
+    78
+   ],
+   "jp": "忌まわしき記憶と共に",
+   "source_zh": "与可憎的记忆一同",
+   "zh": "与可憎的记忆一同",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F81",
+   "ptr": "0x023F0F81",
+   "payload_hex": "e832e7c4eb34e7b4e996eac687e85d00"
+  },
+  {
+   "id": "UTXT02035",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C1A",
+   "sites": [
+    "0x17658C"
+   ],
+   "record_ids": [
+    79
+   ],
+   "jp": "デビルガンダム再び",
+   "source_zh": "恶魔高达再临",
+   "zh": "恶魔高达再临",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F91",
+   "ptr": "0x023F0F91",
+   "payload_hex": "e7dee8d8e812ef2be80bed1e00"
+  },
+  {
+   "id": "UTXT02036",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C26",
+   "sites": [
+    "0x1765C0",
+    "0x1765F4",
+    "0x176628"
+   ],
+   "record_ids": [
+    80,
+    81,
+    82
+   ],
+   "jp": "その闇の名は木星",
+   "source_zh": "那黑暗之名，乃是木星",
+   "zh": "那黑暗之名、乃是木星",
+   "adjustments": [
+    "ref punctuation: ， -> 、"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9F9E",
+   "ptr": "0x023F0F9E",
+   "payload_hex": "e7b7ef3eea6ae7cde8ac02efdde7b6d4b500"
+  },
+  {
+   "id": "UTXT02037",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C37",
+   "sites": [
+    "0x17665C",
+    "0x176690",
+    "0x1766C4"
+   ],
+   "record_ids": [
+    83,
+    84,
+    85
+   ],
+   "jp": "ザビーネの反乱",
+   "source_zh": "萨比尼的叛乱",
+   "zh": "扎比涅的叛乱",
+   "adjustments": [
+    "ref terminology: 萨比尼 -> 扎比涅"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9FB0",
+   "ptr": "0x023F0FB0",
+   "payload_hex": "e84be825eacfe7b4ef43e97600"
+  },
+  {
+   "id": "UTXT02038",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C43",
+   "sites": [
+    "0x1766F8",
+    "0x17672C",
+    "0x176760"
+   ],
+   "record_ids": [
+    86,
+    87,
+    88
+   ],
+   "jp": "燃える宇宙",
+   "source_zh": "燃烧的宇宙",
+   "zh": "燃烧的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9FBD",
+   "ptr": "0x023F0FBD",
+   "payload_hex": "eb93ec29e7b4e8bee8bf00"
+  },
+  {
+   "id": "UTXT02039",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169C4F",
+   "sites": [
+    "0x176794",
+    "0x1767C8",
+    "0x1767FC"
+   ],
+   "record_ids": [
+    89,
+    90,
+    91
+   ],
+   "jp": "人と継ぐ者の間に",
+   "source_zh": "在人类与继承者之间",
+   "zh": "在人类与继承者之间",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9FC8",
+   "ptr": "0x023F0FC8",
+   "payload_hex": "ef29b4e841e832e9d6ea75ade7cde8fc00"
+  },
+  {
+   "id": "UTXT02043",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169CA1",
+   "sites": [
+    "0x176384"
+   ],
+   "record_ids": [
+    69
+   ],
+   "jp": "チュートリアル 1",
+   "source_zh": "教程 1",
+   "zh": "教程{01}1",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9FD9",
+   "ptr": "0x023F0FD9",
+   "payload_hex": "eaacea7d010e00"
+  },
+  {
+   "id": "UTXT02044",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169CB1",
+   "sites": [
+    "0x1763B8"
+   ],
+   "record_ids": [
+    70
+   ],
+   "jp": "チュートリアル 2",
+   "source_zh": "教程 2",
+   "zh": "教程{01}2",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9FE0",
+   "ptr": "0x023F0FE0",
+   "payload_hex": "eaacea7d010f00"
+  },
+  {
+   "id": "UTXT02045",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169CC1",
+   "sites": [
+    "0x1763EC"
+   ],
+   "record_ids": [
+    71
+   ],
+   "jp": "チュートリアル 3",
+   "source_zh": "教程 3",
+   "zh": "教程{01}3",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9FE7",
+   "ptr": "0x023F0FE7",
+   "payload_hex": "eaacea7d011000"
+  },
+  {
+   "id": "UTXT02046",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169CD0",
+   "sites": [
+    "0x176420"
+   ],
+   "record_ids": [
+    72
+   ],
+   "jp": "索敵 宇宙",
+   "source_zh": "索敌 宇宙",
+   "zh": "索敌{01}宇宙",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9FEE",
+   "ptr": "0x023F0FEE",
+   "payload_hex": "e93ce7e301e8bee8bf00"
+  },
+  {
+   "id": "UTXT02047",
+   "view": "chapter_card",
+   "domain": "stage_title_stream",
+   "surface": "stage",
+   "old_ptr": "0x02169CDC",
+   "sites": [
+    "0x176454"
+   ],
+   "record_ids": [
+    73
+   ],
+   "jp": "索敵 地上",
+   "source_zh": "索敌 地上",
+   "zh": "索敌{01}地上",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9FF8",
+   "ptr": "0x023F0FF8",
+   "payload_hex": "e93ce7e301bfb200"
+  },
+  {
+   "id": "SLOT_UTXT01876",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169338",
+   "sites": [
+    "0x17556C",
+    "0x1755A0",
+    "0x1755D4"
+   ],
+   "record_ids": [
+    0,
+    1,
+    2
+   ],
+   "jp": "００",
+   "source_zh": "00",
+   "zh": "00",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA000",
+   "ptr": "0x023F1000",
+   "payload_hex": "e001e00100"
+  },
+  {
+   "id": "SLOT_UTXT01878",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169352",
+   "sites": [
+    "0x17563C"
+   ],
+   "record_ids": [
+    4
+   ],
+   "jp": "０１",
+   "source_zh": "01",
+   "zh": "01",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA005",
+   "ptr": "0x023F1005",
+   "payload_hex": "e0010200"
+  },
+  {
+   "id": "SLOT_UTXT01879",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216935D",
+   "sites": [
+    "0x175670"
+   ],
+   "record_ids": [
+    5
+   ],
+   "jp": "０２",
+   "source_zh": "02",
+   "zh": "02",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA009",
+   "ptr": "0x023F1009",
+   "payload_hex": "e0010300"
+  },
+  {
+   "id": "SLOT_UTXT01880",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216936A",
+   "sites": [
+    "0x1756A4"
+   ],
+   "record_ids": [
+    6
+   ],
+   "jp": "０３前",
+   "source_zh": "03前",
+   "zh": "03前",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA00D",
+   "ptr": "0x023F100D",
+   "payload_hex": "e00104ef5100"
+  },
+  {
+   "id": "SLOT_UTXT01881",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216937A",
+   "sites": [
+    "0x1756D8"
+   ],
+   "record_ids": [
+    7
+   ],
+   "jp": "０３後",
+   "source_zh": "03后",
+   "zh": "03后",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA013",
+   "ptr": "0x023F1013",
+   "payload_hex": "e00104e7fe00"
+  },
+  {
+   "id": "SLOT_UTXT01884",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021693A5",
+   "sites": [
+    "0x175774"
+   ],
+   "record_ids": [
+    10
+   ],
+   "jp": "０５",
+   "source_zh": "05",
+   "zh": "05",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA019",
+   "ptr": "0x023F1019",
+   "payload_hex": "e001e00300"
+  },
+  {
+   "id": "SLOT_UTXT01885",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021693B6",
+   "sites": [
+    "0x1757A8"
+   ],
+   "record_ids": [
+    11
+   ],
+   "jp": "０６",
+   "source_zh": "06",
+   "zh": "06",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA01E",
+   "ptr": "0x023F101E",
+   "payload_hex": "e001e00400"
+  },
+  {
+   "id": "SLOT_UTXT01893",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216942C",
+   "sites": [
+    "0x175948"
+   ],
+   "record_ids": [
+    19
+   ],
+   "jp": "０９",
+   "source_zh": "09",
+   "zh": "09",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA023",
+   "ptr": "0x023F1023",
+   "payload_hex": "e001e00700"
+  },
+  {
+   "id": "SLOT_UTXT01877",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169342",
+   "sites": [
+    "0x175608"
+   ],
+   "record_ids": [
+    3
+   ],
+   "jp": "００Ｓ□",
+   "source_zh": "00SP",
+   "zh": "00SP",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA028",
+   "ptr": "0x023F1028",
+   "payload_hex": "e001e00108e01400"
+  },
+  {
+   "id": "SLOT_UTXT01882",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216938A",
+   "sites": [
+    "0x17570C"
+   ],
+   "record_ids": [
+    8
+   ],
+   "jp": "０□□",
+   "source_zh": "04A",
+   "zh": "04A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA030",
+   "ptr": "0x023F1030",
+   "payload_hex": "e001e002e00800"
+  },
+  {
+   "id": "SLOT_UTXT01883",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169397",
+   "sites": [
+    "0x175740"
+   ],
+   "record_ids": [
+    9
+   ],
+   "jp": "０□□",
+   "source_zh": "04B",
+   "zh": "04B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA037",
+   "ptr": "0x023F1037",
+   "payload_hex": "e001e002e00900"
+  },
+  {
+   "id": "SLOT_UTXT01886",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021693C1",
+   "sites": [
+    "0x1757DC"
+   ],
+   "record_ids": [
+    12
+   ],
+   "jp": "０６Ｓ□",
+   "source_zh": "06SP",
+   "zh": "06SP",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA03E",
+   "ptr": "0x023F103E",
+   "payload_hex": "e001e00408e01400"
+  },
+  {
+   "id": "SLOT_UTXT01887",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021693D6",
+   "sites": [
+    "0x175810"
+   ],
+   "record_ids": [
+    13
+   ],
+   "jp": "０７□",
+   "source_zh": "07A",
+   "zh": "07A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA046",
+   "ptr": "0x023F1046",
+   "payload_hex": "e001e005e00800"
+  },
+  {
+   "id": "SLOT_UTXT01888",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021693E3",
+   "sites": [
+    "0x175844"
+   ],
+   "record_ids": [
+    14
+   ],
+   "jp": "０７□",
+   "source_zh": "07B",
+   "zh": "07B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA04D",
+   "ptr": "0x023F104D",
+   "payload_hex": "e001e005e00900"
+  },
+  {
+   "id": "SLOT_UTXT01889",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021693F2",
+   "sites": [
+    "0x175878"
+   ],
+   "record_ids": [
+    15
+   ],
+   "jp": "０７Ｓ□",
+   "source_zh": "07SP",
+   "zh": "07SP",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA054",
+   "ptr": "0x023F1054",
+   "payload_hex": "e001e00508e01400"
+  },
+  {
+   "id": "SLOT_UTXT01890",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021693FF",
+   "sites": [
+    "0x1758AC"
+   ],
+   "record_ids": [
+    16
+   ],
+   "jp": "０８□",
+   "source_zh": "08A",
+   "zh": "08A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA05C",
+   "ptr": "0x023F105C",
+   "payload_hex": "e001e006e00800"
+  },
+  {
+   "id": "SLOT_UTXT01891",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216940E",
+   "sites": [
+    "0x1758E0"
+   ],
+   "record_ids": [
+    17
+   ],
+   "jp": "０８□",
+   "source_zh": "08B",
+   "zh": "08B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA063",
+   "ptr": "0x023F1063",
+   "payload_hex": "e001e006e00900"
+  },
+  {
+   "id": "SLOT_UTXT01892",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216941D",
+   "sites": [
+    "0x175914"
+   ],
+   "record_ids": [
+    18
+   ],
+   "jp": "０８Ｓ□",
+   "source_zh": "08SP",
+   "zh": "08SP",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA06A",
+   "ptr": "0x023F106A",
+   "payload_hex": "e001e00608e01400"
+  },
+  {
+   "id": "SLOT_UTXT01894",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169439",
+   "sites": [
+    "0x17597C"
+   ],
+   "record_ids": [
+    20
+   ],
+   "jp": "０９Ｓ□",
+   "source_zh": "09SP",
+   "zh": "09SP",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA072",
+   "ptr": "0x023F1072",
+   "payload_hex": "e001e00708e01400"
+  },
+  {
+   "id": "SLOT_UTXT01895",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169444",
+   "sites": [
+    "0x1759B0"
+   ],
+   "record_ids": [
+    21
+   ],
+   "jp": "１０□",
+   "source_zh": "10A",
+   "zh": "10A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA07A",
+   "ptr": "0x023F107A",
+   "payload_hex": "02e001e00800"
+  },
+  {
+   "id": "SLOT_UTXT01896",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169451",
+   "sites": [
+    "0x1759E4"
+   ],
+   "record_ids": [
+    22
+   ],
+   "jp": "１０□",
+   "source_zh": "10B",
+   "zh": "10B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA080",
+   "ptr": "0x023F1080",
+   "payload_hex": "02e001e00900"
+  },
+  {
+   "id": "SLOT_UTXT01897",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216945D",
+   "sites": [
+    "0x175A18"
+   ],
+   "record_ids": [
+    23
+   ],
+   "jp": "１０Ｓ□",
+   "source_zh": "10SP",
+   "zh": "10SP",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA086",
+   "ptr": "0x023F1086",
+   "payload_hex": "02e00108e01400"
+  },
+  {
+   "id": "SLOT_UTXT01898",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169469",
+   "sites": [
+    "0x175A4C"
+   ],
+   "record_ids": [
+    24
+   ],
+   "jp": "１１□",
+   "source_zh": "11A",
+   "zh": "11A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA08D",
+   "ptr": "0x023F108D",
+   "payload_hex": "0202e00800"
+  },
+  {
+   "id": "SLOT_UTXT01899",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169476",
+   "sites": [
+    "0x175A80"
+   ],
+   "record_ids": [
+    25
+   ],
+   "jp": "１１□",
+   "source_zh": "11B",
+   "zh": "11B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA092",
+   "ptr": "0x023F1092",
+   "payload_hex": "0202e00900"
+  },
+  {
+   "id": "SLOT_UTXT01900",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169481",
+   "sites": [
+    "0x175AB4"
+   ],
+   "record_ids": [
+    26
+   ],
+   "jp": "１１Ｓ□",
+   "source_zh": "11SP",
+   "zh": "11SP",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA097",
+   "ptr": "0x023F1097",
+   "payload_hex": "020208e01400"
+  },
+  {
+   "id": "SLOT_UTXT01901",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169490",
+   "sites": [
+    "0x175AE8"
+   ],
+   "record_ids": [
+    27
+   ],
+   "jp": "１２□",
+   "source_zh": "12A",
+   "zh": "12A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA09D",
+   "ptr": "0x023F109D",
+   "payload_hex": "0203e00800"
+  },
+  {
+   "id": "SLOT_UTXT01902",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216949B",
+   "sites": [
+    "0x175B1C"
+   ],
+   "record_ids": [
+    28
+   ],
+   "jp": "１２□",
+   "source_zh": "12B",
+   "zh": "12B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0A2",
+   "ptr": "0x023F10A2",
+   "payload_hex": "0203e00900"
+  },
+  {
+   "id": "SLOT_UTXT01903",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021694AA",
+   "sites": [
+    "0x175B50"
+   ],
+   "record_ids": [
+    29
+   ],
+   "jp": "１３□",
+   "source_zh": "13A",
+   "zh": "13A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0A7",
+   "ptr": "0x023F10A7",
+   "payload_hex": "0204e00800"
+  },
+  {
+   "id": "SLOT_UTXT01904",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021694B5",
+   "sites": [
+    "0x175B84"
+   ],
+   "record_ids": [
+    30
+   ],
+   "jp": "１３□",
+   "source_zh": "13B",
+   "zh": "13B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0AC",
+   "ptr": "0x023F10AC",
+   "payload_hex": "0204e00900"
+  },
+  {
+   "id": "SLOT_UTXT01905",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021694C0",
+   "sites": [
+    "0x175BB8"
+   ],
+   "record_ids": [
+    31
+   ],
+   "jp": "１□□",
+   "source_zh": "14A",
+   "zh": "14A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0B1",
+   "ptr": "0x023F10B1",
+   "payload_hex": "02e002e00800"
+  },
+  {
+   "id": "SLOT_UTXT01906",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021694D0",
+   "sites": [
+    "0x175BEC",
+    "0x175C20"
+   ],
+   "record_ids": [
+    32,
+    33
+   ],
+   "jp": "１□□",
+   "source_zh": "14B",
+   "zh": "14B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0B7",
+   "ptr": "0x023F10B7",
+   "payload_hex": "02e002e00900"
+  },
+  {
+   "id": "SLOT_UTXT01907",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021694DD",
+   "sites": [
+    "0x175C54"
+   ],
+   "record_ids": [
+    34
+   ],
+   "jp": "１５□前",
+   "source_zh": "15A",
+   "zh": "15A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0BD",
+   "ptr": "0x023F10BD",
+   "payload_hex": "02e003e00800"
+  },
+  {
+   "id": "SLOT_UTXT01908",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021694F1",
+   "sites": [
+    "0x175C88"
+   ],
+   "record_ids": [
+    35
+   ],
+   "jp": "１５□後",
+   "source_zh": "15A后",
+   "zh": "15A后",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0C3",
+   "ptr": "0x023F10C3",
+   "payload_hex": "02e003e008e7fe00"
+  },
+  {
+   "id": "SLOT_UTXT01909",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169505",
+   "sites": [
+    "0x175CBC"
+   ],
+   "record_ids": [
+    36
+   ],
+   "jp": "１５□",
+   "source_zh": "15B",
+   "zh": "15B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0CB",
+   "ptr": "0x023F10CB",
+   "payload_hex": "02e003e00900"
+  },
+  {
+   "id": "SLOT_UTXT01910",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169513",
+   "sites": [
+    "0x175CF0"
+   ],
+   "record_ids": [
+    37
+   ],
+   "jp": "１６□",
+   "source_zh": "16A",
+   "zh": "16A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0D1",
+   "ptr": "0x023F10D1",
+   "payload_hex": "02e004e00800"
+  },
+  {
+   "id": "SLOT_UTXT01911",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169521",
+   "sites": [
+    "0x175D24"
+   ],
+   "record_ids": [
+    38
+   ],
+   "jp": "１６□",
+   "source_zh": "16B",
+   "zh": "16B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0D7",
+   "ptr": "0x023F10D7",
+   "payload_hex": "02e004e00900"
+  },
+  {
+   "id": "SLOT_UTXT01912",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216952D",
+   "sites": [
+    "0x175D58"
+   ],
+   "record_ids": [
+    39
+   ],
+   "jp": "１７□",
+   "source_zh": "17A",
+   "zh": "17A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0DD",
+   "ptr": "0x023F10DD",
+   "payload_hex": "02e005e00800"
+  },
+  {
+   "id": "SLOT_UTXT01913",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169539",
+   "sites": [
+    "0x175D8C"
+   ],
+   "record_ids": [
+    40
+   ],
+   "jp": "１７□",
+   "source_zh": "17B",
+   "zh": "17B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0E3",
+   "ptr": "0x023F10E3",
+   "payload_hex": "02e005e00900"
+  },
+  {
+   "id": "SLOT_UTXT01914",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169544",
+   "sites": [
+    "0x175DC0"
+   ],
+   "record_ids": [
+    41
+   ],
+   "jp": "１８□",
+   "source_zh": "18A",
+   "zh": "18A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0E9",
+   "ptr": "0x023F10E9",
+   "payload_hex": "02e006e00800"
+  },
+  {
+   "id": "SLOT_UTXT01915",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216954F",
+   "sites": [
+    "0x175DF4"
+   ],
+   "record_ids": [
+    42
+   ],
+   "jp": "１８□",
+   "source_zh": "18B",
+   "zh": "18B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0EF",
+   "ptr": "0x023F10EF",
+   "payload_hex": "02e006e00900"
+  },
+  {
+   "id": "SLOT_UTXT01916",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216955A",
+   "sites": [
+    "0x175E28"
+   ],
+   "record_ids": [
+    43
+   ],
+   "jp": "１９□",
+   "source_zh": "19A",
+   "zh": "19A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0F5",
+   "ptr": "0x023F10F5",
+   "payload_hex": "02e007e00800"
+  },
+  {
+   "id": "SLOT_UTXT01917",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169567",
+   "sites": [
+    "0x175E5C"
+   ],
+   "record_ids": [
+    44
+   ],
+   "jp": "１９□前",
+   "source_zh": "19B前",
+   "zh": "19B前",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA0FB",
+   "ptr": "0x023F10FB",
+   "payload_hex": "02e007e009ef5100"
+  },
+  {
+   "id": "SLOT_UTXT01918",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169578",
+   "sites": [
+    "0x175E90"
+   ],
+   "record_ids": [
+    45
+   ],
+   "jp": "１９□後",
+   "source_zh": "19B后",
+   "zh": "19B后",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA103",
+   "ptr": "0x023F1103",
+   "payload_hex": "02e007e009e7fe00"
+  },
+  {
+   "id": "SLOT_UTXT01919",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169584",
+   "sites": [
+    "0x175EC4"
+   ],
+   "record_ids": [
+    46
+   ],
+   "jp": "２０□",
+   "source_zh": "20A",
+   "zh": "20A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA10B",
+   "ptr": "0x023F110B",
+   "payload_hex": "03e001e00800"
+  },
+  {
+   "id": "SLOT_UTXT01920",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169590",
+   "sites": [
+    "0x175EF8"
+   ],
+   "record_ids": [
+    47
+   ],
+   "jp": "２０□",
+   "source_zh": "20B",
+   "zh": "20B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA111",
+   "ptr": "0x023F1111",
+   "payload_hex": "03e001e00900"
+  },
+  {
+   "id": "SLOT_UTXT01921",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216959D",
+   "sites": [
+    "0x175F2C"
+   ],
+   "record_ids": [
+    48
+   ],
+   "jp": "２１□",
+   "source_zh": "21A",
+   "zh": "21A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA117",
+   "ptr": "0x023F1117",
+   "payload_hex": "0302e00800"
+  },
+  {
+   "id": "SLOT_UTXT01922",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021695A9",
+   "sites": [
+    "0x175F60"
+   ],
+   "record_ids": [
+    49
+   ],
+   "jp": "２１□",
+   "source_zh": "21B",
+   "zh": "21B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA11C",
+   "ptr": "0x023F111C",
+   "payload_hex": "0302e00900"
+  },
+  {
+   "id": "SLOT_UTXT01923",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021695B5",
+   "sites": [
+    "0x175F94"
+   ],
+   "record_ids": [
+    50
+   ],
+   "jp": "２２□",
+   "source_zh": "22A",
+   "zh": "22A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA121",
+   "ptr": "0x023F1121",
+   "payload_hex": "0303e00800"
+  },
+  {
+   "id": "SLOT_UTXT01924",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021695C0",
+   "sites": [
+    "0x175FC8"
+   ],
+   "record_ids": [
+    51
+   ],
+   "jp": "２２□",
+   "source_zh": "22B",
+   "zh": "22B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA126",
+   "ptr": "0x023F1126",
+   "payload_hex": "0303e00900"
+  },
+  {
+   "id": "SLOT_UTXT01925",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021695CB",
+   "sites": [
+    "0x175FFC"
+   ],
+   "record_ids": [
+    52
+   ],
+   "jp": "２３□",
+   "source_zh": "23A",
+   "zh": "23A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA12B",
+   "ptr": "0x023F112B",
+   "payload_hex": "0304e00800"
+  },
+  {
+   "id": "SLOT_UTXT01926",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021695D6",
+   "sites": [
+    "0x176030"
+   ],
+   "record_ids": [
+    53
+   ],
+   "jp": "２３□",
+   "source_zh": "23B",
+   "zh": "23B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA130",
+   "ptr": "0x023F1130",
+   "payload_hex": "0304e00900"
+  },
+  {
+   "id": "SLOT_UTXT01927",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021695E1",
+   "sites": [
+    "0x176064"
+   ],
+   "record_ids": [
+    54
+   ],
+   "jp": "２□□",
+   "source_zh": "24A",
+   "zh": "24A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA135",
+   "ptr": "0x023F1135",
+   "payload_hex": "03e002e00800"
+  },
+  {
+   "id": "SLOT_UTXT01928",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021695F0",
+   "sites": [
+    "0x176098"
+   ],
+   "record_ids": [
+    55
+   ],
+   "jp": "２□□",
+   "source_zh": "24B",
+   "zh": "24B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA13B",
+   "ptr": "0x023F113B",
+   "payload_hex": "03e002e00900"
+  },
+  {
+   "id": "SLOT_UTXT01929",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021695FF",
+   "sites": [
+    "0x1760CC"
+   ],
+   "record_ids": [
+    56
+   ],
+   "jp": "□１前",
+   "source_zh": "X1前",
+   "zh": "X1前",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA141",
+   "ptr": "0x023F1141",
+   "payload_hex": "e01b02ef5100"
+  },
+  {
+   "id": "SLOT_UTXT01930",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169614",
+   "sites": [
+    "0x176100"
+   ],
+   "record_ids": [
+    57
+   ],
+   "jp": "□１後",
+   "source_zh": "X1后",
+   "zh": "X1后",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA147",
+   "ptr": "0x023F1147",
+   "payload_hex": "e01b02e7fe00"
+  },
+  {
+   "id": "SLOT_UTXT01931",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169629",
+   "sites": [
+    "0x176134"
+   ],
+   "record_ids": [
+    58
+   ],
+   "jp": "□２",
+   "source_zh": "X2",
+   "zh": "X2",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA14D",
+   "ptr": "0x023F114D",
+   "payload_hex": "e01b0300"
+  },
+  {
+   "id": "SLOT_UTXT01932",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169633",
+   "sites": [
+    "0x176168"
+   ],
+   "record_ids": [
+    59
+   ],
+   "jp": "□３□",
+   "source_zh": "X3A",
+   "zh": "X3A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA151",
+   "ptr": "0x023F1151",
+   "payload_hex": "e01b04e00800"
+  },
+  {
+   "id": "SLOT_UTXT01933",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169640",
+   "sites": [
+    "0x17619C"
+   ],
+   "record_ids": [
+    60
+   ],
+   "jp": "□３□",
+   "source_zh": "X3B",
+   "zh": "X3B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA157",
+   "ptr": "0x023F1157",
+   "payload_hex": "e01b04e00900"
+  },
+  {
+   "id": "SLOT_UTXT01934",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216964D",
+   "sites": [
+    "0x1761D0"
+   ],
+   "record_ids": [
+    61
+   ],
+   "jp": "□□□",
+   "source_zh": "X4A",
+   "zh": "X4A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA15D",
+   "ptr": "0x023F115D",
+   "payload_hex": "e01be002e00800"
+  },
+  {
+   "id": "SLOT_UTXT01935",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216965E",
+   "sites": [
+    "0x176204"
+   ],
+   "record_ids": [
+    62
+   ],
+   "jp": "□□□",
+   "source_zh": "X4B",
+   "zh": "X4B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA164",
+   "ptr": "0x023F1164",
+   "payload_hex": "e01be002e00900"
+  },
+  {
+   "id": "SLOT_UTXT01936",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169670",
+   "sites": [
+    "0x176238"
+   ],
+   "record_ids": [
+    63
+   ],
+   "jp": "□５□",
+   "source_zh": "X5A",
+   "zh": "X5A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA16B",
+   "ptr": "0x023F116B",
+   "payload_hex": "e01be003e00800"
+  },
+  {
+   "id": "SLOT_UTXT01937",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169680",
+   "sites": [
+    "0x17626C"
+   ],
+   "record_ids": [
+    64
+   ],
+   "jp": "□５□",
+   "source_zh": "X5B",
+   "zh": "X5B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA172",
+   "ptr": "0x023F1172",
+   "payload_hex": "e01be003e00900"
+  },
+  {
+   "id": "SLOT_UTXT01938",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169691",
+   "sites": [
+    "0x1762A0"
+   ],
+   "record_ids": [
+    65
+   ],
+   "jp": "□６□",
+   "source_zh": "X6A",
+   "zh": "X6A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA179",
+   "ptr": "0x023F1179",
+   "payload_hex": "e01be004e00800"
+  },
+  {
+   "id": "SLOT_UTXT01939",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021696A1",
+   "sites": [
+    "0x1762D4",
+    "0x176308"
+   ],
+   "record_ids": [
+    66,
+    67
+   ],
+   "jp": "□６□",
+   "source_zh": "X6B",
+   "zh": "X6B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA180",
+   "ptr": "0x023F1180",
+   "payload_hex": "e01be004e00900"
+  },
+  {
+   "id": "SLOT_UTXT01940",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021696AE",
+   "sites": [
+    "0x17633C"
+   ],
+   "record_ids": [
+    68
+   ],
+   "jp": "□７Ｓ□",
+   "source_zh": "X7",
+   "zh": "X7",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA187",
+   "ptr": "0x023F1187",
+   "payload_hex": "e01be00500"
+  },
+  {
+   "id": "SLOT_UTXT01941",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021696CB",
+   "sites": [
+    "0x176474"
+   ],
+   "record_ids": [
+    74
+   ],
+   "jp": "Ｓ□１□",
+   "source_zh": "SP1A",
+   "zh": "SP1A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA18C",
+   "ptr": "0x023F118C",
+   "payload_hex": "08e01402e00800"
+  },
+  {
+   "id": "SLOT_UTXT01942",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021696DA",
+   "sites": [
+    "0x1764A8"
+   ],
+   "record_ids": [
+    75
+   ],
+   "jp": "Ｓ□１□",
+   "source_zh": "SP1B",
+   "zh": "SP1B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA193",
+   "ptr": "0x023F1193",
+   "payload_hex": "08e01402e00900"
+  },
+  {
+   "id": "SLOT_UTXT01943",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021696EA",
+   "sites": [
+    "0x1764DC"
+   ],
+   "record_ids": [
+    76
+   ],
+   "jp": "Ｓ□２□",
+   "source_zh": "SP2A",
+   "zh": "SP2A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA19A",
+   "ptr": "0x023F119A",
+   "payload_hex": "08e01403e00800"
+  },
+  {
+   "id": "SLOT_UTXT01944",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021696FB",
+   "sites": [
+    "0x176510"
+   ],
+   "record_ids": [
+    77
+   ],
+   "jp": "Ｓ□２□",
+   "source_zh": "SP2B",
+   "zh": "SP2B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1A1",
+   "ptr": "0x023F11A1",
+   "payload_hex": "08e01403e00900"
+  },
+  {
+   "id": "SLOT_UTXT01945",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216970C",
+   "sites": [
+    "0x176544"
+   ],
+   "record_ids": [
+    78
+   ],
+   "jp": "Ｓ□３□",
+   "source_zh": "SP3A",
+   "zh": "SP3A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1A8",
+   "ptr": "0x023F11A8",
+   "payload_hex": "08e01404e00800"
+  },
+  {
+   "id": "SLOT_UTXT01946",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216971D",
+   "sites": [
+    "0x176578"
+   ],
+   "record_ids": [
+    79
+   ],
+   "jp": "Ｓ□３□",
+   "source_zh": "SP3B",
+   "zh": "SP3B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1AF",
+   "ptr": "0x023F11AF",
+   "payload_hex": "08e01404e00900"
+  },
+  {
+   "id": "SLOT_UTXT01947",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169729",
+   "sites": [
+    "0x1765AC",
+    "0x1765E0",
+    "0x176614"
+   ],
+   "record_ids": [
+    80,
+    81,
+    82
+   ],
+   "jp": "Ｓ□□",
+   "source_zh": "SP4",
+   "zh": "SP4",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1B6",
+   "ptr": "0x023F11B6",
+   "payload_hex": "08e014e00200"
+  },
+  {
+   "id": "SLOT_UTXT01948",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216973A",
+   "sites": [
+    "0x176648",
+    "0x17667C",
+    "0x1766B0"
+   ],
+   "record_ids": [
+    83,
+    84,
+    85
+   ],
+   "jp": "Ｓ□５",
+   "source_zh": "SP5",
+   "zh": "SP5",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1BC",
+   "ptr": "0x023F11BC",
+   "payload_hex": "08e014e00300"
+  },
+  {
+   "id": "SLOT_UTXT01949",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169746",
+   "sites": [
+    "0x1766E4",
+    "0x176718",
+    "0x17674C"
+   ],
+   "record_ids": [
+    86,
+    87,
+    88
+   ],
+   "jp": "Ｓ□６",
+   "source_zh": "SP6",
+   "zh": "SP6",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1C2",
+   "ptr": "0x023F11C2",
+   "payload_hex": "08e014e00400"
+  },
+  {
+   "id": "SLOT_UTXT01950",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169752",
+   "sites": [
+    "0x176780",
+    "0x1767B4",
+    "0x1767E8"
+   ],
+   "record_ids": [
+    89,
+    90,
+    91
+   ],
+   "jp": "Ｓ□７",
+   "source_zh": "SP7",
+   "zh": "SP7",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1C8",
+   "ptr": "0x023F11C8",
+   "payload_hex": "08e014e00500"
+  },
+  {
+   "id": "SLOT_UTXT01951",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169763",
+   "sites": [
+    "0x176954"
+   ],
+   "record_ids": [
+    98
+   ],
+   "jp": "Ｓ□８□",
+   "source_zh": "SP8A",
+   "zh": "SP8A",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1CE",
+   "ptr": "0x023F11CE",
+   "payload_hex": "08e014e006e00800"
+  },
+  {
+   "id": "SLOT_UTXT01952",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169778",
+   "sites": [
+    "0x176988"
+   ],
+   "record_ids": [
+    99
+   ],
+   "jp": "Ｓ□８□",
+   "source_zh": "SP8B",
+   "zh": "SP8B",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1D6",
+   "ptr": "0x023F11D6",
+   "payload_hex": "08e014e006e00900"
+  },
+  {
+   "id": "SLOT_UTXT01953",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216978E",
+   "sites": [
+    "0x1769BC"
+   ],
+   "record_ids": [
+    100
+   ],
+   "jp": "Ｓ□８Ｓ",
+   "source_zh": "SP8S",
+   "zh": "SP8S",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1DE",
+   "ptr": "0x023F11DE",
+   "payload_hex": "08e014e0060800"
+  },
+  {
+   "id": "SLOT_UTXT01954",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021697A4",
+   "sites": [
+    "0x176370"
+   ],
+   "record_ids": [
+    69
+   ],
+   "jp": "Ｔ□１",
+   "source_zh": "TR1",
+   "zh": "TR1",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1E5",
+   "ptr": "0x023F11E5",
+   "payload_hex": "e017e0160200"
+  },
+  {
+   "id": "SLOT_UTXT01955",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021697B4",
+   "sites": [
+    "0x1763A4"
+   ],
+   "record_ids": [
+    70
+   ],
+   "jp": "Ｔ□２",
+   "source_zh": "TR2",
+   "zh": "TR2",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1EB",
+   "ptr": "0x023F11EB",
+   "payload_hex": "e017e0160300"
+  },
+  {
+   "id": "SLOT_UTXT01956",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021697C4",
+   "sites": [
+    "0x1763D8"
+   ],
+   "record_ids": [
+    71
+   ],
+   "jp": "Ｔ□３",
+   "source_zh": "TR3",
+   "zh": "TR3",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1F1",
+   "ptr": "0x023F11F1",
+   "payload_hex": "e017e0160400"
+  },
+  {
+   "id": "SLOT_UTXT01957",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021697D4",
+   "sites": [
+    "0x17640C"
+   ],
+   "record_ids": [
+    72
+   ],
+   "jp": "□□",
+   "source_zh": "TU",
+   "zh": "TU",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1F7",
+   "ptr": "0x023F11F7",
+   "payload_hex": "e017e01800"
+  },
+  {
+   "id": "SLOT_UTXT01958",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021697E0",
+   "sites": [
+    "0x176440"
+   ],
+   "record_ids": [
+    73
+   ],
+   "jp": "□□",
+   "source_zh": "TL",
+   "zh": "TL",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA1FC",
+   "ptr": "0x023F11FC",
+   "payload_hex": "e017e01100"
+  },
+  {
+   "id": "SLOT_UTXT01959",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021697EC",
+   "sites": [
+    "0x17681C"
+   ],
+   "record_ids": [
+    92
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA201",
+   "ptr": "0x023F1201",
+   "payload_hex": "e00ce00900"
+  },
+  {
+   "id": "SLOT_UTXT01960",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x021697F7",
+   "sites": [
+    "0x176850"
+   ],
+   "record_ids": [
+    93
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA201",
+   "ptr": "0x023F1201",
+   "payload_hex": "e00ce00900"
+  },
+  {
+   "id": "SLOT_UTXT01961",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169802",
+   "sites": [
+    "0x176884"
+   ],
+   "record_ids": [
+    94
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA201",
+   "ptr": "0x023F1201",
+   "payload_hex": "e00ce00900"
+  },
+  {
+   "id": "SLOT_UTXT01962",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x0216980D",
+   "sites": [
+    "0x1768B8"
+   ],
+   "record_ids": [
+    95
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA201",
+   "ptr": "0x023F1201",
+   "payload_hex": "e00ce00900"
+  },
+  {
+   "id": "SLOT_UTXT01963",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169818",
+   "sites": [
+    "0x1768EC"
+   ],
+   "record_ids": [
+    96
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA201",
+   "ptr": "0x023F1201",
+   "payload_hex": "e00ce00900"
+  },
+  {
+   "id": "SLOT_UTXT01964",
+   "view": "save_slot",
+   "domain": "stage_title_prefix",
+   "surface": "bank",
+   "old_ptr": "0x02169823",
+   "sites": [
+    "0x176920"
+   ],
+   "record_ids": [
+    97
+   ],
+   "jp": "□□",
+   "source_zh": "FB",
+   "zh": "FB",
+   "adjustments": [
+    "save-list chapter code uses native renderB identities"
+   ],
+   "encoding": "renderb_identity+zh",
+   "offset": "0xA201",
+   "ptr": "0x023F1201",
+   "payload_hex": "e00ce00900"
+  },
+  {
+   "id": "SLOT_UTXT01980",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169415",
+   "sites": [
+    "0x1758E4"
+   ],
+   "record_ids": [
+    17
+   ],
+   "jp": "分かたれし道",
+   "source_zh": "分歧之路",
+   "zh": "分歧之路",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA206",
+   "ptr": "0x023F1206",
+   "payload_hex": "efaee915e7cde8d200"
+  },
+  {
+   "id": "SLOT_UTXT02004",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169555",
+   "sites": [
+    "0x175DF8"
+   ],
+   "record_ids": [
+    42
+   ],
+   "jp": "ラクス出撃",
+   "source_zh": "拉克丝出击",
+   "zh": "拉克丝出击",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA20F",
+   "ptr": "0x023F120F",
+   "payload_hex": "e7c2e7d5e8a3efbee7cc00"
+  },
+  {
+   "id": "SLOT_UTXT02010",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021695A2",
+   "sites": [
+    "0x175F30"
+   ],
+   "record_ids": [
+    48
+   ],
+   "jp": "宇宙を駆ける",
+   "source_zh": "驰骋宇宙",
+   "zh": "驰骋宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CB5",
+   "ptr": "0x023F0CB5",
+   "payload_hex": "ee04edf0e8bee8bf00"
+  },
+  {
+   "id": "SLOT_UTXT02018",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169603",
+   "sites": [
+    "0x1760D0"
+   ],
+   "record_ids": [
+    56
+   ],
+   "jp": "ポケットの中の戦争",
+   "source_zh": "口袋里的战争",
+   "zh": "口袋里的战争",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CBE",
+   "ptr": "0x023F0CBE",
+   "payload_hex": "eabded04ef31e7b4ef28e85200"
+  },
+  {
+   "id": "SLOT_UTXT02019",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169618",
+   "sites": [
+    "0x176104"
+   ],
+   "record_ids": [
+    57
+   ],
+   "jp": "ポケットの中の戦争",
+   "source_zh": "口袋里的战争",
+   "zh": "口袋里的战争",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CBE",
+   "ptr": "0x023F0CBE",
+   "payload_hex": "eabded04ef31e7b4ef28e85200"
+  },
+  {
+   "id": "SLOT_UTXT02022",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169645",
+   "sites": [
+    "0x1761A0"
+   ],
+   "record_ids": [
+    60
+   ],
+   "jp": "作られし者",
+   "source_zh": "被创造者",
+   "zh": "被创造者",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA21A",
+   "ptr": "0x023F121A",
+   "payload_hex": "e7f1e893e93eef6e00"
+  },
+  {
+   "id": "SLOT_UTXT02023",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169654",
+   "sites": [
+    "0x1761D4"
+   ],
+   "record_ids": [
+    61
+   ],
+   "jp": "モノアイガンダムズ",
+   "source_zh": "独眼高达",
+   "zh": "独眼高达",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CD3",
+   "ptr": "0x023F0CD3",
+   "payload_hex": "e8eee90be812ef2b00"
+  },
+  {
+   "id": "SLOT_UTXT02025",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169677",
+   "sites": [
+    "0x17623C"
+   ],
+   "record_ids": [
+    63
+   ],
+   "jp": "月は出ているか",
+   "source_zh": "月亮升起了吗",
+   "zh": "月亮升起了吗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CDC",
+   "ptr": "0x023F0CDC",
+   "payload_hex": "e850eaa2ed2be847e7bae80200"
+  },
+  {
+   "id": "SLOT_UTXT02033",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169702",
+   "sites": [
+    "0x176514"
+   ],
+   "record_ids": [
+    77
+   ],
+   "jp": "エンドレスワルツ",
+   "source_zh": "无尽的华尔兹",
+   "zh": "无尽的华尔兹",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9CE9",
+   "ptr": "0x023F0CE9",
+   "payload_hex": "e7dce8f2e7b4ed2ce7e1e85600"
+  },
+  {
+   "id": "SLOT_UTXT02040",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216976B",
+   "sites": [
+    "0x176958"
+   ],
+   "record_ids": [
+    98
+   ],
+   "jp": "特別演習（プリベンター）",
+   "source_zh": "特别演习（守护者）",
+   "zh": "特别演习（预防者）",
+   "adjustments": [
+    "ref terminology: 守护者 -> 预防者"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA223",
+   "ptr": "0x023F1223",
+   "payload_hex": "e7cfe7e5ea2feab6ef8eea5ae968ef6eef8f00"
+  },
+  {
+   "id": "SLOT_UTXT02041",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169780",
+   "sites": [
+    "0x17698C"
+   ],
+   "record_ids": [
+    99
+   ],
+   "jp": "特別演習（ロンド・ベル）",
+   "source_zh": "特别演习（隆德·贝尔）",
+   "zh": "特别演习（隆德贝尔）",
+   "adjustments": [
+    "save-slot shared 10-cell title budget: omit middle dot"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA236",
+   "ptr": "0x023F1236",
+   "payload_hex": "e7cfe7e5ea2feab6ef8eed16e82ce857e7e1ef8f00"
+  },
+  {
+   "id": "SLOT_UTXT02042",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169795",
+   "sites": [
+    "0x1769C0"
+   ],
+   "record_ids": [
+    100
+   ],
+   "jp": "特別演習（ガンダム連合）",
+   "source_zh": "特别演习（高达联合）",
+   "zh": "特别演习（高达联合）",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA24B",
+   "ptr": "0x023F124B",
+   "payload_hex": "e7cfe7e5ea2feab6ef8ee812ef2bef2eefc0ef8f00"
+  },
+  {
+   "id": "SLOT_UTXT02048",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021697F1",
+   "sites": [
+    "0x176820"
+   ],
+   "record_ids": [
+    92
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA260",
+   "ptr": "0x023F1260",
+   "payload_hex": "efb5e8a6ef28e7ff00"
+  },
+  {
+   "id": "SLOT_UTXT02049",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021697FC",
+   "sites": [
+    "0x176854"
+   ],
+   "record_ids": [
+    93
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA260",
+   "ptr": "0x023F1260",
+   "payload_hex": "efb5e8a6ef28e7ff00"
+  },
+  {
+   "id": "SLOT_UTXT02050",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169807",
+   "sites": [
+    "0x176888"
+   ],
+   "record_ids": [
+    94
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA260",
+   "ptr": "0x023F1260",
+   "payload_hex": "efb5e8a6ef28e7ff00"
+  },
+  {
+   "id": "SLOT_UTXT02051",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169812",
+   "sites": [
+    "0x1768BC"
+   ],
+   "record_ids": [
+    95
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA260",
+   "ptr": "0x023F1260",
+   "payload_hex": "efb5e8a6ef28e7ff00"
+  },
+  {
+   "id": "SLOT_UTXT02052",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216981D",
+   "sites": [
+    "0x1768F0"
+   ],
+   "record_ids": [
+    96
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA260",
+   "ptr": "0x023F1260",
+   "payload_hex": "efb5e8a6ef28e7ff00"
+  },
+  {
+   "id": "SLOT_UTXT02053",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169828",
+   "sites": [
+    "0x176924"
+   ],
+   "record_ids": [
+    97
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA260",
+   "ptr": "0x023F1260",
+   "payload_hex": "efb5e8a6ef28e7ff00"
+  },
+  {
+   "id": "SLOT_UTXT01965",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216933D",
+   "sites": [
+    "0x175570",
+    "0x1755A4",
+    "0x1755D8"
+   ],
+   "record_ids": [
+    0,
+    1,
+    2
+   ],
+   "jp": "ザンジバル追撃",
+   "source_zh": "桑吉巴尔级追击",
+   "zh": "桑吉巴尔级追击",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D34",
+   "ptr": "0x023F0D34",
+   "payload_hex": "ea2be7d9e85be7e1eaeee8dde7cc00"
+  },
+  {
+   "id": "SLOT_UTXT01966",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216934A",
+   "sites": [
+    "0x17560C"
+   ],
+   "record_ids": [
+    3
+   ],
+   "jp": "一年戦争の悪夢",
+   "source_zh": "一年战争的噩梦",
+   "zh": "一年战争的噩梦",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA269",
+   "ptr": "0x023F1269",
+   "payload_hex": "efb6e909ef28e852e7b4ed3fea4000"
+  },
+  {
+   "id": "SLOT_UTXT01967",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169356",
+   "sites": [
+    "0x175640"
+   ],
+   "record_ids": [
+    4
+   ],
+   "jp": "宿命の出会い",
+   "source_zh": "宿命的相遇",
+   "zh": "宿命的相遇",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D51",
+   "ptr": "0x023F0D51",
+   "payload_hex": "ec11e853e7b4e8b1ea4300"
+  },
+  {
+   "id": "SLOT_UTXT01968",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169361",
+   "sites": [
+    "0x175674"
+   ],
+   "record_ids": [
+    5
+   ],
+   "jp": "めぐりあい宇宙",
+   "source_zh": "相逢在宇宙",
+   "zh": "相逢在宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D5C",
+   "ptr": "0x023F0D5C",
+   "payload_hex": "e8b1ed11ef29e8bee8bf00"
+  },
+  {
+   "id": "SLOT_UTXT01969",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216936F",
+   "sites": [
+    "0x1756A8"
+   ],
+   "record_ids": [
+    6
+   ],
+   "jp": "ソロモンの攻防",
+   "source_zh": "所罗门攻防战(前篇)",
+   "zh": "所罗门攻防战(前篇)",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA278",
+   "ptr": "0x023F1278",
+   "payload_hex": "e7fbe7ece90cef67e968ef28ef5cef51ea15efbd00"
+  },
+  {
+   "id": "SLOT_UTXT01970",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216937F",
+   "sites": [
+    "0x1756DC"
+   ],
+   "record_ids": [
+    7
+   ],
+   "jp": "ソロモンの攻防",
+   "source_zh": "所罗门攻防战(后篇)",
+   "zh": "所罗门攻防战(后篇)",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA28D",
+   "ptr": "0x023F128D",
+   "payload_hex": "e7fbe7ece90cef67e968ef28ef5ce7feea15efbd00"
+  },
+  {
+   "id": "SLOT_UTXT01971",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169391",
+   "sites": [
+    "0x175710"
+   ],
+   "record_ids": [
+    8
+   ],
+   "jp": "光る宇宙",
+   "source_zh": "闪耀的宇宙",
+   "zh": "闪耀的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9D8E",
+   "ptr": "0x023F0D8E",
+   "payload_hex": "ea44eda6e7b4e8bee8bf00"
+  },
+  {
+   "id": "SLOT_UTXT01972",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216939E",
+   "sites": [
+    "0x175744"
+   ],
+   "record_ids": [
+    9
+   ],
+   "jp": "エース集結！",
+   "source_zh": "王牌集结！",
+   "zh": "王牌集结！",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA2A2",
+   "ptr": "0x023F12A2",
+   "payload_hex": "e884ec2bea98e868ef9700"
+  },
+  {
+   "id": "SLOT_UTXT01973",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021693AA",
+   "sites": [
+    "0x175778"
+   ],
+   "record_ids": [
+    10
+   ],
+   "jp": "宇宙要塞•ア•バオア•クー",
+   "source_zh": "宇宙要塞阿·巴瓦·库",
+   "zh": "宇宙要塞阿·巴瓦·库",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA2AD",
+   "ptr": "0x023F12AD",
+   "payload_hex": "e8bee8bfef2ae950e7d2ef4be85be99fef4be9b300"
+  },
+  {
+   "id": "SLOT_UTXT01974",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021693BB",
+   "sites": [
+    "0x1757AC"
+   ],
+   "record_ids": [
+    11
+   ],
+   "jp": "震える宇宙",
+   "source_zh": "震撼的宇宙",
+   "zh": "撼动宇宙",
+   "adjustments": [
+    "save-slot compact wording: 震撼的宇宙 -> 撼动宇宙"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA2C2",
+   "ptr": "0x023F12C2",
+   "payload_hex": "ee37ef30e8bee8bf00"
+  },
+  {
+   "id": "SLOT_UTXT01975",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021693C9",
+   "sites": [
+    "0x1757E0"
+   ],
+   "record_ids": [
+    12
+   ],
+   "jp": "震える宇宙，アナザ—サイト",
+   "source_zh": "震撼的宇宙 另一侧",
+   "zh": "撼动宇宙{01}另一侧",
+   "adjustments": [
+    "save-slot compact wording: 震撼的宇宙 -> 撼动宇宙",
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA2CB",
+   "ptr": "0x023F12CB",
+   "payload_hex": "ee37ef30e8bee8bf01e99befb6ecaa00"
+  },
+  {
+   "id": "SLOT_UTXT01976",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021693DD",
+   "sites": [
+    "0x175814"
+   ],
+   "record_ids": [
+    13
+   ],
+   "jp": "激突戦域",
+   "source_zh": "激突战域",
+   "zh": "激突战域",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DD2",
+   "ptr": "0x023F0DD2",
+   "payload_hex": "e9b9e8b6ef28eaa700"
+  },
+  {
+   "id": "SLOT_UTXT01977",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021693EA",
+   "sites": [
+    "0x175848"
+   ],
+   "record_ids": [
+    14
+   ],
+   "jp": "アクシズの残夢",
+   "source_zh": "阿克西斯的残梦",
+   "zh": "阿克西斯的残梦",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DDB",
+   "ptr": "0x023F0DDB",
+   "payload_hex": "e7d2e7d5e7f8e7c8e7b4e97bea4000"
+  },
+  {
+   "id": "SLOT_UTXT01978",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021693FA",
+   "sites": [
+    "0x17587C"
+   ],
+   "record_ids": [
+    15
+   ],
+   "jp": "開く扉",
+   "source_zh": "开启的门",
+   "zh": "开启的门",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DEA",
+   "ptr": "0x023F0DEA",
+   "payload_hex": "e7faea3be7b4e90c00"
+  },
+  {
+   "id": "SLOT_UTXT01979",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169406",
+   "sites": [
+    "0x1758B0"
+   ],
+   "record_ids": [
+    16
+   ],
+   "jp": "駆け抜ける嵐",
+   "source_zh": "疾驰而过的风暴",
+   "zh": "疾驰而过的风暴",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DF3",
+   "ptr": "0x023F0DF3",
+   "payload_hex": "e815ee04e89cef36e7b4eb75ea4f00"
+  },
+  {
+   "id": "SLOT_UTXT01981",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169425",
+   "sites": [
+    "0x175918"
+   ],
+   "record_ids": [
+    18
+   ],
+   "jp": "搖れる世界",
+   "source_zh": "动摇的世界",
+   "zh": "动摇的世界",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E02",
+   "ptr": "0x023F0E02",
+   "payload_hex": "ef30ebcce7b4e83ce8f500"
+  },
+  {
+   "id": "SLOT_UTXT01982",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169431",
+   "sites": [
+    "0x17594C"
+   ],
+   "record_ids": [
+    19
+   ],
+   "jp": "黒いガンダム",
+   "source_zh": "黑色高达",
+   "zh": "黑色高达",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E0D",
+   "ptr": "0x023F0E0D",
+   "payload_hex": "ef3ee89fe812ef2b00"
+  },
+  {
+   "id": "SLOT_UTXT01983",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169441",
+   "sites": [
+    "0x175980"
+   ],
+   "record_ids": [
+    20
+   ],
+   "jp": "決别",
+   "source_zh": "离别",
+   "zh": "离别",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E16",
+   "ptr": "0x023F0E16",
+   "payload_hex": "e901e7e500"
+  },
+  {
+   "id": "SLOT_UTXT01984",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169449",
+   "sites": [
+    "0x1759B4"
+   ],
+   "record_ids": [
+    21
+   ],
+   "jp": "月の裏側",
+   "source_zh": "月球背面",
+   "zh": "月球背面",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA2DB",
+   "ptr": "0x023F12DB",
+   "payload_hex": "e850efd3e9e4e86200"
+  },
+  {
+   "id": "SLOT_UTXT01985",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169456",
+   "sites": [
+    "0x1759E8"
+   ],
+   "record_ids": [
+    22
+   ],
+   "jp": "闇の胎動",
+   "source_zh": "黑暗的胎动",
+   "zh": "黑暗的胎动",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E23",
+   "ptr": "0x023F0E23",
+   "payload_hex": "ef3eea6ae7b4ed15ef3000"
+  },
+  {
+   "id": "SLOT_UTXT01986",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169463",
+   "sites": [
+    "0x175A1C"
+   ],
+   "record_ids": [
+    23
+   ],
+   "jp": "終末の光",
+   "source_zh": "终末之光",
+   "zh": "终末之光",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E2E",
+   "ptr": "0x023F0E2E",
+   "payload_hex": "e8e2ec22e7cde83d00"
+  },
+  {
+   "id": "SLOT_UTXT01987",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216946E",
+   "sites": [
+    "0x175A50"
+   ],
+   "record_ids": [
+    24
+   ],
+   "jp": "ハマーンの嘲笑",
+   "source_zh": "哈曼的嘲笑",
+   "zh": "哈曼的嘲笑",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E37",
+   "ptr": "0x023F0E37",
+   "payload_hex": "e7e8e874e7b4ed3eea1c00"
+  },
+  {
+   "id": "SLOT_UTXT01988",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216947B",
+   "sites": [
+    "0x175A84"
+   ],
+   "record_ids": [
+    25
+   ],
+   "jp": "キエルとディアナ",
+   "source_zh": "基艾尔与迪安娜",
+   "zh": "基艾尔与迪安娜",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E42",
+   "ptr": "0x023F0E42",
+   "payload_hex": "e829e8d6e7e1e832ea11e7fce7ea00"
+  },
+  {
+   "id": "SLOT_UTXT01989",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169487",
+   "sites": [
+    "0x175AB8"
+   ],
+   "record_ids": [
+    26
+   ],
+   "jp": "未来への道標",
+   "source_zh": "通往未来的路标",
+   "zh": "通往未来的路标",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA2E4",
+   "ptr": "0x023F12E4",
+   "payload_hex": "ef59e911e8b4efcfe7b4e8d2e96f00"
+  },
+  {
+   "id": "SLOT_UTXT01990",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169495",
+   "sites": [
+    "0x175AEC"
+   ],
+   "record_ids": [
+    27
+   ],
+   "jp": "燃える地球",
+   "source_zh": "燃烧的地球",
+   "zh": "燃烧的地球",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA2F3",
+   "ptr": "0x023F12F3",
+   "payload_hex": "eb93ec29e7b4ef63efd300"
+  },
+  {
+   "id": "SLOT_UTXT01991",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021694A0",
+   "sites": [
+    "0x175B20"
+   ],
+   "record_ids": [
+    28
+   ],
+   "jp": "正義の名のもとに",
+   "source_zh": "以正义之名",
+   "zh": "以正义之名",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E67",
+   "ptr": "0x023F0E67",
+   "payload_hex": "e7f3ef3be8cee7cde8ac00"
+  },
+  {
+   "id": "SLOT_UTXT01992",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021694AF",
+   "sites": [
+    "0x175B54"
+   ],
+   "record_ids": [
+    29
+   ],
+   "jp": "キエルとディアナ",
+   "source_zh": "基艾尔与迪安娜",
+   "zh": "基艾尔与迪安娜",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E42",
+   "ptr": "0x023F0E42",
+   "payload_hex": "e829e8d6e7e1e832ea11e7fce7ea00"
+  },
+  {
+   "id": "SLOT_UTXT01993",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021694BA",
+   "sites": [
+    "0x175B88"
+   ],
+   "record_ids": [
+    30
+   ],
+   "jp": "決意の砲火",
+   "source_zh": "决意的炮火",
+   "zh": "决意的炮火",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E72",
+   "ptr": "0x023F0E72",
+   "payload_hex": "e8abef3ce7b4e95ae8da00"
+  },
+  {
+   "id": "SLOT_UTXT01994",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021694C6",
+   "sites": [
+    "0x175BBC"
+   ],
+   "record_ids": [
+    31
+   ],
+   "jp": "塩の湖を越えて",
+   "source_zh": "越过盐湖",
+   "zh": "越过盐湖",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E7D",
+   "ptr": "0x023F0E7D",
+   "payload_hex": "ea57ef36ebbbef1500"
+  },
+  {
+   "id": "SLOT_UTXT01995",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021694D6",
+   "sites": [
+    "0x175BF0",
+    "0x175C24"
+   ],
+   "record_ids": [
+    32,
+    33
+   ],
+   "jp": "ガラスの王国",
+   "source_zh": "玻璃王国",
+   "zh": "玻璃王国",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA2FE",
+   "ptr": "0x023F12FE",
+   "payload_hex": "ee15eef7e884efc400"
+  },
+  {
+   "id": "SLOT_UTXT01996",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021694E4",
+   "sites": [
+    "0x175C58"
+   ],
+   "record_ids": [
+    34
+   ],
+   "jp": "ダカールの灯火",
+   "source_zh": "达卡尔的灯火",
+   "zh": "达卡尔的灯火",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E8E",
+   "ptr": "0x023F0E8E",
+   "payload_hex": "ef2be801e7e1e7b4ef0de8da00"
+  },
+  {
+   "id": "SLOT_UTXT01997",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021694F8",
+   "sites": [
+    "0x175C8C"
+   ],
+   "record_ids": [
+    35
+   ],
+   "jp": "ダカールの灯火",
+   "source_zh": "达卡尔的灯火",
+   "zh": "达卡尔的灯火",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E8E",
+   "ptr": "0x023F0E8E",
+   "payload_hex": "ef2be801e7e1e7b4ef0de8da00"
+  },
+  {
+   "id": "SLOT_UTXT01998",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216950B",
+   "sites": [
+    "0x175CC0"
+   ],
+   "record_ids": [
+    36
+   ],
+   "jp": "月世界の門",
+   "source_zh": "月世界之门",
+   "zh": "月世界之门",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E9B",
+   "ptr": "0x023F0E9B",
+   "payload_hex": "e850e83ce8f5e7cde90c00"
+  },
+  {
+   "id": "SLOT_UTXT01999",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169519",
+   "sites": [
+    "0x175CF4"
+   ],
+   "record_ids": [
+    37
+   ],
+   "jp": "月世界の門",
+   "source_zh": "月世界之门",
+   "zh": "月世界之门",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E9B",
+   "ptr": "0x023F0E9B",
+   "payload_hex": "e850e83ce8f5e7cde90c00"
+  },
+  {
+   "id": "SLOT_UTXT02000",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169527",
+   "sites": [
+    "0x175D28"
+   ],
+   "record_ids": [
+    38
+   ],
+   "jp": "衝撃の黒歴史",
+   "source_zh": "冲击的黑历史",
+   "zh": "冲击的黑历史",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EA6",
+   "ptr": "0x023F0EA6",
+   "payload_hex": "e95ee7cce7b4ef3ee8fbe92500"
+  },
+  {
+   "id": "SLOT_UTXT02001",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169533",
+   "sites": [
+    "0x175D5C"
+   ],
+   "record_ids": [
+    39
+   ],
+   "jp": "衝撃の黒歴史",
+   "source_zh": "冲击的黑历史",
+   "zh": "冲击的黑历史",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EA6",
+   "ptr": "0x023F0EA6",
+   "payload_hex": "e95ee7cce7b4ef3ee8fbe92500"
+  },
+  {
+   "id": "SLOT_UTXT02002",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216953F",
+   "sites": [
+    "0x175D90"
+   ],
+   "record_ids": [
+    40
+   ],
+   "jp": "宇宙海賊",
+   "source_zh": "宇宙海盗",
+   "zh": "宇宙海盗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EB3",
+   "ptr": "0x023F0EB3",
+   "payload_hex": "e8bee8bfe91be9f300"
+  },
+  {
+   "id": "SLOT_UTXT02003",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216954A",
+   "sites": [
+    "0x175DC4"
+   ],
+   "record_ids": [
+    41
+   ],
+   "jp": "宇宙海賊",
+   "source_zh": "宇宙海盗",
+   "zh": "宇宙海盗",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EB3",
+   "ptr": "0x023F0EB3",
+   "payload_hex": "e8bee8bfe91be9f300"
+  },
+  {
+   "id": "SLOT_UTXT02005",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169560",
+   "sites": [
+    "0x175E2C"
+   ],
+   "record_ids": [
+    43
+   ],
+   "jp": "女たちの戦場",
+   "source_zh": "女人们的战场",
+   "zh": "女人们的战场",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA307",
+   "ptr": "0x023F1307",
+   "payload_hex": "efadefb2e7bbe7b4ef28e87600"
+  },
+  {
+   "id": "SLOT_UTXT02006",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216956E",
+   "sites": [
+    "0x175E60"
+   ],
+   "record_ids": [
+    44
+   ],
+   "jp": "螺旋の邂逅",
+   "source_zh": "螺旋的邂逅",
+   "zh": "螺旋的邂逅",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EC7",
+   "ptr": "0x023F0EC7",
+   "payload_hex": "ef98ec1fe7b4e80fefd400"
+  },
+  {
+   "id": "SLOT_UTXT02007",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216957F",
+   "sites": [
+    "0x175E94"
+   ],
+   "record_ids": [
+    45
+   ],
+   "jp": "開く扉",
+   "source_zh": "开启的门",
+   "zh": "开启的门",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9DEA",
+   "ptr": "0x023F0DEA",
+   "payload_hex": "e7faea3be7b4e90c00"
+  },
+  {
+   "id": "SLOT_UTXT02008",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169589",
+   "sites": [
+    "0x175EC8"
+   ],
+   "record_ids": [
+    46
+   ],
+   "jp": "命散って",
+   "source_zh": "生命凋零",
+   "zh": "生命凋零",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA314",
+   "ptr": "0x023F1314",
+   "payload_hex": "ef8de853eee5eb7400"
+  },
+  {
+   "id": "SLOT_UTXT02009",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169595",
+   "sites": [
+    "0x175EFC"
+   ],
+   "record_ids": [
+    47
+   ],
+   "jp": "混迷の宇宙",
+   "source_zh": "混迷的宇宙",
+   "zh": "混迷的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EDA",
+   "ptr": "0x023F0EDA",
+   "payload_hex": "ea41eaf7e7b4e8bee8bf00"
+  },
+  {
+   "id": "SLOT_UTXT02011",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021695AE",
+   "sites": [
+    "0x175F64"
+   ],
+   "record_ids": [
+    49
+   ],
+   "jp": "最後の勝利者",
+   "source_zh": "最后的胜利者",
+   "zh": "最后的胜利者",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA31D",
+   "ptr": "0x023F131D",
+   "payload_hex": "e8c5e7fee7b4e8dbe82eef6e00"
+  },
+  {
+   "id": "SLOT_UTXT02012",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021695BA",
+   "sites": [
+    "0x175F98"
+   ],
+   "record_ids": [
+    50
+   ],
+   "jp": "終末の光",
+   "source_zh": "终末之光",
+   "zh": "终末之光",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E2E",
+   "ptr": "0x023F0E2E",
+   "payload_hex": "e8e2ec22e7cde83d00"
+  },
+  {
+   "id": "SLOT_UTXT02013",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021695C5",
+   "sites": [
+    "0x175FCC"
+   ],
+   "record_ids": [
+    51
+   ],
+   "jp": "終末の光",
+   "source_zh": "终末之光",
+   "zh": "终末之光",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9E2E",
+   "ptr": "0x023F0E2E",
+   "payload_hex": "e8e2ec22e7cde83d00"
+  },
+  {
+   "id": "SLOT_UTXT02014",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021695D0",
+   "sites": [
+    "0x176000"
+   ],
+   "record_ids": [
+    52
+   ],
+   "jp": "甦る亡霊",
+   "source_zh": "复苏的亡灵",
+   "zh": "复苏的亡灵",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EF1",
+   "ptr": "0x023F0EF1",
+   "payload_hex": "e9eeec8de7b4ebb2eaeb00"
+  },
+  {
+   "id": "SLOT_UTXT02015",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021695DB",
+   "sites": [
+    "0x176034"
+   ],
+   "record_ids": [
+    53
+   ],
+   "jp": "甦る亡霊",
+   "source_zh": "复苏的亡灵",
+   "zh": "复苏的亡灵",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9EF1",
+   "ptr": "0x023F0EF1",
+   "payload_hex": "e9eeec8de7b4ebb2eaeb00"
+  },
+  {
+   "id": "SLOT_UTXT02016",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021695E7",
+   "sites": [
+    "0x176068"
+   ],
+   "record_ids": [
+    54
+   ],
+   "jp": "未来の道標",
+   "source_zh": "未来的路标",
+   "zh": "未来的路标",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA32A",
+   "ptr": "0x023F132A",
+   "payload_hex": "e8b4efcfe7b4e8d2e96f00"
+  },
+  {
+   "id": "SLOT_UTXT02017",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021695F6",
+   "sites": [
+    "0x17609C"
+   ],
+   "record_ids": [
+    55
+   ],
+   "jp": "未来の道標",
+   "source_zh": "未来的路标",
+   "zh": "未来的路标",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA32A",
+   "ptr": "0x023F132A",
+   "payload_hex": "e8b4efcfe7b4e8d2e96f00"
+  },
+  {
+   "id": "SLOT_UTXT02020",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216962C",
+   "sites": [
+    "0x176138"
+   ],
+   "record_ids": [
+    58
+   ],
+   "jp": "裏切りの宇宙",
+   "source_zh": "背叛的宇宙",
+   "zh": "背叛的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F06",
+   "ptr": "0x023F0F06",
+   "payload_hex": "e9e4ef43e7b4e8bee8bf00"
+  },
+  {
+   "id": "SLOT_UTXT02021",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169638",
+   "sites": [
+    "0x17616C"
+   ],
+   "record_ids": [
+    59
+   ],
+   "jp": "宇宙の蜻蛉",
+   "source_zh": "宇宙蜻蜓",
+   "zh": "宇宙蜻蜓",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F11",
+   "ptr": "0x023F0F11",
+   "payload_hex": "e8bee8bfed09ed4b00"
+  },
+  {
+   "id": "SLOT_UTXT02024",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169665",
+   "sites": [
+    "0x176208"
+   ],
+   "record_ids": [
+    62
+   ],
+   "jp": "地球に落ちたガンダム",
+   "source_zh": "坠落地球的高达",
+   "zh": "坠落地球的高达",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA335",
+   "ptr": "0x023F1335",
+   "payload_hex": "eb53e92aef63efd3e7b4e812ef2b00"
+  },
+  {
+   "id": "SLOT_UTXT02026",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169687",
+   "sites": [
+    "0x176270"
+   ],
+   "record_ids": [
+    64
+   ],
+   "jp": "その名は東方不敗",
+   "source_zh": "其名东方不败",
+   "zh": "其名东方不败",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA344",
+   "ptr": "0x023F1344",
+   "payload_hex": "e8cfe8ace8baefb1e7b5e88f00"
+  },
+  {
+   "id": "SLOT_UTXT02027",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169698",
+   "sites": [
+    "0x1762A4"
+   ],
+   "record_ids": [
+    65
+   ],
+   "jp": "そして悲劇が終わる",
+   "source_zh": "然后悲剧终结",
+   "zh": "然后悲剧终结",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F33",
+   "ptr": "0x023F0F33",
+   "payload_hex": "e7efe7fee9dfecb5e8e2e86800"
+  },
+  {
+   "id": "SLOT_UTXT02028",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021696A8",
+   "sites": [
+    "0x1762D8",
+    "0x17630C"
+   ],
+   "record_ids": [
+    66,
+    67
+   ],
+   "jp": "宿命の戦い",
+   "source_zh": "宿命之战",
+   "zh": "宿命之战",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F40",
+   "ptr": "0x023F0F40",
+   "payload_hex": "ec11e853e7cdef2800"
+  },
+  {
+   "id": "SLOT_UTXT02029",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021696B6",
+   "sites": [
+    "0x176340"
+   ],
+   "record_ids": [
+    68
+   ],
+   "jp": "モノアイガンダムズ After",
+   "source_zh": "独眼高达 After",
+   "zh": "独眼高达{01}后篇",
+   "adjustments": [
+    "save-slot localized suffix: After -> 后篇",
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA351",
+   "ptr": "0x023F1351",
+   "payload_hex": "e8eee90be812ef2b01e7feea1500"
+  },
+  {
+   "id": "SLOT_UTXT02030",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021696D2",
+   "sites": [
+    "0x176478"
+   ],
+   "record_ids": [
+    74
+   ],
+   "jp": "逆襲のシャア",
+   "source_zh": "逆袭的夏亚",
+   "zh": "逆袭的夏亚",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F5D",
+   "ptr": "0x023F0F5D",
+   "payload_hex": "eeb4e9aee7b4ef37e7d600"
+  },
+  {
+   "id": "SLOT_UTXT02031",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021696E1",
+   "sites": [
+    "0x1764AC"
+   ],
+   "record_ids": [
+    75
+   ],
+   "jp": "13番目の星座",
+   "source_zh": "第13个星座",
+   "zh": "第13个星座",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA35F",
+   "ptr": "0x023F135F",
+   "payload_hex": "e940eff7ef60e828ef69ebc400"
+  },
+  {
+   "id": "SLOT_UTXT02032",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021696F1",
+   "sites": [
+    "0x1764E0"
+   ],
+   "record_ids": [
+    76
+   ],
+   "jp": "メビウスの輪から",
+   "source_zh": "来自莫比乌斯之环",
+   "zh": "来自莫比乌斯之环",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA36C",
+   "ptr": "0x023F136C",
+   "payload_hex": "efcfefb5eba0e825e94de7c8e7cdef4700"
+  },
+  {
+   "id": "SLOT_UTXT02034",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169713",
+   "sites": [
+    "0x176548"
+   ],
+   "record_ids": [
+    78
+   ],
+   "jp": "忌まわしき記憶と共に",
+   "source_zh": "与可憎的记忆一同",
+   "zh": "与可憎的记忆一同",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA37D",
+   "ptr": "0x023F137D",
+   "payload_hex": "e832e7c4eb34e7b4e996eac6efb6e85d00"
+  },
+  {
+   "id": "SLOT_UTXT02035",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169724",
+   "sites": [
+    "0x17657C"
+   ],
+   "record_ids": [
+    79
+   ],
+   "jp": "デビルガンダム再び",
+   "source_zh": "恶魔高达再临",
+   "zh": "恶魔高达再临",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9F91",
+   "ptr": "0x023F0F91",
+   "payload_hex": "e7dee8d8e812ef2be80bed1e00"
+  },
+  {
+   "id": "SLOT_UTXT02036",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216972F",
+   "sites": [
+    "0x1765B0",
+    "0x1765E4",
+    "0x176618"
+   ],
+   "record_ids": [
+    80,
+    81,
+    82
+   ],
+   "jp": "その闇の名は木星",
+   "source_zh": "那黑暗之名，乃是木星",
+   "zh": "那黑暗之名乃是木星",
+   "adjustments": [
+    "ref punctuation: ， -> 、",
+    "save-slot compact punctuation: omit 、"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA38E",
+   "ptr": "0x023F138E",
+   "payload_hex": "e7b7ef3eea6ae7cde8acefdde7b6efa9ef6900"
+  },
+  {
+   "id": "SLOT_UTXT02037",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169740",
+   "sites": [
+    "0x17664C",
+    "0x176680",
+    "0x1766B4"
+   ],
+   "record_ids": [
+    83,
+    84,
+    85
+   ],
+   "jp": "ザビーネの反乱",
+   "source_zh": "萨比尼的叛乱",
+   "zh": "扎比涅的叛乱",
+   "adjustments": [
+    "ref terminology: 萨比尼 -> 扎比涅"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9FB0",
+   "ptr": "0x023F0FB0",
+   "payload_hex": "e84be825eacfe7b4ef43e97600"
+  },
+  {
+   "id": "SLOT_UTXT02038",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0216974C",
+   "sites": [
+    "0x1766E8",
+    "0x17671C",
+    "0x176750"
+   ],
+   "record_ids": [
+    86,
+    87,
+    88
+   ],
+   "jp": "燃える宇宙",
+   "source_zh": "燃烧的宇宙",
+   "zh": "燃烧的宇宙",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0x9FBD",
+   "ptr": "0x023F0FBD",
+   "payload_hex": "eb93ec29e7b4e8bee8bf00"
+  },
+  {
+   "id": "SLOT_UTXT02039",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x02169758",
+   "sites": [
+    "0x176784",
+    "0x1767B8",
+    "0x1767EC"
+   ],
+   "record_ids": [
+    89,
+    90,
+    91
+   ],
+   "jp": "人と継ぐ者の間に",
+   "source_zh": "在人类与继承者之间",
+   "zh": "在人类与继承者之间",
+   "adjustments": [],
+   "encoding": "text_codec",
+   "offset": "0xA3A1",
+   "ptr": "0x023F13A1",
+   "payload_hex": "ef29efb2e841e832e9d6ea75ef6ee7cde8fc00"
+  },
+  {
+   "id": "SLOT_UTXT02043",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021697AA",
+   "sites": [
+    "0x176374"
+   ],
+   "record_ids": [
+    69
+   ],
+   "jp": "チュートリアル 1",
+   "source_zh": "教程 1",
+   "zh": "教程{01}1",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA3B4",
+   "ptr": "0x023F13B4",
+   "payload_hex": "eaacea7d01eff700"
+  },
+  {
+   "id": "SLOT_UTXT02044",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021697BA",
+   "sites": [
+    "0x1763A8"
+   ],
+   "record_ids": [
+    70
+   ],
+   "jp": "チュートリアル 2",
+   "source_zh": "教程 2",
+   "zh": "教程{01}2",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA3BC",
+   "ptr": "0x023F13BC",
+   "payload_hex": "eaacea7d01ef5f00"
+  },
+  {
+   "id": "SLOT_UTXT02045",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021697CA",
+   "sites": [
+    "0x1763DC"
+   ],
+   "record_ids": [
+    71
+   ],
+   "jp": "チュートリアル 3",
+   "source_zh": "教程 3",
+   "zh": "教程{01}3",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA3C4",
+   "ptr": "0x023F13C4",
+   "payload_hex": "eaacea7d01ef6000"
+  },
+  {
+   "id": "SLOT_UTXT02046",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021697D9",
+   "sites": [
+    "0x176410"
+   ],
+   "record_ids": [
+    72
+   ],
+   "jp": "索敵 宇宙",
+   "source_zh": "索敌 宇宙",
+   "zh": "索敌{01}宇宙",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0x9FEE",
+   "ptr": "0x023F0FEE",
+   "payload_hex": "e93ce7e301e8bee8bf00"
+  },
+  {
+   "id": "SLOT_UTXT02047",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x021697E5",
+   "sites": [
+    "0x176444"
+   ],
+   "record_ids": [
+    73
+   ],
+   "jp": "索敵 地上",
+   "source_zh": "索敌 地上",
+   "zh": "索敌{01}地上",
+   "adjustments": [
+    "literal visual space -> {01} control cell"
+   ],
+   "encoding": "text_codec",
+   "offset": "0xA3CC",
+   "ptr": "0x023F13CC",
+   "payload_hex": "e93ce7e301ef63ef4c00"
+  }
+ ],
+ "extra_pointer_entries": [
+  {
+   "id": "LOAD_FREE_BATTLE_FALLBACK",
+   "view": "save_slot",
+   "domain": "stage_title_stream",
+   "surface": "bank",
+   "old_ptr": "0x0214B00B",
+   "sites": [
+    "0x32550",
+    "0x3B098",
+    "0x8540C"
+   ],
+   "jp": "フリーバトル",
+   "source_zh": "自由战斗",
+   "zh": "自由战斗",
+   "adjustments": [],
+   "offset": "0xA260",
+   "ptr": "0x023F1260",
+   "payload_hex": "efb5e8a6ef28e7ff00"
+  }
+ ]
+}

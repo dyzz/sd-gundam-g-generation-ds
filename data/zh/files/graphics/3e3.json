@@ -1,0 +1,322 @@
+{
+ "file": "3e3.bin",
+ "what": "System-settings descriptions and all unfocused values. The New Game+ row is translated in this shared asset; the original runtime screen-map gate still hides it on a first playthrough.",
+ "format": "settings_graphics",
+ "source": {
+  "sha256": "2193539ab7ecc417a3c22deb95e0e6544a4e0917058d0dabf8199aa0d08491ea",
+  "size": 9744,
+  "width_tiles": 32,
+  "height_tiles": 24,
+  "screen_offset": 16,
+  "gfx_offset": 1552,
+  "gfx_len": 8192
+ },
+ "expected_used_tiles": 205,
+ "solid_labels": [
+  {
+   "id": "header_system",
+   "text": "系统",
+   "x": 28,
+   "y": 2,
+   "clear": {
+    "x": 16,
+    "y": 0,
+    "width": 48,
+    "height": 16,
+    "background": 4
+   },
+   "palette_indices": {
+    "stroke": 9,
+    "shadow": 3
+   }
+  },
+  {
+   "id": "header_settings",
+   "text": "设置",
+   "x": 72,
+   "y": 2,
+   "clear": {
+    "x": 72,
+    "y": 0,
+    "width": 28,
+    "height": 16,
+    "background": 6
+   },
+   "palette_indices": {
+    "stroke": 9,
+    "shadow": 3
+   }
+  }
+ ],
+ "transparent_labels": [
+  {
+   "id": "text_speed",
+   "text": "文字显示速度",
+   "x": 8,
+   "y": 26,
+   "clear": {
+    "x": 8,
+    "y": 24,
+    "width": 120,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "page_speed",
+   "text": "画面切换速度",
+   "x": 8,
+   "y": 42,
+   "clear": {
+    "x": 8,
+    "y": 40,
+    "width": 120,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "message_skip",
+   "text": "B键跳过消息",
+   "x": 8,
+   "y": 58,
+   "clear": {
+    "x": 8,
+    "y": 56,
+    "width": 168,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "command_confirmation",
+   "text": "指令执行确认",
+   "x": 8,
+   "y": 82,
+   "clear": {
+    "x": 8,
+    "y": 80,
+    "width": 168,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "battle_instruction",
+   "text": "战斗指示",
+   "x": 8,
+   "y": 106,
+   "clear": {
+    "x": 8,
+    "y": 104,
+    "width": 136,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "other_battle_animation",
+   "text": "显示我军以外战斗动画",
+   "x": 8,
+   "y": 131,
+   "clear": {
+    "x": 8,
+    "y": 128,
+    "width": 168,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "own_battle_animation_new_game_plus",
+   "text": "显示我军战斗动画",
+   "x": 8,
+   "y": 147,
+   "clear": {
+    "x": 8,
+    "y": 144,
+    "width": 168,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "text_speed_fast",
+   "text": "快",
+   "x": 138,
+   "y": 26,
+   "clear": {
+    "x": 128,
+    "y": 24,
+    "width": 32,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "text_speed_slow",
+   "text": "慢",
+   "x": 238,
+   "y": 26,
+   "clear": {
+    "x": 232,
+    "y": 24,
+    "width": 24,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "page_speed_fast",
+   "text": "快",
+   "x": 138,
+   "y": 42,
+   "clear": {
+    "x": 128,
+    "y": 40,
+    "width": 32,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  },
+  {
+   "id": "page_speed_slow",
+   "text": "慢",
+   "x": 238,
+   "y": 42,
+   "clear": {
+    "x": 232,
+    "y": 40,
+    "width": 24,
+    "height": 16,
+    "old_indices": [2, 15],
+    "background": 0
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 2
+   }
+  }
+ ],
+ "button_styles": {
+  "light": {
+   "width": 32,
+   "height": 16,
+   "text_y": 2,
+   "frame_indices": {
+    "outside": 0,
+    "outer": 2,
+    "middle": 3,
+    "inner_border": 4,
+    "background": 5
+   },
+   "palette_indices": {
+    "stroke": 8,
+    "shadow": 2
+   }
+  }
+ },
+ "button_groups": [
+  {
+   "id": "toggle_values",
+   "style": "light",
+   "origins": [
+    {"x": 184, "y": 56},
+    {"x": 184, "y": 80},
+    {"x": 184, "y": 128},
+    {"x": 184, "y": 144}
+   ],
+   "buttons": [
+    {"text": "开", "dx": 0},
+    {"text": "关", "dx": 32}
+   ]
+  },
+  {
+   "id": "battle_instruction_values",
+   "style": "light",
+   "origins": [
+    {"x": 152, "y": 104}
+   ],
+   "buttons": [
+    {"text": "个别", "dx": 0},
+    {"text": "近战", "dx": 32},
+    {"text": "射击", "dx": 64}
+   ]
+  }
+ ],
+ "pointed_labels": [
+  {
+   "id": "confirm",
+   "text": "确定",
+   "x": 204,
+   "y": 174,
+   "body": {
+    "x": 203,
+    "y": 174,
+    "width": 26,
+    "height": 12,
+    "row_backgrounds": [6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 7]
+   },
+   "source_ink_bounds": {
+    "x": 203,
+    "y": 174,
+    "width": 26,
+    "height": 12
+   },
+   "palette_indices": {
+    "stroke": 15,
+    "shadow": 3
+   }
+  }
+ ]
+}
