@@ -38,7 +38,7 @@ the mapping complete in both directions).
 
 ## 2. What the build does, in order
 
-`build/build.py` orchestrates four component builders (all in `utils/`):
+`build/build.py` orchestrates five component modules (all in `utils/`):
 
 ### Phase 1 — code binary (`utils/arm9_layout.py`)
 
@@ -54,8 +54,8 @@ Starting from the Japanese arm9 image (1,797,560 B):
    parts-name offsets `0x16B474`; UI label literal sites; the text-macro dictionary at
    `0x12D770` (offset repoints + re-encoded entries).
 3. **Write string pools** (`data/zh/placements/` + `zh/event_text.json`): in-place pools (battle names, detail pool,
-   menu descriptors, resident caves), the 1,267 event/briefing text blocks in
-   `0x1985A4..0x1AD520`, and the two relocated banks that later become autoload
+   menu descriptors, resident caves), the 1,297 event/briefing text blocks in
+   `0x1985A4..0x1AD745`, and the two relocated banks that later become autoload
    payloads (pool B also owns the 18 BackStage help strings and the deduplicated
    chapter-title strings). The 101 stage descriptors retarget both their
    shared load-list/battle-header fields (`+0x0C/+0x10`) and chapter-card
@@ -108,7 +108,14 @@ paired settings canvases, plus the compressed save/load screen (`c34.bin`).
 Shared-tile resources are copy-on-write
 repacked/deduplicated within their original fixed capacities.
 
-### Phase 4 — container assembly (`utils/rom.py` + ndspy)
+### Phase 4 — gallery resources (`utils/gallery_titles.py`)
+
+Repack the three coupled metadata/string-bank pairs (`43f/440`, `322/323`, `b38/b39`).
+The writer joins character and unit names by runtime roster ID, rewrites only owned offset
+words, preserves all other metadata and fixed tails, reads back every record, and enforces
+the mode0/renderB-trampoline glyph identity plus 6/8/12px width budgets.
+
+### Phase 5 — container assembly (`utils/rom.py` + ndspy)
 
 Replace `rom.arm9` and the 128 changed NitroFS files **by index** in the loaded Japanese
 ROM, `rom.save()`, verify final sha1. ndspy reproduces the container byte-identically
