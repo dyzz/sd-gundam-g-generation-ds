@@ -58,6 +58,7 @@ in-game failure the gate protects against.
   effect_line_stops           special-box record bleed (duplicate/phantom ability lines)
   bio_line_geometry           half-empty library bio boxes (JP-inherited premature breaks)
   placement_span_safety       strings planted on live zero-valued tables (the 暴击-vanish bug)
+  autoload_bank_loader_safety pool B overlapping the nds-bootstrap FNT/FAT cache (TWiLight #26)
   patch_literal_safety        cave scratch in the stage buffer / caves paving live JP data
                               (audits code_patches.json AND raw_regions.json writers)
   hp_format_liveness          blank battle HP readouts (the ISSUE-6 "D4"/"/D4" paving class)
@@ -888,6 +889,26 @@ RESIDENT_POOL_LO, RESIDENT_POOL_HI = 0x02180000, 0x021A0000
 # freeze (LESSONS C1); narrowing it makes the repoint rule a real invariant.
 RELOC_POOL_A_FRONT = (0x02328720, 0x0232C800)
 RELOC_POOL_B = (0x023E7000, 0x02400000)
+
+# The heap ceiling (arena-hi): pool B lives above it, which is why it needs no
+# heap change.  See utils/arm9_layout.py.
+ARENA_HI = 0x023C0000
+
+# nds-bootstrap's NitroFS FNT/FAT cache, main-RAM backing.  Moved down to
+# 0x03700000 by nds-bootstrap commit 15ef2364 (2024-12-16), shipped in v2.3.0 /
+# TWiLight Menu++ v27.12.3.  Anything of ours living here is destroyed by the
+# loader before the game ever runs (issue #26).
+NDS_BOOTSTRAP_FNT_FAT = (0x023EC1E8, 0x023F8F98)
+
+# RATCHET (issue #26, OPEN).  Pool B at 0x023E7000 + 0xA3D8 currently reaches
+# 20,976 bytes into that window, so TWiLight >= v27.12.3 corrupts the tail.
+# It cannot simply be moved down: [0x023C0000, 0x023E7000) is live game memory
+# (measured — see the gate docstring), and the largest free hole there is only
+# 0x749C bytes against a 0xA3D8 bank.  Until someone splits the bank or finds
+# another home, this number may only go DOWN.  It silently went UP once (PR #24
+# grew the bank from 0x98FC to 0xA3D8, +2,780 bytes of overlap) with every gate
+# green; that is what this ratchet exists to prevent.
+POOL_B_KNOWN_LOADER_OVERLAP = 20976
 
 # Name-pointer reader band (deploy/nameplate freeze class): unit-name
 # (master 0xB94BC +0x00) and pilot/character-name (char-DB 0xDCF18 +0x04)
@@ -4396,6 +4417,85 @@ def gate_bio_line_geometry(rep, ctx):
 # =============================================================================
 # placement span safety — strings planted on live zero-valued tables
 # =============================================================================
+def gate_autoload_bank_loader_safety(rep, ctx):
+    """Our autoload banks must not collide with the LOADER's own scratch.
+
+    The banks are placed in main-RAM gaps that the GAME never touches, which is
+    necessary but not sufficient: on a flashcart the game is not alone in RAM.
+    nds-bootstrap (the loader behind TWiLight Menu++) keeps its NitroFS FNT/FAT
+    cache in main RAM, and since nds-bootstrap commit 15ef2364 (2024-12-16,
+    shipped in v2.3.0 / TWiLight v27.12.3) that cache is backed by
+
+        [0x023EC1E8, 0x023F8F98)
+
+    Issue #26: the briefing/help bank (pool B) was planted at 0x023E7000 and
+    grew into that window, so the loader's FNT/FAT writes shredded the tail of
+    the bank and the game's next NitroFS lookup read a corrupted entry ->
+    Data Abort (PC 0x020A37F8).  Nothing caught it: every game-side gate is
+    green because the GAME never writes there, and the pool-B acceptance band
+    RELOC_POOL_B ran all the way to 0x02400000.  The overlap even deepened
+    silently when PR #24 grew the bank from 0x98FC to 0xA3D8.
+
+    The obvious remedy — slide the bank down 0x10000 — was BUILT AND TESTED and
+    does NOT work: [0x023C0000, 0x023E7000) is live game memory, not a gap.  A
+    py-desmume run of the relocated build hangs at boot (PC 0x020A4FC8) and the
+    game overwrites 5,068 bytes of the bank within 20 frames, while the same
+    measurement at 0x023E7000 shows the bank byte-perfect forever.  The largest
+    free hole below 0x023E7000 is 0x749C bytes against a 0xA3D8 bank, so a real
+    fix has to split the bank or find another home.
+
+    So this is a RATCHET, not a clean invariant: the overlap may only shrink.
+    Enforced against the BUILT image's own autoload list (not a constant), so
+    any future growth or re-homing of a bank is re-checked:
+      * the overlap with the FNT/FAT window never grows;
+      * pool B stays above the heap ceiling (arena-hi) so it needs no heap
+        change, which is why it was put up there in the first place.
+    """
+    az = ctx["a9"]
+    # module params -> the relocated 5-entry autoload list
+    list_start = int.from_bytes(az[0xB0C:0xB10], "little") - 0x02000000
+    list_end = int.from_bytes(az[0xB10:0xB14], "little") - 0x02000000
+    if not (0 < list_start < list_end <= len(az)) or (list_end - list_start) % 12:
+        rep.add("autoload_bank_loader_safety", False,
+                f"autoload list bounds look wrong: {list_start:#x}..{list_end:#x}")
+        return
+
+    banks = []
+    for off in range(list_start, list_end, 12):
+        ram, size, _bss = struct.unpack_from("<3I", az, off)
+        if size and ram >= 0x02000000:          # main-RAM payloads only
+            banks.append((ram, ram + size))
+
+    clo, chi = NDS_BOOTSTRAP_FNT_FAT
+    overlap = sum(max(0, min(hi, chi) - max(lo, clo)) for lo, hi in banks)
+    if overlap > POOL_B_KNOWN_LOADER_OVERLAP:
+        rep.add("autoload_bank_loader_safety", False,
+                f"autoload banks now reach {overlap} bytes into the nds-bootstrap "
+                f"FNT/FAT cache [{clo:08X},{chi:08X}), up from the tracked "
+                f"{POOL_B_KNOWN_LOADER_OVERLAP} (issue #26) — a bank grew into the "
+                "loader's scratch, deepening the TWiLight >= v27.12.3 Data Abort")
+        return
+    if overlap < POOL_B_KNOWN_LOADER_OVERLAP:
+        rep.add("autoload_bank_loader_safety", False,
+                f"overlap with the FNT/FAT cache shrank to {overlap} bytes — good; "
+                f"lower POOL_B_KNOWN_LOADER_OVERLAP to {overlap} to lock it in "
+                "(0 once the bank is fully clear, which closes issue #26)")
+        return
+
+    above = [(lo, hi) for lo, hi in banks if lo >= ARENA_HI]
+    if not above:
+        rep.add("autoload_bank_loader_safety", False,
+                "no autoload bank sits above the heap ceiling — pool B lost its "
+                f"home above arena-hi {ARENA_HI:08X}")
+        return
+    lo, hi = min(above)
+    state = ("clear of the nds-bootstrap FNT/FAT window" if not overlap
+             else f"overlapping it by {overlap} B — TRACKED, issue #26 OPEN")
+    rep.add("autoload_bank_loader_safety", True,
+            f"{len(banks)} autoload banks, {state}; pool B [{lo:08X},{hi:08X}) "
+            f"sits {lo - ARENA_HI:#x} above arena-hi")
+
+
 def gate_placement_span_safety(rep, ctx):
     """A relocated string must live in genuinely DEAD space.  'All zeros in the
     JP image' is not sufficient: zero-valued LIVE tables exist (the battle
@@ -4825,6 +4925,7 @@ GATES = [
     gate_effect_line_stops,
     gate_bio_line_geometry,
     gate_placement_span_safety,
+    gate_autoload_bank_loader_safety,
     gate_bark_map_row_liveness,
     gate_patch_literal_safety,
     gate_hp_format_liveness,

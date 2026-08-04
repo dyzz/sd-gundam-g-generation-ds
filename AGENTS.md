@@ -134,9 +134,10 @@ Two fonts, one byte grammar (see `docs/TEXT_SYSTEM.md`):
 
 `build/build.py` from a clean tree (strict manifest verify; refresh via
 `build/refresh_manifest.py` after intended data changes), then:
-1. `test/run_static.py <rom>` — ALL 32 gates, including the ratchets
+1. `test/run_static.py <rom>` — ALL 57 gates, including the ratchets
    (`translation_coverage`, `unit_weapon_names`, `id_command_names`,
-   `bank_onebyte_regression`), `pool_trampoline_tokens` (zero JP-band 2-byte
+   `bank_onebyte_regression`, `autoload_bank_loader_safety`),
+   `pool_trampoline_tokens` (zero JP-band 2-byte
    tokens in any referenced name-pool string), and the architecture gates
    (`extraction_fresh`, `zh_reconciliation`);
 2. `test/coverage_render.py <rom> --out /tmp/coverage` — offline render of EVERY text
