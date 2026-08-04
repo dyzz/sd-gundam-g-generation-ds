@@ -296,6 +296,27 @@
    "why": "gameplay tweak: every stage transition gated on a free-battle (recon) count required 3-4 battles; each `cmp rN,#count ; bne` becomes `cmp rN,#1 ; blo` so a single free battle unlocks the next stage."
   },
   {
+   "file_offset": "0x422B8",
+   "old_hex": "0e20",
+   "new_hex": "2020",
+   "what": "配属 fourth-carrier background width 14 -> 32 tiles",
+   "why": "the four-carrier BG2 layout copies only the stock Eternal carrier plus two unit slots into the visible fourth row.  Copy the full 32-tile template so slots 3-6 receive the same pale carrier-row backing and outer border as every other carrier."
+  },
+  {
+   "file_offset": "0x422E2",
+   "old_hex": "00f04bfa",
+   "new_hex": "c046c046",
+   "what": "配属 skip stock two-slot Eternal BG2 terminal-edge copy",
+   "why": "the stock fourth-row layout overlays a five-tile terminal edge after Eternal slot 2.  Once the full 32-tile six-slot BG2 template is copied, skip that short-row-only overlay so the complete Eternal row remains byte-for-byte the same background shape as the other six-slot carriers."
+  },
+  {
+   "file_offset": "0x42302",
+   "old_hex": "0e20",
+   "new_hex": "2020",
+   "what": "配属 fourth-carrier empty-slot frame width 14 -> 32 tiles",
+   "why": "the four-carrier BG1 layout copies the complete second-carrier frame row into the visible fourth-carrier row, but the JP copy width is only 14 tiles: carrier plus Eternal's stock two unit slots.  Copy all 32 tiles instead so the capacity-6 Eternal receives the same six outlined unit slots as the other carriers.  This changes only the frame-layer rectangle width; unit-icon drawing, assignment capacity and save data are untouched."
+  },
+  {
    "file_offset": "0x4A340",
    "old_hex": "207e0228",
    "new_hex": "d1f09cff",
