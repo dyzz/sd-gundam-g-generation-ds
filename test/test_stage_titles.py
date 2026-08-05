@@ -315,6 +315,7 @@ class StageTitleTest(unittest.TestCase):
         plan = json.loads(GLYPH_PLAN_PATH.read_text(encoding="utf-8"))
         helper._verify_charmap(plan)
         helper._verify_move_scope(plan)
+        helper._verify_preencoded_identity_usage(plan)
         atlas = ATLAS_PATH.read_bytes()
         self.assertEqual(helper.sha256(atlas), plan["source_atlas_sha256"])
         effective = helper.build_target(atlas, plan)
@@ -343,6 +344,17 @@ class StageTitleTest(unittest.TestCase):
         collision[target * helper.CELL_BYTES] ^= 1
         with self.assertRaisesRegex(ValueError, "target drifted"):
             helper.build_target(bytes(collision), plan)
+
+    def test_preencoded_identity_check_rejects_the_historical_collision(self):
+        helper = load_glyph_helper()
+        plan = json.loads(GLYPH_PLAN_PATH.read_text(encoding="utf-8"))
+        next(
+            entry for entry in plan["mints"] if entry["char"] == "逅"
+        )["slot"] = 4276
+        with self.assertRaisesRegex(
+            ValueError, r"slot 4276 \('逅'\)"
+        ):
+            helper._verify_preencoded_identity_usage(plan)
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ from pathlib import Path
 REPO = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO))
 
-from utils import font_atlas  # noqa: E402
+from utils import font_atlas, text_codec  # noqa: E402
 
 ATLAS_PATH = REPO / "data/font/atlas12.bin"
 CHARMAP_PATH = REPO / "data/charmap.json"
@@ -23,6 +23,9 @@ PLAN_PATH = REPO / "data/font/stage_title_glyphs.json"
 CELL_BYTES = font_atlas.CELL_BYTES
 ATLAS_SLOTS = font_atlas.ATLAS_SLOTS
 sha256 = font_atlas.sha256
+
+# The relocation ledger proves this old master-name copy has no live pointer.
+_DEAD_PREENCODED_RECORDS = {("resident_caves.json", "0x943F")}
 
 
 def _verify_charmap(plan: dict) -> None:
@@ -91,6 +94,67 @@ def _verify_move_scope(plan: dict) -> None:
             )
 
 
+def _verify_preencoded_identity_usage(plan: dict) -> None:
+    """Reject plan-owned slots that silently relabel preencoded text."""
+    identities = {}
+    for section, slot_key in (
+        ("moves", "to_slot"),
+        ("remaps", "to_slot"),
+        ("mints", "slot"),
+        ("promotions", "slot"),
+        ("native_reuses", "slot"),
+    ):
+        identities.update(
+            (int(entry[slot_key]), entry["char"])
+            for entry in plan.get(section, [])
+        )
+
+    problems = []
+    for path in sorted((REPO / "data/zh").rglob("*.json")):
+        document = json.loads(path.read_text(encoding="utf-8"))
+
+        def walk(value) -> None:
+            if isinstance(value, dict):
+                if (path.name, value.get("offset")) in _DEAD_PREENCODED_RECORDS:
+                    return
+                annotation = next(
+                    (value[key] for key in ("zh_text", "text", "zh", "source_zh")
+                     if isinstance(value.get(key), str)),
+                    None,
+                )
+                if annotation is not None:
+                    for key in ("payload_hex", "zh_hex", "new_hex"):
+                        if not isinstance(value.get(key), str):
+                            continue
+                        counts = {}
+                        for _offset, token, length in text_codec.iter_tokens(
+                            bytes.fromhex(value[key])
+                        ):
+                            slot = token - 0xE000 + text_codec.TWO_BYTE_SLOT_OFFSET
+                            if length == 2 and slot in identities:
+                                counts[slot] = counts.get(slot, 0) + 1
+                        for slot, count in counts.items():
+                            if count > annotation.count(identities[slot]):
+                                record = value.get("offset") or value.get("id")
+                                problems.append(
+                                    f"slot {slot} ({identities[slot]!r}) in "
+                                    f"{path.relative_to(REPO)}@{record}"
+                                )
+                for child in value.values():
+                    walk(child)
+            elif isinstance(value, list):
+                for child in value:
+                    walk(child)
+
+        walk(document)
+
+    if problems:
+        raise ValueError(
+            "managed glyph slot/text identity drift: "
+            + "; ".join(problems[:4])
+        )
+
+
 build_target = font_atlas.compose_title_glyphs
 
 
@@ -107,6 +171,7 @@ def main() -> int:
     plan = json.loads(PLAN_PATH.read_text(encoding="utf-8"))
     _verify_charmap(plan)
     _verify_move_scope(plan)
+    _verify_preencoded_identity_usage(plan)
     atlas_path = args.atlas.resolve()
     current = atlas_path.read_bytes()
     target = build_target(current, plan)

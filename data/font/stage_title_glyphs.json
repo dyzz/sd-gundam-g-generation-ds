@@ -1,7 +1,7 @@
 {
- "_about": "Composable glyph relocation/mint plan for the reviewed chapter titles. Nine characters used only by renderA encyclopedia biographies move into candidate-ROM-token-free JP-band cells; one title character reuses a same-character native atlas cell. Their freed ZH cells and two unused ZH cells receive every title glyph required by both the stage-card renderA path and the save/load-slot trampoline path. The committed atlas stays at the shared baseline; normal builds apply this layer in memory. New cells are byte-exact reviewed WenQuanYi or same-character native atlas rasters.",
+ "_about": "Composable glyph relocation/mint plan for the reviewed chapter titles. Nine characters used only by renderA encyclopedia biographies move into candidate-ROM-token-free JP-band cells; one title character reuses a same-character native atlas cell. Their freed ZH cells, one unused ZH cell, and one zero-demand redundant two-byte ellipsis cell receive every title glyph required by both the stage-card renderA path and the save/load-slot trampoline path. The committed atlas stays at the shared baseline; normal builds apply this layer in memory. New cells are byte-exact reviewed WenQuanYi or same-character native atlas rasters.",
  "source_atlas_sha256": "bb41342f15ac89da9beabeca4e5358f51bd4195e04000c178cd4407ffa12e501",
- "target_atlas_sha256": "a181561b36ceebbb0bd21d00911c18888c9220e67e0fa06f86814cfe53b61ac1",
+ "target_atlas_sha256": "14a77a2c7b86919e2f6124b541846ace1e74e3c2fb4ad48b73282e4d829ba34a",
  "candidate_rom": {
   "path_hint": "/private/tmp/sdgundam-pr24-baseline.nds",
   "sha1": "06c86732ebf14e6c7f4d660157a01a742ae6c683",
@@ -168,9 +168,9 @@
   },
   {
    "char": "逅",
-   "slot": 4276,
-   "old_char": null,
-   "old_cell_sha256": "24f06baf53abd6d079857c3a63e52de1818bdd2617c70da5684dddc67c93a3b2",
+   "slot": 4157,
+   "old_char": "…",
+   "old_cell_sha256": "9aba42b011b4f597a042813d7977fb68b0adcdbdedb687a5a86c387391839530",
    "new_cell_sha256": "5090917d76184c09d589535a4e5b34992dcca32849ce9426d59c94a9ddcf4194",
    "cell_hex": "24002598552a90a902a0559595a9aa9a592590992690992490592564aa2aa955950aaaaa"
   }

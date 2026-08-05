@@ -118,7 +118,7 @@
   "_STGXXA.bin": "590415e5b8a73b528747fe3327c58a3d878649e7",
   "_STGXXB.bin": "fb7c8701f78232cc0b8d034b611cba586fa8afc8",
   "_STGXXS.bin": "d712c3aa6a15da195e35b4fa30514170cbb20722",
-  "arm9": "64fabad5698a8facd9b12cc727ddbf713399b822",
+  "arm9": "28205c5c785ea511cceaf8fb12d692129cf82b22",
   "b6e.bin": "a9d52829b9f7bb20962b39982361b69e7541e18d",
   "b6f.bin": "370c0dc0b8db4aba2b74f9c49a199f17aa1ea14f",
   "c4b.bin": "30556a95c8685a505f3b0d51d092ddf211d4ef4f",
@@ -139,11 +139,11 @@
   "b39.bin": "64ad546cc10b9925f97095d737e9c43f205c6c61"
  },
  "output_rom": {
-  "sha1": "2dffa43c8678d36d06786a031279282b021c9241",
+  "sha1": "d5f8f7544241769b192abed7cca3d503515cb740",
   "size": 30364008
  },
  "output_rom_padded": {
-  "sha1": "2c3a16410f7de0cf80f1121a0bc1e4a3d099277f",
+  "sha1": "80cc3a81297e3c7c02b2e042c2cd4d371a5f33c9",
   "size": 33554432
  },
  "source_rom": {

@@ -3172,7 +3172,7 @@
    "encoding": "text_codec",
    "offset": "0x9EC7",
    "ptr": "0x023F0EC7",
-   "payload_hex": "ef98ec1fe7b4e80fefd400"
+   "payload_hex": "ef98ec1fe7b4e80fef5d00"
   },
   {
    "id": "UTXT02007",
@@ -7161,7 +7161,7 @@
    "encoding": "text_codec",
    "offset": "0x9EC7",
    "ptr": "0x023F0EC7",
-   "payload_hex": "ef98ec1fe7b4e80fefd400"
+   "payload_hex": "ef98ec1fe7b4e80fef5d00"
   },
   {
    "id": "SLOT_UTXT02007",
